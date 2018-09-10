@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+             xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+             x:Class="FarmaEnlace.Views.DetailPromotionMenuView" 
+             BackgroundColor="{StaticResource BackgroundColor}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <helpers:HideableToolbarItem
+            Command="{Binding CallCommand}" 
+            Icon="IconoTelefono"
+            Priority="0"
+            Order="Primary"
+            IsVisible="{Binding Brand.AllowCall}"/>
+        <ToolbarItem
+            Command="{Binding ReturnHomeCommand}" 
+            Icon="home"
+            Priority="0"
+            Order="Primary"
+            />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <AbsoluteLayout 
+            BindingContext="{Binding DetailPromotion}" 
+            Padding="0">
+            <!--Isquierda, Arriba, ancho,alto -->
+            <local:ImageOptimizedRenderer Margin="0"
+                   Aspect="AspectFit" 
+                   AbsoluteLayout.LayoutBounds="0,0,1,0.45"
+                   AbsoluteLayout.LayoutFlags="All" 
+                   Source="{Binding ImageBrand.ImageFullPath}"/>
+            <local:ImageOptimizedRenderer Margin="0" 
+                   AbsoluteLayout.LayoutBounds="0,0.5,1,0.1"
+                   AbsoluteLayout.LayoutFlags="All" 
+                   Aspect="AspectFit" 
+                   Source="{helpers:ImageResource btncompartirbarra.png}">
+                   <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ShareCommand}"/>
+                   </local:ImageOptimizedRenderer.GestureRecognizers>
+            </local:ImageOptimizedRenderer>
+            <Label AbsoluteLayout.LayoutBounds="0.2,0.6,1,0.1"
+                   AbsoluteLayout.LayoutFlags="All" 
+                   VerticalOptions ="Center" 
+                   HorizontalOptions="CenterAndExpand"  
+                   Style="{DynamicResource labelRedTitlesStyle}"
+                   TextColor="{Binding TextColorTitle}"
+                   Text="{Binding ImageBrand.ImageName}">
+            </Label>
+            <Label AbsoluteLayout.LayoutBounds="0.2,0.8,1,0.3"
+                   AbsoluteLayout.LayoutFlags="All" 
+                   VerticalOptions ="Center" 
+                   HorizontalOptions="CenterAndExpand" 
+                   Style="{DynamicResource labelGreyStyle}"
+                   TextColor="{Binding TextColorDesc}"
+                   Text="{Binding ImageBrand.Remarks}">
+            </Label>
+            <Label AbsoluteLayout.LayoutBounds="0.2,0.9,1,0.1"
+                   AbsoluteLayout.LayoutFlags="All" 
+                   VerticalOptions ="Center" 
+                   HorizontalOptions="CenterAndExpand"  
+                   Style="{DynamicResource labelGreyStyle}"
+                   Text="{Binding ImageBrand.EndDate, StringFormat='Fecha Promoción: {0:dd MMMM yyyy}'}">
+            </Label>
+            <local:ImageOptimizedRenderer 
+                Aspect="Fill"
+                AbsoluteLayout.LayoutBounds="0,1,1,0.03"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="EndAndExpand"
+                Source="{helpers:ImageResource rayacierre2.png}">
+            </local:ImageOptimizedRenderer>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

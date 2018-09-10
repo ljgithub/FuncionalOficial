@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"      
+    xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+    x:Class="FarmaEnlace.Views.CommerceMapView"
+    xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <helpers:HideableToolbarItem
+            Command="{Binding CallCommand}" 
+            Icon="IconoTelefono"
+            Priority="0"
+            Order="Primary"
+            IsVisible="{Binding Brand.AllowCall}"/>
+
+        <ToolbarItem
+            Command="{Binding ReturnHomeCommand}" 
+            Icon="home"
+            Priority="0"
+            Order="Primary"
+            />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Spacing="0"
+                     Orientation="Vertical"
+                     BindingContext="{Binding CommerceMap}">
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.43*"/>
+                    <RowDefinition Height="0.47*"/>
+                    <RowDefinition Height="0.10*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <local:CustomMap Grid.Row="0" x:Name="MyMapCommerce" 
+                            Margin="0,0,0,0"
+                            MapType="Street" 
+                            IsShowingUser="true"/>
+                <ScrollView Grid.Row="1" Grid.Column="0">
+                    <StackLayout Spacing="0" Padding="0" Margin="20,0,10,0">
+                        <StackLayout Orientation="Horizontal">
+                            <Label  Margin="10,10,0,0"
+                                    HorizontalOptions="StartAndExpand" 
+                                    VerticalOptions="Center"
+                                    Style="{DynamicResource labelGreyTitlesStyle}"
+                                    Text="{Binding Commerce.Name}">
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="0" Padding="0">
+                            <local:ImageOptimizedRenderer
+                                Scale="0.7"
+                                HeightRequest="25"
+                                Aspect="AspectFill"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start" 
+                                Source="{helpers:ImageResource  icondireccion.png}">
+                            </local:ImageOptimizedRenderer>
+                            <Label 
+                                HorizontalOptions="Start" 
+                                VerticalOptions="Center"
+                                Style="{DynamicResource labelSmallGreyStyle}"
+                                Text="{Binding Commerce.Address}">
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="0" Padding="0">
+                            <local:ImageOptimizedRenderer
+                                Scale="0.7"
+                                HeightRequest="25"
+                                Aspect="AspectFill"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start" 
+                                Source="{helpers:ImageResource icontelefono.png}">
+                            </local:ImageOptimizedRenderer>
+                            <Label 
+                                HorizontalOptions="Start" 
+                                VerticalOptions="Center"
+                                Style="{DynamicResource labelSmallGreyStyle}"
+                                Text="{Binding Commerce.Phone}">
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="0" Padding="0">
+                            <local:ImageOptimizedRenderer
+                                Scale="0.7"
+                                HeightRequest="25"
+                                Aspect="AspectFill"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start" 
+                                Source="{helpers:ImageResource iconohorario.png}">
+                            </local:ImageOptimizedRenderer>
+                            <Label 
+                                HorizontalOptions="Start" 
+                                VerticalOptions="Center"
+                                Style="{DynamicResource labelSmallGreyStyle}"
+                                Text="{Binding Commerce.ScheduleMondayToFriday}">
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="0" Padding="0">
+                            <local:ImageOptimizedRenderer
+                                Scale="0.7"
+                                HeightRequest="25"
+                                Aspect="AspectFill"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start" 
+                                Source="{helpers:ImageResource iconohorario.png}">
+                            </local:ImageOptimizedRenderer>
+                            <Label 
+                                HorizontalOptions="Start" 
+                                VerticalOptions="Center"
+                                Style="{DynamicResource labelSmallGreyStyle}"
+                                Text="{Binding Commerce.ScheduleSaturday}">
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="0" Padding="0">
+                            <local:ImageOptimizedRenderer
+                                Scale="0.7"
+                                HeightRequest="25"
+                                Aspect="AspectFill"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start" 
+                                Source="{helpers:ImageResource iconohorario.png}">
+                            </local:ImageOptimizedRenderer>
+                            <Label 
+                                HorizontalOptions="Start" 
+                                VerticalOptions="Center"
+                                Style="{DynamicResource labelSmallGreyStyle}"
+                                Text="{Binding Commerce.ScheduleSunday}">
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="0" Padding="0">
+                            <local:ImageOptimizedRenderer
+                                Scale="0.7"
+                                HeightRequest="25"
+                                Aspect="AspectFill"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start" 
+                                Source="{helpers:ImageResource iconemailmarca.png}">
+                            </local:ImageOptimizedRenderer>
+                            <Label 
+                                HorizontalOptions="Start" 
+                                VerticalOptions="Center"
+                                Style="{DynamicResource labelSmallGreyStyle}"
+                                Text="{Binding Commerce.Email}">
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" IsVisible="{Binding IsVisibleInfo}" Spacing="0" Padding="0">
+                            <local:ImageOptimizedRenderer
+                                Scale="0.7"
+                                HeightRequest="25"
+                                Aspect="AspectFill"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start" 
+                                Source="{helpers:ImageResource iconinfomarca.png}">
+                            </local:ImageOptimizedRenderer>
+                            <Label 
+                                HorizontalOptions="Start" 
+                                VerticalOptions="Center"
+                                Style="{DynamicResource labelSmallGreyStyle}"
+                                Text="{Binding Commerce.Description}">
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <local:ImageOptimizedRenderer Grid.Row="2"
+                       Margin="0,0,0,0"
+                       Aspect="Fill"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="EndAndExpand"
+                       Source="{helpers:ImageResource btngoogle.png}">
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer 
+                                Command="{Binding MapCommerceCommand}"
+                                CommandParameter="{Binding Commerce.CommerceId}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+            </Grid>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

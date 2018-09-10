@@ -1,0 +1,93 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Referencias\**" />
+    <EmbeddedResource Remove="Referencias\**" />
+    <None Remove="Referencias\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
+    <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.10" />
+    <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Plugin.Share" Version="7.1.1" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.0.4" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.4.118" />
+    <PackageReference Include="SQLiteNetExtensions" Version="2.0.0" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.1.1" />
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.2.0" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.3.6" />
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
+    <PackageReference Include="Xamarin.Forms.CarouselView" Version="2.3.0-pre2" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="3.0.0.482510" />
+    <PackageReference Include="XLabs.Forms" Version="2.0.5782" />
+    <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
+      <DependentUpon>*.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="MainPage.xaml.cs">
+      <DependentUpon>*.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Resource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CategoriesLineView.xaml.cs">
+      <DependentUpon>CategoriesLineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CategoriesSub4View.xaml.cs">
+      <DependentUpon>CategoriesSub4View.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CategoriesSub3View.xaml.cs">
+      <DependentUpon>CategoriesSub3View.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CategoriesSub2View.xaml.cs">
+      <DependentUpon>CategoriesSub2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CategoriesSub1View.xaml.cs">
+      <DependentUpon>CategoriesSub1View.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CommerceMapView.xaml.cs">
+      <DependentUpon>CommerceMapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CommercesSearchView.xaml.cs">
+      <DependentUpon>CommercesSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NewCustomerStep2View.xaml.cs">
+      <DependentUpon>NewCustomerStep2View.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CarouselSalePlus.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\VoiceRecognition_iOS.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

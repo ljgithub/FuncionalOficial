@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+                xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+                xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+                xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                x:Class="FarmaEnlace.Views.DetailBrandsView"  
+                BackgroundColor="{StaticResource BackgroundColor}"
+                BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Command="{Binding ReturnBrandCommand}" 
+            Icon="home"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <AbsoluteLayout BindingContext="{Binding DetailBrands}">
+            <cv:CarouselView  x:Name="CarouselImages" 
+                AbsoluteLayout.LayoutBounds="0,0,1,.40"
+                AbsoluteLayout.LayoutFlags="All" 
+                ItemsSource="{Binding ImagesCollection}" 
+                Position="{Binding CurrentPhoto, Mode=TwoWay}">
+                <cv:CarouselView.Behaviors>
+                    <helpers:CarouselViewBehavior  Command="{Binding CurrentPhotoChangedCommand}"/>
+                </cv:CarouselView.Behaviors>
+                <cv:CarouselView.ItemTemplate>
+                    <DataTemplate >
+                        <local:ImageOptimizedRenderer 
+                            Grid.Row="0" 
+                            Margin="0,0,0,0"
+                            Grid.ColumnSpan="2" 
+                            Aspect="AspectFit" 
+                            Source="{Binding ImageFullPath}">
+                            <local:ImageOptimizedRenderer.GestureRecognizers>
+                                <TapGestureRecognizer  Command="{Binding Path=BindingContext.LinkCommand, Source={x:Reference CarouselImages}"  />
+                            </local:ImageOptimizedRenderer.GestureRecognizers>
+                        </local:ImageOptimizedRenderer>
+                    </DataTemplate>
+                </cv:CarouselView.ItemTemplate>
+            </cv:CarouselView>
+
+            <!--Isquierda, Arriba, ancho,alto -->
+            <helpers:CarouselIndicators 
+                AbsoluteLayout.LayoutBounds="0.03,0.03,0.35,0.15"
+                AbsoluteLayout.LayoutFlags="All" 
+                IndicatorHeight="25" 
+                IndicatorWidth="25" 
+                UnselectedIndicator="{helpers:ImageResource unselected_circle.png}" 
+                SelectedIndicator="{helpers:ImageResource selected_circle.png}" 
+                Position="{Binding CurrentPhoto}" 
+                ItemsSource="{Binding ImagesCollection}" />
+
+            <!--<Grid IsVisible="{Binding IsNotVisibleCall}"  
+                        AbsoluteLayout.LayoutBounds="0,0.45,1,.10"
+                         AbsoluteLayout.LayoutFlags="All"
+                      Margin="0,0,0,0"  Padding="0" ColumnSpacing="0"  RowSpacing="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ffimageloading:CachedImage 
+                    Grid.Row="0" Grid.Column="0"
+                    DownsampleToViewSize="False"
+                    Aspect="AspectFill"
+                    Source="{helpers:ImageResource btnverdetalles1.png}">
+                    <ffimageloading:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding LinkCommand}"/>
+                    </ffimageloading:CachedImage.GestureRecognizers>
+                </ffimageloading:CachedImage>
+                <ffimageloading:CachedImage 
+                    Grid.Row="0" Grid.Column="1"
+                    DownsampleToViewSize="False"
+                    Aspect="AspectFill"
+                    Source="{helpers:ImageResource btncompartir1.png}">
+                    <ffimageloading:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding ShareCommand}"/>
+                    </ffimageloading:CachedImage.GestureRecognizers>
+                </ffimageloading:CachedImage>                
+            </Grid>-->
+            <ffimageloading:CachedImage 
+                IsVisible="{Binding IsNotVisibleCall}"
+                AbsoluteLayout.LayoutBounds="0.0,0.44,0.5,0.20"
+                AbsoluteLayout.LayoutFlags="All" 
+                DownsampleToViewSize="False"
+                Aspect="AspectFit"
+                Source="{helpers:ImageResource btnverdetalles1.png}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding LinkCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+
+            <ffimageloading:CachedImage 
+                IsVisible="{Binding IsNotVisibleCall}"
+                AbsoluteLayout.LayoutBounds="1,0.44,0.5,0.20"
+                AbsoluteLayout.LayoutFlags="All" 
+                DownsampleToViewSize="False"
+                Aspect="AspectFit"
+                Source="{helpers:ImageResource btncompartir1.png}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding ShareCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+
+
+
+            <!--AbsoluteLayout.LayoutBounds="0,0.45,1,.10"-->
+            <!--<Grid IsVisible="{Binding IsVisibleCall}"
+                         AbsoluteLayout.LayoutBounds="0,0.45,1,.10"
+                         AbsoluteLayout.LayoutFlags="All" 
+                      Padding="0" ColumnSpacing="0"  RowSpacing="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" Spacing="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding CallCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                    <ffimageloading:CachedImage 
+                        AbsoluteLayout.LayoutBounds="0.0,0.85,0.33,0.40"
+                        AbsoluteLayout.LayoutFlags="All" 
+                        DownsampleToViewSize="False"
+                        Aspect="AspectFit"
+                        Source="{helpers:ImageResource btnllamar.png}">
+                    </ffimageloading:CachedImage>
+                </StackLayout>
+                <StackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" Spacing="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LinkCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                    <ffimageloading:CachedImage 
+                        DownsampleToViewSize="False"
+                        Aspect="AspectFit"
+                        Source="{helpers:ImageResource btnverdetalles.png}">
+                    </ffimageloading:CachedImage>
+                </StackLayout>
+                <StackLayout Grid.Row="0" Grid.Column="2"  HorizontalOptions="End" Spacing="0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer   Command="{Binding ShareCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                    <ffimageloading:CachedImage 
+                        DownsampleToViewSize="False"
+                        Aspect="AspectFit"
+                        Source="{helpers:ImageResource btncompartir.png}">
+                    </ffimageloading:CachedImage>
+                  
+                </StackLayout>
+            </Grid>-->
+
+            <ffimageloading:CachedImage 
+                IsVisible="{Binding IsVisibleCall}"
+                AbsoluteLayout.LayoutBounds="0.0,0.44,0.33,0.20"
+                AbsoluteLayout.LayoutFlags="All" 
+                DownsampleToViewSize="False"
+                Aspect="AspectFit"
+                Source="{helpers:ImageResource btnllamar.png}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding CallCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+
+            <ffimageloading:CachedImage 
+                IsVisible="{Binding IsVisibleCall}"
+                AbsoluteLayout.LayoutBounds="0.5,0.44,0.33,0.20"
+                AbsoluteLayout.LayoutFlags="All" 
+                DownsampleToViewSize="False"
+                Aspect="AspectFit"
+                Source="{helpers:ImageResource btnverdetalles.png}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding LinkCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+
+            <ffimageloading:CachedImage 
+                IsVisible="{Binding IsVisibleCall}"
+                AbsoluteLayout.LayoutBounds="1,0.44,0.33,0.20"
+                AbsoluteLayout.LayoutFlags="All" 
+                DownsampleToViewSize="False"
+                Aspect="AspectFit"
+                Source="{helpers:ImageResource btncompartir.png}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding ShareCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+
+            <!--Isquierda, Arriba, ancho,alto -->
+            <ffimageloading:CachedImage 
+                AbsoluteLayout.LayoutBounds="0.90,0.97,0.4,0.43"
+                AbsoluteLayout.LayoutFlags="All" 
+                DownsampleToViewSize="False"
+                Aspect="AspectFit"
+                Source="{helpers:ImageResource btncatalogo.png}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding ProductsCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+            <ffimageloading:CachedImage 
+                 AbsoluteLayout.LayoutBounds="0.10,0.97,0.4,0.43"
+                AbsoluteLayout.LayoutFlags="All"
+                DownsampleToViewSize="False"
+                Aspect="AspectFit"
+                Source="{helpers:ImageResource btnencuentranos.png}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding CommercesCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+            <local:ImageOptimizedRenderer 
+                Aspect="Fill"
+                AbsoluteLayout.LayoutBounds="0,1,1,0.03"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="EndAndExpand"
+                Source="{helpers:ImageResource rayacierre2.png}">
+            </local:ImageOptimizedRenderer>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>    

@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"      
+    xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+    xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+    x:Class="FarmaEnlace.Views.CommercesListMapView"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <helpers:HideableToolbarItem
+            Command="{Binding CallCommand}" 
+            Icon="IconoTelefono"
+            Priority="0"
+            Order="Primary"
+            IsVisible="{Binding Brand.AllowCall}"/>
+        <ToolbarItem
+            Command="{Binding ReturnHomeCommand}" 
+            Icon="home"
+            Priority="0"
+            Order="Primary"
+            />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <AbsoluteLayout  BindingContext="{Binding CommercesListMap}">
+            <Grid AbsoluteLayout.LayoutBounds="0,0,1,.10"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="StartAndExpand"
+                Margin="0,0,0,0" 
+                BackgroundColor="#f0f0f0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.80*"/>
+                    <ColumnDefinition Width="0.20*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <SearchBar 
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    Margin="0,0,0,0"
+                    HorizontalOptions="FillAndExpand" 
+                    BackgroundColor="#f0f0f0"
+                    Placeholder="BUSQUEDA DE ESTABLECIMIENTOS"
+                    Style="{DynamicResource labelGreyStyle}"
+                    Text="{Binding FilterMap, Mode=TwoWay}"
+                    SearchCommand="{Binding SearchCommerceCommand}"
+                    SearchCommandParameter="{Binding FilterMap}">
+                </SearchBar>
+                <local:ImageOptimizedRenderer
+                    HorizontalOptions="CenterAndExpand"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Aspect="AspectFit"
+                    Source="{helpers:ImageResource iconmicrofono.png}">                
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding VozCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+            </Grid>
+            <local:CustomMap x:Name="MyMap" 
+                              AbsoluteLayout.LayoutBounds="0,0.42,1,0.80"
+                              AbsoluteLayout.LayoutFlags="All" 
+                            
+                             
+                             Margin="0,0,0,0"
+                             MapType="Street" 
+                             IsShowingUser="true"/>
+            
+            <local:ImageOptimizedRenderer
+                Aspect="AspectFill"
+                AbsoluteLayout.LayoutBounds="0,1,1,0.10"
+                AbsoluteLayout.LayoutFlags="All" 
+                VerticalOptions="EndAndExpand"
+                Source="{helpers:ImageResource btnlistafarmac.png}">
+                <local:ImageOptimizedRenderer.GestureRecognizers>
+                    <TapGestureRecognizer 
+                         Command="{Binding ListlinkCommand}">
+                    </TapGestureRecognizer>
+                </local:ImageOptimizedRenderer.GestureRecognizers>
+            </local:ImageOptimizedRenderer>
+        </AbsoluteLayout>
+        <!--<StackLayout Spacing="0"
+            Orientation="Vertical"
+            BindingContext="{Binding CommercesListMap}">
+            <Grid Margin="0,0,0,0" HeightRequest="50" BackgroundColor="#f0f0f0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.80*"/>
+                    <ColumnDefinition Width="0.20*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <SearchBar Grid.Column="0"
+                    Grid.Row="0"
+                           WidthRequest="80"
+                    HeightRequest="80"
+                    BackgroundColor="#f0f0f0"
+                    Margin="0,0,0,0"
+                    HorizontalOptions="FillAndExpand" 
+                    Placeholder="BUSQUEDA DE ESTABLECIMIENTOS"
+                    Style="{DynamicResource labelGreyStyle}"
+                    Text="{Binding FilterMap, Mode=TwoWay}"
+                    SearchCommand="{Binding SearchCommerceCommand}"
+                    SearchCommandParameter="{Binding FilterMap}">
+                </SearchBar>
+                <local:ImageOptimizedRenderer
+                    Scale="0.7"
+                    HorizontalOptions="CenterAndExpand"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Aspect="AspectFit"
+                    Source="{helpers:ImageResource iconmicrofono.png}">
+                </local:ImageOptimizedRenderer>
+                <local:ImageOptimizedRenderer.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding VozCommand}"/>
+                </local:ImageOptimizedRenderer.GestureRecognizers>
+            </Grid>
+            <local:CustomMap x:Name="MyMap" 
+                             Margin="0,0,0,0"
+                             MapType="Street" 
+                             IsShowingUser="true"/>
+            <local:ImageOptimizedRenderer
+                Aspect="Fill"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="EndAndExpand"
+                Source="{helpers:ImageResource btnlistafarmac.png}">
+                <local:ImageOptimizedRenderer.GestureRecognizers>
+                    <TapGestureRecognizer 
+                         Command="{Binding ListlinkCommand}">
+                    </TapGestureRecognizer>
+                </local:ImageOptimizedRenderer.GestureRecognizers>
+            </local:ImageOptimizedRenderer>
+        </StackLayout>-->
+        
+    </ContentPage.Content>
+</ContentPage>

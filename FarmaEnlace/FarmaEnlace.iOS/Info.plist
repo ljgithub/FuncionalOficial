@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+		<integer>2</integer>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>comgooglemaps</string>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Para continuar, permite que la aplicación utilice la camara</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Para continuar, permite que la aplicación utilice el micrófono</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Para continuar, permite que la aplicación utilice el micrófono</string>
+	<key>NSSiriUsageDescription</key>
+	<string>Para continuar, permite que la aplicación utilice el micrófono</string>
+	<key>MinimumOSVersion</key>
+	<string>8.0</string>
+	<key>CFBundleDisplayName</key>
+	<string>Tu App Farmacia</string>
+	<key>CFBundleVersion</key>
+	<string>1.65</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Para continuar, permite que tu dispositivo active la ubicación, que se usa en el servicio de ubicación.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Para continuar, permite que tu dispositivo active la ubicación, que se usa en el servicio de ubicación.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Para continuar, permite que la app acceda al calendario</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>CFBundleIconName</key>
+	<string>iTunesArtworkIcon</string>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>Icon-60@2x</string>
+				<string>Icon-60@3x</string>
+				<string>Icon-76</string>
+				<string>Icon-76@2x</string>
+				<string>Default</string>
+				<string>Icon-Small-40</string>
+				<string>Icon-Small-40@2x</string>
+				<string>Icon-Small-40@3x</string>
+				<string>Icon-Small</string>
+				<string>Icon-Small@2x</string>
+				<string>Icon-Small@3x</string>
+				<string>Icon-83.5@2x</string>
+			</array>
+		</dict>
+	</dict>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.TandiCorp.TuAppFarmacia</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>es</string>
+	</array>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>XSAppIconAssets</key>
+	<string>Resources/Media.xcassets/AppIcons.appiconset</string>
+</dict>
+</plist>

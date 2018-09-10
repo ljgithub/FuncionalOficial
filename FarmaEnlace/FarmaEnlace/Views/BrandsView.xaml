@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="FarmaEnlace.Views.BrandsView"  
+                x:Name="BrandView"
+                xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+                xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                xmlns:abstractions="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+                xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+                BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                iOS="0, 20, 0, 0"
+                Android="0, 0, 0, 0"
+                WinPhone="0, 0, 0, 0" />
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <AbsoluteLayout 
+                     x:Name="BransViewName"
+                     BindingContext="{Binding Brands}"
+                     VerticalOptions ="Center"
+                     HorizontalOptions ="Center"
+                     Padding="0" >
+
+            <local:ImageOptimizedRenderer 
+                Aspect="Fill"
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="CenterAndExpand"
+                Source="fondo.png">
+            </local:ImageOptimizedRenderer>
+            
+            <local:ImageOptimizedRenderer 
+                Aspect="Fill"
+                Margin="0,0,0,0"
+                AbsoluteLayout.LayoutBounds="0,0,1,0.25"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="StartAndExpand"
+                Source="cabecera.png">
+            </local:ImageOptimizedRenderer>
+            <ffimageloading:CachedImage 
+                AbsoluteLayout.LayoutBounds="0.97,0.37,0.5,0.3"
+                AbsoluteLayout.LayoutFlags="All" 
+                DownsampleToViewSize="False"
+                Aspect="AspectFit"
+                Source="{Binding ImageMedicity}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding RedirectionMedicityCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+            <ffimageloading:CachedImage 
+                AbsoluteLayout.LayoutBounds="0.03,0.57,0.5,0.3"
+                AbsoluteLayout.LayoutFlags="All"
+                DownsampleToViewSize="False"
+                Aspect="AspectFit"
+                Source="{Binding ImageEconomica}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding RedirectionEconomicasCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+
+            <ffimageloading:CachedImage 
+                AbsoluteLayout.LayoutBounds="0.97,0.77,0.5,0.3"
+                AbsoluteLayout.LayoutFlags="All"
+                DownsampleToViewSize="False"
+                Aspect="AspectFit"
+                Source="{Binding ImagePuntoNatural}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding RedirectionPuntoNaturalCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+            <ffimageloading:CachedImage 
+                AbsoluteLayout.LayoutBounds="0.03,0.97,0.5,0.3"
+                AbsoluteLayout.LayoutFlags="All" 
+                DownsampleToViewSize="False"
+                Aspect="AspectFit"
+                Source="{Binding ImageLogin}">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding RedirectionLoginCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+
+            <local:ImageOptimizedRenderer 
+                AbsoluteLayout.LayoutBounds="0,1,1,0.03"
+                AbsoluteLayout.LayoutFlags="All" 
+                Aspect="AspectFill"
+                Margin="0,0,0,0"
+                Source="rayacierre.png">
+            </local:ImageOptimizedRenderer>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+    
+</ContentPage>    

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:helpers="clr-namespace:FarmaEnlace.Helpers"
+    xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+    x:Class="FarmaEnlace.Views.ChangeUserView"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Command="{Binding ReturnHomeCommand}"
+            Icon="home"
+            Priority="0"
+            Order="Primary"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout  BindingContext="{Binding ChangeUser}">
+                <local:ImageOptimizedRenderer  Aspect="AspectFit" 
+                Source="titeditarperfil.jpg"/>
+                <Label Margin="0,10"
+                    Text="Por favor actualice sus datos de contacto"
+                    TextColor="#595959"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Center"
+                    FontSize="Small">
+                </Label>
+                <Frame  HasShadow="False">
+                    <StackLayout Orientation="Vertical">
+                        <local:ImageEntrySquare
+                            Text="{Binding Name, Mode=TwoWay}"
+                            IsEnabled="False"
+                            Image="iconnombre"
+                            FontSize="Small"
+                            HorizontalOptions="FillAndExpand">
+                        </local:ImageEntrySquare>
+                        <local:ImageEntrySquare
+                            Placeholder="0998340825"
+                            Image="iconcel"
+                            Keyboard="Numeric"
+                            HorizontalOptions="FillAndExpand"
+                            Text="{Binding Phone, Mode=TwoWay}">
+                            <local:ImageEntrySquare.Behaviors>
+                                <helpers:ImageEntrySquareViewBehavior MaxLength="10" />
+                            </local:ImageEntrySquare.Behaviors>
+                        </local:ImageEntrySquare>
+                        <local:ImageEntrySquare
+                            Placeholder="juanarias@hotmail.com"
+                            Image="iconemail"
+                            HorizontalOptions="FillAndExpand"
+                            Text="{Binding Email, Mode=TwoWay}">
+                            <local:ImageEntrySquare.Behaviors>
+                                <helpers:ImageEntrySquareViewBehavior MaxLength="100" />
+                            </local:ImageEntrySquare.Behaviors>
+                        </local:ImageEntrySquare>
+                        <StackLayout Margin="20,20,20,0">
+                            <Button  Text="ACTUALIZAR"
+                                     TextColor="#FFFFFF"
+                                     BackgroundColor="#72B923"
+                                     FontAttributes="Bold"
+                                     HorizontalOptions="FillAndExpand"
+                                     Style="{DynamicResource labelWhiteStyle}"
+                            Command="{Binding SaveCommand}"
+                            IsEnabled="{Binding IsEnabled, Mode=TwoWay}">
+                            </Button>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

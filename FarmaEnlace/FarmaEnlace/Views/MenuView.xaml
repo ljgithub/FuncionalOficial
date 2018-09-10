@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+    x:Class="FarmaEnlace.Views.MenuView"
+    xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    Title="Menu">
+    <ContentPage.Content>
+        <StackLayout
+            Padding="0">
+            <ListView Margin="0,0,0,0"
+                BackgroundColor="#595959" 
+                ItemsSource="{Binding MyMenu}" 
+                HasUnevenRows="True"
+                IsVisible="{Binding IsVisibleMyMenu}"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                Padding = "10"
+                                HasShadow="false"
+                                BackgroundColor="#595959"
+                                Margin="2">
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding NavigateCommand}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <local:ImageOptimizedRenderer 
+                                        Grid.Column="0"  
+                                        Grid.Row="0"
+                                        HeightRequest="30"
+                                        Aspect="AspectFit"
+                                        Source="{Binding Icon}" 
+                                        WidthRequest="30">
+                                    </local:ImageOptimizedRenderer>
+                                    <Label 
+                                        Grid.Column="1"  
+                                        Grid.Row="0"
+                                        FontSize="Large"
+                                        Style="{DynamicResource labelWhiteStyle}"
+                                        Text="{Binding Title}"
+                                        TextColor="{StaticResource BackgroundColor}" 
+                                        VerticalOptions="Center">
+                                    </Label>
+                                    <local:ImageOptimizedRenderer 
+                                        Grid.Column="0"  
+                                        Grid.ColumnSpan="2"
+                                        Grid.Row="1"
+                                        VerticalOptions="FillAndExpand"
+                                        Aspect="AspectFit"
+                                        Source="{helpers:ImageResource line.png}" >
+                                    </local:ImageOptimizedRenderer>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView 
+                Margin="0,0,0,0"
+                BackgroundColor="#001689" 
+                ItemsSource="{Binding MyMenuUser}" 
+                HasUnevenRows="True"
+                IsVisible="{Binding IsVisibleMyMenuUser}"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <!--Padding = "10"
+                                Margin="2"-->
+                            <Frame
+                                Padding="0"
+                                Margin="0"
+                                HasShadow="false"
+                                BackgroundColor="#001689">
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding NavigateCommand}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60" />
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <local:ImageOptimizedRenderer 
+                                        Grid.Column="0"  
+                                        Grid.Row="0"
+                                        Margin="0,10,0,0"
+                                        HeightRequest="30"
+                                        Aspect="AspectFit"
+                                        Source="{Binding Icon}" 
+                                        WidthRequest="30">
+                                    </local:ImageOptimizedRenderer>
+                                    <Label 
+                                        Grid.Column="1"  
+                                        Grid.Row="0"
+                                        Margin="0,10,0,0"
+                                        FontSize="Large"
+                                        Style="{DynamicResource labelWhiteStyle}"
+                                        Text="{Binding Title}"
+                                        TextColor="{StaticResource BackgroundColor}" 
+                                        VerticalOptions="Center">
+                                    </Label>
+                                    <local:ImageOptimizedRenderer 
+                                        Grid.Column="0"  
+                                        Grid.ColumnSpan="2"
+                                        Grid.Row="1"
+                                        VerticalOptions="EndAndExpand"  
+                                        Aspect="AspectFit"
+                                        Source="line" >
+                                    </local:ImageOptimizedRenderer>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

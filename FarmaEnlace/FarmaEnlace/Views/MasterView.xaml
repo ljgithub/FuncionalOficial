@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MasterDetailPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:FarmaEnlace.Views;assembly=FarmaEnlace"
+    xmlns:renderers="clr-namespace:FarmaEnlace.Renderers;assembly=FarmaEnlace"
+    Title="Detalle"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    x:Class="FarmaEnlace.Views.MasterView">
+    <MasterDetailPage.Master>
+        <views:MenuView />
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <renderers:NavigationPageCardRenderer
+            x:Name="Navigator"
+            Title="Detalle">
+            <x:Arguments>
+                <views:VirtualCardView/>
+            </x:Arguments>
+        </renderers:NavigationPageCardRenderer>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>

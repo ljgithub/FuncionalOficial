@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+             xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+             x:Class="FarmaEnlace.Views.DetailProductView" 
+             BackgroundColor="{StaticResource BackgroundColor}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <helpers:HideableToolbarItem
+            Command="{Binding CallCommand}" 
+            Icon="IconoTelefono"
+            Priority="0"
+            Order="Primary"
+            IsVisible="{Binding Brand.AllowCall}"/>
+        <ToolbarItem
+            Command="{Binding ReturnHomeCommand}" 
+            Icon="home"
+            Priority="0"
+            Order="Primary"
+            />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout 
+            BindingContext="{Binding DetailProduct}" 
+            Padding="0">
+            <Grid Margin="0,0,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.80*"/>
+                    <ColumnDefinition Width="0.10*"/>
+                    <ColumnDefinition Width="0.10*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <SearchBar 
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    Margin="0,0,0,0"
+                    Grid.Row="0" 
+                    Grid.Column="0"
+                    BackgroundColor="White"
+                    HorizontalOptions="FillAndExpand" 
+                    Placeholder="BUSQUEDA DE PRODUCTOS"
+                    Style="{DynamicResource labelGreyStyle}"
+                    Text="{Binding Filter, Mode=TwoWay}"
+                    SearchCommand="{Binding SearchCommand}"
+                    SearchCommandParameter="{Binding Filter}">
+                </SearchBar>
+                <local:ImageOptimizedRenderer
+                    HorizontalOptions="End"
+                    Grid.Column="1"
+                    Aspect="AspectFit"
+                    Source="{helpers:ImageResource iconmicrofono.png}">
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding VozCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+                <local:ImageOptimizedRenderer
+                    HorizontalOptions="End"
+                    Grid.Column="2"
+                    Aspect="AspectFit"
+                    Source="{helpers:ImageResource barcode.png}">
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding ScanCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+            </Grid>
+            <Grid RowSpacing="0" Margin="0,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.50*"/>  <!-- 0 Imagen producto  -->
+                    <RowDefinition Height="0.20*"/>  <!-- 1 Descrip con Precio y Presentacion  -->
+                    <RowDefinition Height="0.15*"/>  <!-- 2 Precio esp y nameBrand-->
+                    <RowDefinition Height="0.14*"/>  <!-- 3 Texto para med controlados--> 
+                    <RowDefinition Height="0.11*"/>  <!-- 4 boton de buscar stock -->
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+             
+                <local:ImageOptimizedRenderer 
+                       HeightRequest="300"
+                       Aspect="AspectFit" 
+                       Source="{Binding DetailProduct.ImageFullPath}"  
+                        Margin="0,0,0,0"                           
+                    />
+
+                <StackLayout Grid.Row="1"
+                             Orientation="Horizontal"                               
+                             HorizontalOptions="Center" 
+                             VerticalOptions="Start"  
+                             Margin="0,0,0,0">
+                    <Label  
+                        Margin="0,0,0,0"                                                
+                        HorizontalOptions="StartAndExpand" 
+                        VerticalOptions="Start"
+                        VerticalTextAlignment="Start"
+                        HorizontalTextAlignment="Start"
+                        Style="{DynamicResource labelRedTitlesStyle}"
+                        TextColor="{Binding TextColorName}"
+                        Text="{Binding DetailProduct.Name}"
+                        >
+                        <Label.WidthRequest>
+                            <OnIdiom x:TypeArguments="x:Double"
+                                 Phone="200"
+                                 Tablet="400"
+                                 />
+                        </Label.WidthRequest>
+                    </Label>
+                    <StackLayout  Orientation="Vertical" 
+                                  Margin="0,0,0,0"                                 
+                                  HorizontalOptions="Start"
+                                  >
+                        <Label      
+                            HorizontalOptions="Start"
+                            Style="{DynamicResource labelSmallGreyStyle}"
+                            Text="{Binding NameBrand, StringFormat='Presentación'}"
+                            VerticalOptions="Start"
+                            LineBreakMode="NoWrap"
+                            Margin="0,0,0,0"
+                            FontSize="Small">
+                        </Label>
+                        <Label  
+                            HorizontalOptions="Center" 
+                            Style="{DynamicResource labelSmallGreyStyle}"                           
+                            Text="{Binding DetailProduct.TypeSale, StringFormat='{0}'}"
+                            VerticalOptions="Start"                            
+                            >
+                        </Label>
+
+                        <StackLayout  
+                            Orientation="Horizontal"                             
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start" >
+
+                            <Label 
+                            HorizontalOptions="Start" 
+                            Style="{DynamicResource labelGreyTitlesStyle}"
+                            Margin="0,0,0,0"                           
+                            Text="PVP "
+                            VerticalOptions="Center">
+                            </Label>
+
+                            <Label 
+                            HorizontalOptions="EndAndExpand" 
+                            Style="{DynamicResource labelGreyTitlesStyle}"
+                            TextColor="{Binding TextColorPrice}"
+                            Margin="0,0,0,0"                            
+                            Text="{Binding DetailProduct.Price, StringFormat='${0:0.00}'}"
+                            VerticalOptions="Start">
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+
+                </StackLayout>
+                <StackLayout Grid.Row="2"
+                        Orientation="Vertical"
+                             
+                             Margin="0,0,0,0">
+                    <Label                                                        
+                        Style="{DynamicResource labelSmallGreyStyle}"
+                        Text="{Binding NameBrand, StringFormat='Precio especial en:'}"
+                        FontSize="Medium"
+                        HorizontalTextAlignment="Center"                        
+                        LineBreakMode="NoWrap"
+                        Margin="0,0,0,0">
+
+                    </Label>
+                    <!--NOMBRE DE LA FARMACIA -->
+                    <Label                                           
+                        Style="{DynamicResource labelRedTitlesStyle}"
+                        Text="{Binding NameBrand, StringFormat='{0}'}"
+                        Margin="0,0,0,0"                        
+                        TextColor="{Binding TextColorName}"
+                        HorizontalTextAlignment="Center"
+                        FontSize="Large">
+                    </Label>
+                </StackLayout>
+                <!--   DESCRIPCION DEL PRODUCTO
+                <Label Grid.Row="4"
+                       HorizontalOptions="StartAndExpand" 
+                       Margin="0,0,0,0"
+                       Style="{DynamicResource labelGreyStyle}"
+                       Text="{Binding DetailProduct.Remarks}" 
+                       VerticalOptions="Center">
+                </Label>
+-->
+                <StackLayout 
+                    Orientation="Horizontal" 
+                    Spacing="0" 
+                    Padding="0"
+                    Margin="0,0,0,0"
+                    Grid.Row="3"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center">
+                    <local:ImageOptimizedRenderer
+                        Aspect="AspectFill"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start" 
+                        IsVisible="{Binding DetailProduct.IsProductWithControl}"
+                        Source="iconinfocontrol.png">
+                    </local:ImageOptimizedRenderer>
+            <!--  Texto Medicamento de prescripcion, venta-->
+                    <Label                         
+                        HorizontalOptions="Start" 
+                        VerticalOptions="Center"                        
+                        TextColor="{Binding DetailProduct.TextColorDescripctionControl}"
+                        Text="{Binding DetailProduct.DescripctionControl}"
+                        Style="{DynamicResource labelRedTitlesStyle}">
+                        <Label.FontSize>
+                            <OnIdiom x:TypeArguments="x:Double"
+                                 Phone="13"
+                                 Tablet="19"
+                                 />
+                        </Label.FontSize>
+                    </Label>
+                </StackLayout>
+
+                <local:ImageOptimizedRenderer 
+                    Grid.Row="4"
+                    Aspect="AspectFit"
+                    Source="{helpers:ImageResource btnbuscarstock.png}"
+                    Margin="0,0,0,0"
+                    >
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding SearchStockCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+            </Grid>
+            <!--
+            TEXTO DESCRIPCION
+            <local:ImageOptimizedRenderer  
+                    Aspect="AspectFill"
+                    Margin="0,0,0,0"
+                    Source="{helpers:ImageResource rayacierre2.png}">
+            </local:ImageOptimizedRenderer>-->
+            <local:ImageOptimizedRenderer  
+                    Aspect="AspectFill"
+                    Margin="0,0,0,0"
+                    VerticalOptions="EndAndExpand"
+                    Source="{helpers:ImageResource rayacierre2.png}">
+            </local:ImageOptimizedRenderer>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

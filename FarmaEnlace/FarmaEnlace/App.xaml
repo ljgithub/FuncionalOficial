@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:infrastructure="clr-namespace:FarmaEnlace.Infrastructure;assembly=FarmaEnlace"
+             xmlns:uwp="using:Xamarin.Forms.Platform"
+             x:Class="FarmaEnlace.App">
+    <Application.Resources>
+        <!-- Application resource dictionary -->
+        <ResourceDictionary>
+            
+            <!-- Locator -->
+            <infrastructure:InstanceLocator x:Key="Locator"/>
+            <!-- Parameters -->
+
+             <!--APTO PARA IPV6-->
+            <x:String x:Key="URLAPI">http://appfarmaprod.ddns.net:8084</x:String>
+            <x:String x:Key="PrefixAPI">/ApiFarmaenlace/api</x:String>
+            <x:String x:Key="PrefixAPIToken">ApiFarmaenlace/Token</x:String>
+            <x:String x:Key="AdministradorAppFarmaEnlace">http://appfarmaprod.ddns.net:8084/AdministradorAppFarmaEnlace/{0}</x:String>
+            <x:String x:Key="ApiFarmaenlace">http://appfarmaprod.ddns.net:8084/ApiFarmaenlace/{0}</x:String>
+
+
+
+            <!--PRODUCCION
+            <x:String x:Key="URLAPI">http://181.198.110.230:8084</x:String>
+            <x:String x:Key="PrefixAPI">/ApiFarmaenlace/api</x:String>
+            <x:String x:Key="PrefixAPIToken">ApiFarmaenlace/Token</x:String>
+            <x:String x:Key="AdministradorAppFarmaEnlace">http://181.198.110.230:8084/AdministradorAppFarmaEnlace/{0}</x:String>
+            <x:String x:Key="ApiFarmaenlace">http://181.198.110.230:8084/ApiFarmaenlace/{0}</x:String>-->
+            
+            <!--DESARROLLO-->
+            <!--<x:String x:Key="URLAPI">http://farmaenlaceapi.azurewebsites.net</x:String>
+            <x:String x:Key="PrefixAPI">/api</x:String>
+            <x:String x:Key="PrefixAPIToken">/Token</x:String>
+            <x:String x:Key="AdministradorAppFarmaEnlace">https://farmaenlaceadministrador.azurewebsites.net/{0}</x:String>
+            <x:String x:Key="ApiFarmaenlace">http://farmaenlaceapi.azurewebsites.net/{0}</x:String>-->
+
+            <!--Tandi Desarrollo
+            <x:String x:Key="URLAPI">http://farmaenlaceapi.azurewebsites.net</x:String>
+            <x:String x:Key="PrefixAPI">/api</x:String>
+            <x:String x:Key="PrefixAPIToken">/Token</x:String>
+            <x:String x:Key="AdministradorAppFarmaEnlace">https://farmaenlaceadministrador.azurewebsites.net/{0}</x:String>
+            <x:String x:Key="ApiFarmaenlace">http://farmaenlaceapi.azurewebsites.net/{0}</x:String>-->
+            
+            
+            <x:String x:Key="Economicas">#ed1b2d</x:String>
+            <x:String x:Key="TextEconomicas">#ffffff</x:String>
+            <x:String x:Key="PuntoNatural">#fb7b22</x:String>
+            <x:String x:Key="TextPuntoNatural">#ffffff</x:String>
+            <x:String x:Key="Medicity">#007abf</x:String>
+            <x:String x:Key="TextMedicity">#ffffff</x:String>
+            
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{DynamicResource backgroundColor}"/>
+                <Setter Property="TextColor" Value="{DynamicResource textColor}" />
+                <Setter Property="BorderRadius" Value="23"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HeightRequest" Value="46"/>
+                <Setter Property="Margin" Value="5,0"/>
+            </Style>
+            <Style x:Key="labelWhiteStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#FFFFFF"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+                <Setter Property="FontFamily" Value="MYRIADPRO-REGULAR"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+
+            <Style x:Key="labelGreyStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#595959"/>
+                <Setter Property="Margin" Value="20,10,20,10"/>
+                <Setter Property="FontFamily" Value="MYRIADPRO-REGULAR"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+
+            <Style x:Key="labelGreyTitlesStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#808080"/>
+                <Setter Property="Margin" Value="20,10,20,10"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontFamily" Value="BEBASNUE-REGULAR"/>
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
+            <Style x:Key="labelRedTitlesStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#ed1c2e"/>
+                <Setter Property="Margin" Value="20,10,20,10"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontFamily" Value="BEBASNUE-REGULAR"/>
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
+            <Style x:Key="labelSmallGreyStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#595959"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+                <Setter Property="FontFamily" Value="MYRIADPRO-REGULAR"/>
+                <Setter Property="FontSize" Value="12"/>
+            </Style>
+            <Color x:Key="BackgroundColor">#ffffff</Color>
+            <Color x:Key="textColor">#4c9555</Color>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

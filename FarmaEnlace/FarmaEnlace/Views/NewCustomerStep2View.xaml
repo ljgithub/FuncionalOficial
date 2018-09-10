@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:helpers="clr-namespace:FarmaEnlace.Helpers"
+    xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+    x:Class="FarmaEnlace.Views.NewCustomerStep2View"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Command="{Binding ReturnBrandCommand}" Icon="home"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView
+            BindingContext="{Binding NewCustomer}">
+            <StackLayout>
+                <local:ImageOptimizedRenderer  Aspect="AspectFit" 
+                Source="titregistrarse.jpg"/>
+                <Label Margin="0,15"
+                    Text="Ingrese los siguientes datos (Paso 2/2)"
+                    TextColor="#595959"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Center"
+                    FontSize="Medium">
+                </Label>
+                <Frame  HasShadow="False">
+                    <StackLayout Orientation="Vertical">
+                        <local:ImageEntrySquare
+                            IsEnabled="False"
+                            Text="{Binding FullName, Mode=TwoWay}"
+                            Image="iconnombre"
+                            FontSize="Small"
+                            HorizontalOptions="FillAndExpand">
+                        </local:ImageEntrySquare>
+                        <local:ImageEntrySquare
+                            IsPassword="true"
+                            Placeholder="{helpers:Translate EnterPassword}"
+                            Text="{Binding Password, Mode=TwoWay}"
+                            Image="iconcontrasena"
+                            HorizontalOptions="FillAndExpand">
+                            <local:ImageEntrySquare.Behaviors>
+                                <helpers:ImageEntrySquareViewBehavior MaxLength="6" />
+                            </local:ImageEntrySquare.Behaviors>
+                        </local:ImageEntrySquare>
+                        <local:ImageEntrySquare
+                            IsPassword="true"
+                            Placeholder="{helpers:Translate ConfirmNewPassword}"
+                            Text="{Binding Confirm, Mode=TwoWay}"
+                            Image="iconconfcontrasen"
+                            HorizontalOptions="FillAndExpand">
+                            <local:ImageEntrySquare.Behaviors>
+                                <helpers:ImageEntrySquareViewBehavior MaxLength="6" />
+                            </local:ImageEntrySquare.Behaviors>
+                        </local:ImageEntrySquare>
+                        <local:ImageEntrySquare
+                            Keyboard="Numeric"
+                            Placeholder="{helpers:Translate EnterCellPhone}"
+                            Text="{Binding Phone, Mode=TwoWay}"
+                            Image="iconcel"
+                            HorizontalOptions="FillAndExpand">
+                            <local:ImageEntrySquare.Behaviors>
+                                <helpers:ImageEntrySquareViewBehavior MaxLength="10" />
+                            </local:ImageEntrySquare.Behaviors>
+                        </local:ImageEntrySquare>
+                        <local:ImageEntrySquare
+                            Keyboard="Email"
+                            Placeholder="Ingrese su email"
+                            Text="{Binding Email, Mode=TwoWay}"
+                            Image="iconemail"
+                            HorizontalOptions="FillAndExpand">
+                            <local:ImageEntrySquare.Behaviors>
+                                <helpers:ImageEntrySquareViewBehavior MaxLength="100" />
+                            </local:ImageEntrySquare.Behaviors>
+                        </local:ImageEntrySquare>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="25*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="25*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <local:ImageEntrySquare
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Placeholder="Día"
+                                Text="{Binding Day, Mode=TwoWay}"                                
+                                Keyboard="Numeric"
+                                Image="iconcalendar"
+                                HorizontalOptions="FillAndExpand">
+                                <local:ImageEntrySquare.Behaviors>
+                                    <helpers:ImageEntrySquareViewBehavior MaxLength="2" />
+                                </local:ImageEntrySquare.Behaviors>
+                            </local:ImageEntrySquare>
+                                                        
+                            <Label 
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="-">                                
+                            </Label>
+
+                            <local:ImageEntrySquare 
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Text="{Binding Month, Mode=TwoWay}"
+                                Placeholder="Mes"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Numeric">
+                                <local:ImageEntrySquare.Behaviors>
+                                    <helpers:ImageEntrySquareViewBehavior MaxLength="2" />
+                                </local:ImageEntrySquare.Behaviors>
+                            </local:ImageEntrySquare>
+                            
+                            <Label 
+                                Grid.Row="0"
+                                Grid.Column="3"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="-">                                
+                            </Label>
+
+                            <local:ImageEntrySquare 
+                                Grid.Row="0"
+                                Grid.Column="4"
+                                Text="{Binding Year, Mode=TwoWay}"
+                                Placeholder="Año"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Numeric">
+                                <local:ImageEntrySquare.Behaviors>
+                                    <helpers:ImageEntrySquareViewBehavior MaxLength="4" />
+                                </local:ImageEntrySquare.Behaviors>
+                            </local:ImageEntrySquare>
+                        </Grid>                        
+                        
+                        <StackLayout Margin="20,20,20,0">
+                            <Button  Text="REGISTRARSE"
+                                     TextColor="#FFFFFF"
+                                     BackgroundColor="#72B923"
+                                     FontAttributes="Bold"
+                                     HorizontalOptions="FillAndExpand"
+                                     FontSize="14"
+                                     Style="{DynamicResource labelWhiteStyle}"
+                            Command="{Binding SaveCommand}"
+                            IsEnabled="{Binding IsEnabled, Mode=TwoWay}">
+                            </Button>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+           
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

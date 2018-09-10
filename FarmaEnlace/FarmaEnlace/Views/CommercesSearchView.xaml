@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+        xmlns="http://xamarin.com/schemas/2014/forms" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+        x:Class="FarmaEnlace.Views.CommercesSearchView"
+        xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+        BackgroundColor="{StaticResource BackgroundColor}"
+        BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <helpers:HideableToolbarItem
+            Command="{Binding CallCommand}" 
+            Icon="IconoTelefono"
+            Priority="0"
+            Order="Primary"
+            IsVisible="{Binding Brand.AllowCall}"/>
+        <ToolbarItem
+            Command="{Binding ReturnHomeCommand}" 
+            Icon="home"
+            Priority="0"
+            Order="Primary"
+            />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <AbsoluteLayout BindingContext="{Binding CommercesSearch}">
+            <Image
+                Aspect="Fill"
+                AbsoluteLayout.LayoutBounds="0,0,1,0.25"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="CenterAndExpand"
+                Source="{helpers:ImageResource titbuscar.jpg}">
+            </Image>
+            <!--Isquierda, Arriba, ancho,alto -->
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0.4,1,0.25"
+                            AbsoluteLayout.LayoutFlags="All" >
+                <Label  Text="Por favor"
+                        Style="{DynamicResource labelGreyTitlesStyle}"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="Center"
+                        x:Name="LabelFontSizeTitleDynamic">
+                </Label>
+                <Label Style="{DynamicResource labelGreyStyle}"
+                       Margin="20,0,20,0"
+                       Text="Ingrese una o varias palabras claves para relizar la búsqueda del establecimiento que necesita"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Center"
+                       x:Name="LabelFontSizeDymanic1">
+                </Label>
+            </StackLayout>
+
+
+            <Grid AbsoluteLayout.LayoutBounds="0,0.72,1,0.25"
+                              AbsoluteLayout.LayoutFlags="All" 
+                              HorizontalOptions="Center" 
+                              VerticalOptions="CenterAndExpand"
+                       Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.80*"/>
+                    <ColumnDefinition Width="0.20*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <SearchBar Grid.Row="0"
+                           WidthRequest="80"
+                    HeightRequest="80"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+                        Margin="0,0,0,0"
+                        Placeholder="INGRESE PALABRA CLAVE"
+                        VerticalOptions="Center"
+                        HorizontalOptions="FillAndExpand"
+                        Style="{DynamicResource labelGreyStyle}"
+                        Text="{Binding FilterSearch, Mode=TwoWay}"
+                        SearchCommand="{Binding SearchCommerceCommand}"
+                        SearchCommandParameter="{Binding FilterSearch}">
+                </SearchBar>
+                <Image  HorizontalOptions="Center" 
+                        VerticalOptions="CenterAndExpand"
+                        Grid.Column="1"
+                        Scale="0.6"
+                        Aspect="AspectFit"
+                        Source="{helpers:ImageResource iconmicrofono1.png}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding VozCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+            <Image AbsoluteLayout.LayoutBounds="0,0.97,1,0.25"
+                              AbsoluteLayout.LayoutFlags="All" 
+                              HorizontalOptions="Center" 
+                              VerticalOptions="CenterAndExpand"
+                   Scale="0.6"
+                Aspect="AspectFit"
+                Source="{helpers:ImageResource btnbuscarFarmacia.png}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer 
+                                Command="{Binding SearchCommerceCommand}">
+                    </TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Image
+                Aspect="Fill"
+                AbsoluteLayout.LayoutBounds="0,1,1,0.03"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="CenterAndExpand"
+                Source="{helpers:ImageResource rayacierre2.png}">
+            </Image>
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

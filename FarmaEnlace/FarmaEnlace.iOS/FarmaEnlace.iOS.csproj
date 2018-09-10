@@ -1,0 +1,1814 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FBA8137A-F176-4850-9D7F-ED2E3295B5C6}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>FarmaEnlace.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>FarmaEnlace.iOS</AssemblyName>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <OptimizePNGs>true</OptimizePNGs>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignProvision />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <CodesignKey>iPhone Developer: Jorge Ortiz (TATD3DV2BB)</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>Development Tandicorp 2</CodesignProvision>
+    <MtouchFloat32>false</MtouchFloat32>
+    <MtouchNoSymbolStrip>false</MtouchNoSymbolStrip>
+    <MtouchFastDev>false</MtouchFastDev>
+    <OptimizePNGs>true</OptimizePNGs>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARM64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <BuildIpa>True</BuildIpa>
+    <CodesignProvision>Tu App Farmacia</CodesignProvision>
+    <CodesignKey>iPhone Distribution: Farmaenlace Cia. Ltda. (9447VZDGRS)</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <OptimizePNGs>true</OptimizePNGs>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\iPhone\AppStore</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Implementations\AppsSO.cs" />
+    <Compile Include="Implementations\CloseApplication.cs" />
+    <Compile Include="Implementations\DeviceSO.cs" />
+    <Compile Include="Implementations\FileStore.cs" />
+    <Compile Include="Implementations\IShareService.cs" />
+    <Compile Include="Implementations\Localize.cs" />
+    <Compile Include="Implementations\PermisosGPS.cs" />
+    <Compile Include="Implementations\QrCodeScanningService.cs" />
+    <Compile Include="Implementations\RegistrationDevice.cs" />
+    <Compile Include="Implementations\SpeechToTextImplementation.cs" />
+    <Compile Include="Implementations\UniqueIdIOS.cs" />
+    <Compile Include="Implementations\Voice.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\CustomMapRenderer.cs" />
+    <Compile Include="Renderers\CustomMKAnnotationView.cs" />
+    <Compile Include="Renderers\CustomPickerRenderer.cs" />
+    <Compile Include="Renderers\ImageEntryRenderer.cs" />
+    <Compile Include="Renderers\ImageEntrySquareRenderer.cs" />
+    <Compile Include="Renderers\MySwitchRendererd.cs" />
+    <Compile Include="Renderers\NavigationPageCardRenderer.cs" />
+    <Compile Include="Renderers\NavigationPageRenderer.cs" />
+    <Compile Include="Renderers\RadioButtonRenderer.cs" />
+    <Compile Include="Renderers\RadioButtonView.cs" />
+    <Compile Include="Renderers\UnderlineEffect.cs" />
+    <Compile Include="Renderers\Utils.cs" />
+    <Compile Include="Renderers\ViewCellRenderer.cs" />
+    <None Include="Entitlements.plist">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Info.plist">
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <ITunesArtwork Include="iTunesArtwork" />
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ITunesArtwork Include="iTunesArtwork%402x" />
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="CarouselView.FormsPlugin">
+      <Version>5.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="DLToolkit.Forms.Controls.FlowListView">
+      <Version>2.0.10</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>1.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="SQLiteNetExtensions">
+      <Version>2.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Forms">
+      <Version>2.3.6</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>3.0.0.482510</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms.Maps">
+      <Version>3.0.0.482510</Version>
+    </PackageReference>
+    <PackageReference Include="XLabs.Forms">
+      <Version>2.0.5782</Version>
+    </PackageReference>
+    <PackageReference Include="ZXing.Net.Mobile">
+      <Version>2.4.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FarmaEnlace\FarmaEnlace.csproj">
+      <Project>{877259cc-077c-4f10-8000-d358eef34fbf}</Project>
+      <Name>FarmaEnlace</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\barcode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_action_add_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_action_image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_add_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_chevron_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_exit_to_app.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_sync.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Location.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\microphone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\noimage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\splash2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ubication.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\xamarinlogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnregistrarse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btningresar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\fondoingreso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconclave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconregistrarse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconusuario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tittarjdesc.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\loginPeakImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnaceptar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnaceptarEco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnbuscar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnbuscarFarmacia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnbuscarstock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btncatalogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btncompartir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btncompartir1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btncompartirbarra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnencu1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnencuentranos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnenviar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnfarmacias24h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnfarmaciascerc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btngenerarcodigo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btngoogle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\backgenerarcodigo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnlistafarmac.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnllamar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnmapafar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnmas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btntarjetavirtual.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnubicacion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnverdetalles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnverdetalles1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cabecera_original.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\fondo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flechita.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iclauncher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconadvertencia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconcel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconcerrar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconcodigo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconconfcontras.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconconfcontrasen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconcontrasena.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconcontrcok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icondireccion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconemail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconemailmarca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconinfo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconinfomarca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconjugueter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconluparoja.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconmicrofono.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconmicrofono1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconnombre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconnuevacontrasen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconnumeroident.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconoenviado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconohorario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconperfactualic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icontelefono.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icontipoidentif.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconubicmapa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\line.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\unselected_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tittarjdescing.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\titregistrarse.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\titrecupclave.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\titgenerarcod.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\titlineas.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\titeditarperfil.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\titbuscar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\titactualizarclave.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tarjetavirtual.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\titencuentra.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\selected_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_barcode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnaceptar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnbuscar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnbuscarFarmacia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnbuscarstock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btncatalogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btncompartir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btncompartir1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btncompartirbarra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnencuentranos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnfarmacias24h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnfarmaciascerc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btngoogle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnlistafarmac.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnllamar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnmapafar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnmas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnubicacion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnverdetalles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_btnverdetalles1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_flechita.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_icondireccion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_iconemailmarca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_iconinfomarca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_iconluparoja.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_iconmicrofono.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_iconmicrofono1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_iconohorario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_icontelefono.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_iconubicmapa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_line.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_rayacierre2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_selected_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_titbuscar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_titencuentra.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_titlineas.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_unselected_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\rayacierre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\rayacierre2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_unselected_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_barcode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnaceptar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnbuscar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnbuscarFarmacia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnbuscarstock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btncatalogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btncompartir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btncompartir1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btncompartirbarra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnencuentranos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnfarmacias24h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnfarmaciascerc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btngoogle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnlistafarmac.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnllamar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnmapafar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnmas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnubicacion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnverdetalles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_btnverdetalles1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_flechita.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_icondireccion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_iconemailmarca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_iconinfomarca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_iconluparoja.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_iconmicrofono.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_iconmicrofono1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_iconohorario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_icontelefono.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_iconubicmapa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_line.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_rayacierre2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_selected_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_titbuscar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_titencuentra.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_titlineas.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-Small%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-Small%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-Small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-Small-40%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-Small-40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-76%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-76.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-60%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-60%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\entryBackgroundSquare.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eco_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\unchecked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\unchecked%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-83.5%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\unselected_circle%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\unselected_circle%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_logo_X.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_logo320.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_logo375.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_logo414.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eco_logo_X.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eco_logo320.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eco_logo375.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eco_logo414.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logo_X.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logo320.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logo375.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logo414.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_logo_X.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_logo320.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_logo375.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_logo414.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eco_logo_ipad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eco_logo_ipad1024.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eco_logo_ipad768.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eco_logo_ipad834.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logo_ipad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logo_ipad1024.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logo_ipad768.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logo_ipad834.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_logo_ipad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_logo_ipad1024.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_logo_ipad768.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\med_logo_ipad834.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_logo_ipad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_logo_ipad1024.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_logo_ipad768.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pun_logo_ipad834.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cabecera_2x.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\checked%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cabecera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cabecera%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btneconomicas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnmedicity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnpuntonatural.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconcalendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btnaceptarAutorization.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconListening.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconinfocontrol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconotc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconprescripcion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Notification%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\IconoTelefono.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\titgenerarcod2.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+             xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="FarmaEnlace.Views.CarouselSalePlus"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentView.Content>
+        <AbsoluteLayout BindingContext="{Binding VirtualCard}"
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                HeightRequest="400"
+                x:Name="VirtualCardName"> 
+            <cv:CarouselView  x:Name="CarouselImages" 
+                AbsoluteLayout.LayoutBounds="0,0,1,0.50"
+                AbsoluteLayout.LayoutFlags="All"  
+                ItemsSource="{Binding ImagesCollection}" 
+                Position="{Binding CurrentPhoto, Mode=TwoWay}">
+                <cv:CarouselView.Behaviors>
+                    <helpers:CarouselViewBehavior  Command="{Binding CurrentPhotoChangedCommand}"/>
+                </cv:CarouselView.Behaviors>
+                <cv:CarouselView.ItemTemplate>
+                    <DataTemplate >
+                        <local:ImageOptimizedRenderer 
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="CenterAndExpand"
+                            Margin="0,0,0,0"
+                            Aspect="AspectFit" 
+                            Source="{Binding ImageFullPath}">
+                        </local:ImageOptimizedRenderer>
+                    </DataTemplate>
+                </cv:CarouselView.ItemTemplate>
+            </cv:CarouselView>
+
+            <!--Isquierda, Arriba, ancho,alto-->
+            <!---->
+            <helpers:CarouselIndicators 
+                AbsoluteLayout.LayoutBounds="0.03,0.03,1,0.15"
+                AbsoluteLayout.LayoutFlags="All"
+                IndicatorHeight="25" 
+                IndicatorWidth="25" 
+                UnselectedIndicator="{helpers:ImageResource unselected_circle.png}" 
+                SelectedIndicator="{helpers:ImageResource selected_circle.png}" 
+                Position="{Binding CurrentPhoto}" 
+                ItemsSource="{Binding ImagesCollection}" />
+            
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,0.60,1,0.10"                
+                AbsoluteLayout.LayoutFlags="All"
+                VerticalOptions="CenterAndExpand">                
+                <Label
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                TextColor="#001689"
+                FontFamily="BEBASNUE-REGULAR"
+                Text="{Binding TitlePromotion, Mode=TwoWay}" />              
+            </StackLayout>     
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,0.80,1,0.20"
+                AbsoluteLayout.LayoutFlags="All"
+                VerticalOptions="CenterAndExpand">
+                <Label                     
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    FontSize="Medium"
+                    Text="{Binding DescriptionPromotion, Mode=TwoWay}" /> 
+            </StackLayout>
+            
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,1,1,0.20"
+                AbsoluteLayout.LayoutFlags="All">
+                <Button                          
+                        Text=" Continuar con la compra "
+                        TextColor="#FFFFFF"
+                        BorderRadius="15"
+                        BackgroundColor="#001689"
+                        FontAttributes="Bold"                    
+                        HorizontalOptions="Center"
+                        VerticalOptions="CenterAndExpand"
+                        FontSize="Medium"
+                        Margin="10,10,10,10"
+                        FontFamily="MYRIADPRO-REGULAR"
+                        Command="{Binding GenerateSalesPlusCommand}">
+                 </Button>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"       
+    xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+    xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+    x:Class="FarmaEnlace.Views.CommercesListView"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <helpers:HideableToolbarItem
+            Command="{Binding CallCommand}" 
+            Icon="IconoTelefono"
+            Priority="0"
+            Order="Primary"
+            IsVisible="{Binding Brand.AllowCall}"/>
+        <ToolbarItem
+            Command="{Binding ReturnHomeCommand}" 
+            Icon="home"
+            Priority="0"
+            Order="Primary"
+            />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding CommercesList}" Padding="0" Spacing="0">
+            <Grid Margin="0,0,0,0" BackgroundColor="#f0f0f0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.80*"/>
+                    <ColumnDefinition Width="0.20*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <SearchBar Grid.Row="0" Grid.Column="0"
+                    Margin="0,0,0,0"
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    BackgroundColor="#f0f0f0"
+                    Style="{DynamicResource labelGreyStyle}"
+                    HorizontalOptions="FillAndExpand" 
+                    Placeholder="BUSQUEDA DE ESTABLECIMIENTOS"
+                    Text="{Binding FilterList}"
+                    SearchCommand="{Binding SearchCommerceCommand}"
+                    SearchCommandParameter="{Binding FilterList}">
+                </SearchBar>
+                <local:ImageOptimizedRenderer
+                    HorizontalOptions="CenterAndExpand"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Aspect="AspectFit"
+                    Source="{helpers:ImageResource iconmicrofono.png}">
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding VozCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+            </Grid>
+            <Grid Margin="0,0,0,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"
+                    HorizontalOptions="Start" 
+                    Style="{DynamicResource labelGreyTitlesStyle}"
+                       FontSize="13"
+                    TextColor="{Binding TextoResultadoColor}" 
+                    Text="{Binding TextoResultado}" 
+                    VerticalOptions="Center">
+                </Label>
+                <StackLayout Grid.Row="0" Grid.Column="1"
+                    x:Name="ToggledLayout"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    IsVisible="{Binding IsVisible, Mode=TwoWay}"
+                    Orientation="Horizontal">
+                    <Label
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Text="DE TURNO"
+                        FontSize="13"
+                        Style="{DynamicResource labelGreyStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ToggledChangeCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <local:CustomSwitch 
+                        IsToggled="{Binding IsToggled, Mode=TwoWay}"
+                            Toggled="Switch_Toggled"
+                            SwitchOffColor="{Binding SwitchOffColor}"  
+                            SwitchOnColor="{Binding SwitchOnColor}"
+                            SwitchThumbColor="{Binding SwitchThumbColor}"  
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+            <Grid IsVisible="{Binding IsVisibleLabel, Mode=TwoWay}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label 
+                   Grid.Row="0" Grid.Column="0"
+                   Text="No existen resultados, por favor realice una nueva busqueda"                   
+																	
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center">
+                </Label>
+            </Grid>
+            <ListView
+                x:Name="CommercesCollection"
+                HasUnevenRows="true"
+                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                SeparatorVisibility="None"
+                Margin="0,0,0,0"
+                ItemsSource="{Binding CommercesCollection}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                Padding = "0" 
+                                Margin="0,3,0,3"
+                                CornerRadius="0"
+                                HasShadow="True">
+
+                                <Grid  Margin="10,3,10,3"  RowSpacing="0" ColumnSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.70*"/>
+                                        <ColumnDefinition Width="0.30*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <StackLayout Spacing="0" Margin="0,0,0,0" Grid.Row="0" Grid.Column="0">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label HorizontalOptions="Start" 
+                                                VerticalOptions="Start"
+                                                Style="{DynamicResource labelGreyTitlesStyle}"
+                                                   Margin="8,0,0,0"
+                                                   FontSize="14"
+                                                Text="{Binding Name}">
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout  Spacing="0" Orientation="Horizontal">
+                                            <local:ImageOptimizedRenderer
+                                                Scale="0.7"
+                                                HeightRequest="25"
+                                                Aspect="AspectFill"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Start" 
+                                                Source="{helpers:ImageResource icondireccion.png}">
+                                            </local:ImageOptimizedRenderer>
+                                            <Label 
+                                                HorizontalOptions="StartAndExpand" 
+                                                VerticalOptions="Center"
+                                                Style="{DynamicResource labelSmallGreyStyle}"
+                                                Text="{Binding Address}">
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout  Spacing="0" Margin="0,0,0,0" Orientation="Horizontal">
+                                            <local:ImageOptimizedRenderer
+                                                Scale="0.7"
+                                                HeightRequest="25"
+                                                Aspect="AspectFill"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Start" 
+                                                Source="{helpers:ImageResource icontelefono.png}">
+                                            </local:ImageOptimizedRenderer>
+                                            <Label 
+                                                HorizontalOptions="StartAndExpand" 
+                                                VerticalOptions="Center"
+                                                Style="{DynamicResource labelSmallGreyStyle}"
+                                                Text="{Binding Phone}">
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout  Spacing="0" Orientation="Horizontal">
+                                            <local:ImageOptimizedRenderer
+                                                Scale="0.7"
+                                                HeightRequest="25"
+                                                Aspect="AspectFill"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Start" 
+                                                Source="{helpers:ImageResource iconohorario.png}">
+                                            </local:ImageOptimizedRenderer>
+                                            <Label 
+                                                HorizontalOptions="StartAndExpand" 
+                                                VerticalOptions="Center"
+                                                Style="{DynamicResource labelSmallGreyStyle}"
+                                                Text="{Binding ScheduleMondayToFriday}">
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout  Spacing="0" Orientation="Horizontal">
+                                            <local:ImageOptimizedRenderer
+                                                Scale="0.7"
+                                                HeightRequest="25"
+                                                Aspect="AspectFill"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Start" 
+                                                Source="{helpers:ImageResource iconohorario.png}">
+                                            </local:ImageOptimizedRenderer>
+                                            <Label 
+                                                HorizontalOptions="StartAndExpand" 
+                                                VerticalOptions="Center"
+                                                Style="{DynamicResource labelSmallGreyStyle}"
+                                                Text="{Binding ScheduleSaturday}">
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout  Spacing="0" Orientation="Horizontal">
+                                            <local:ImageOptimizedRenderer
+                                                Scale="0.7"
+                                                HeightRequest="25"
+                                                Aspect="AspectFill"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Start" 
+                                                Source="{helpers:ImageResource iconohorario.png}">
+                                            </local:ImageOptimizedRenderer>
+                                            <Label 
+                                                HorizontalOptions="StartAndExpand" 
+                                                VerticalOptions="Center"
+                                                Style="{DynamicResource labelSmallGreyStyle}"
+                                                Text="{Binding ScheduleSunday}">
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label HorizontalOptions="Start" 
+                                                VerticalOptions="Start"
+                                                Style="{DynamicResource labelSmallGreyStyle}"
+                                                Margin="8,0,0,0"
+                                                FontAttributes="Bold"
+                                                Text="{Binding Distance, StringFormat='Distancia: {0}'}">
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout  Grid.Row="6" Margin="8,0,0,0"
+                                                Grid.ColumnSpan="2" 
+                                                      IsVisible="{Binding Path=BindingContext.IsVisibleStock,
+                                            Source={x:Reference CommercesCollection}" 
+                                                      Spacing="0" 
+                                                      Orientation="Horizontal">
+                                            <Label 
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Start"
+                                                Style="{DynamicResource labelSmallGreyStyle}"
+                                                FontAttributes="Bold"
+                                                Text="{Binding Stock, StringFormat='STOCK DEL PRODUCTO: {0:F0}'}">
+                                            </Label>
+
+                                            <Label 
+                                                HorizontalOptions="StartAndExpand" 
+                                                VerticalOptions="Center"
+                                                Style="{DynamicResource labelSmallGreyStyle}"
+                                                FontAttributes="Bold"
+                                                Text="{Binding State, StringFormat=' {0}'}">
+                                            </Label>
+
+                                        </StackLayout>
+                                        <StackLayout  Margin="8,0,0,0"
+                                               
+                                                      IsVisible="{Binding Path=BindingContext.IsVisibleStock,
+                                            Source={x:Reference CommercesCollection}" 
+                                                      Spacing="0" 
+                                                      Orientation="Horizontal">
+                                            <Label  
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Start"
+                                                    Style="{DynamicResource labelSmallGreyStyle}"
+                                                    FontAttributes="Bold"
+                                                    Text="La cantidad disponible está sujeta a variación.">
+                                            </Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <local:ImageOptimizedRenderer
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Aspect="AspectFill"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        Source="{helpers:ImageResource btnubicacion.png}">
+                                        <local:ImageOptimizedRenderer.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                            Command="{Binding Path=BindingContext.MapCommerceCommand, Source={x:Reference CommercesCollection}"
+                                            CommandParameter="{Binding CommerceId}"/>
+                                        </local:ImageOptimizedRenderer.GestureRecognizers>
+                                    </local:ImageOptimizedRenderer>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <local:ImageOptimizedRenderer
+                Margin="0,0,0,0"
+                Aspect="AspectFill"
+                VerticalOptions="EndAndExpand"
+                Source="{helpers:ImageResource btnmapafar.png}">
+                <local:ImageOptimizedRenderer.GestureRecognizers>
+                    <TapGestureRecognizer 
+                         Command="{Binding MaplinkCommand}">
+                    </TapGestureRecognizer>
+                </local:ImageOptimizedRenderer.GestureRecognizers>
+            </local:ImageOptimizedRenderer>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

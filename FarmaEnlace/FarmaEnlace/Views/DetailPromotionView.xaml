@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+             xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="FarmaEnlace.Views.DetailPromotionView" 
+             BackgroundColor="{StaticResource BackgroundColor}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.Content>
+        <StackLayout 
+            BindingContext="{Binding ImageBrand}" 
+            Margin="0,0,0,0"
+            Spacing="0"
+            Padding="0">
+
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.4*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="0">
+                    <local:ImageOptimizedRenderer  HeightRequest="300"
+                       Aspect="AspectFit" 
+                       Source="{Binding ImageFullPath}"/>
+                    <!--<local:ImageOptimizedRenderer  
+                        Aspect="Fill"
+                        HeightRequest="50"
+                        Source="{helpers:ImageResource btncompartir.png}">
+                        <local:ImageOptimizedRenderer.GestureRecognizers>
+                            <TapGestureRecognizer  CommandParameter="{Binding ImageId}"
+                                                    Command="{Binding ShareCommand}"/>
+                        </local:ImageOptimizedRenderer.GestureRecognizers>
+                    </local:ImageOptimizedRenderer>-->
+
+                    <ffimageloading:CachedImage 
+                        DownsampleToViewSize="False"
+                        Aspect="AspectFit"
+                        HeightRequest="50"
+                        Source="{Binding ImageFullPath}">
+                        <ffimageloading:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer  CommandParameter="{Binding ImageId}"
+                                                    Command="{Binding ShareCommand}"/>
+                        </ffimageloading:CachedImage.GestureRecognizers>
+                    </ffimageloading:CachedImage>
+                </StackLayout>
+                <StackLayout  Grid.Row="1">
+                    <Label 
+                        HorizontalOptions="CenterAndExpand" 
+                        FontSize="Medium" 
+                        Text="{Binding Name}" 
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label Grid.Row="2"
+                       HorizontalOptions="FillAndExpand" 
+                       FontSize="Medium" 
+                       Text="{Binding Remarks}" 
+                       VerticalOptions="Center">
+                    </Label>
+                    <Button  Grid.Row="3" 
+                         Text ="Regresar"
+                         Command="{Binding ReturnCommand}">
+                    </Button>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

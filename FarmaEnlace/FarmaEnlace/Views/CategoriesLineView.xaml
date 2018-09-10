@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="FarmaEnlace.Views.CategoriesLineView" 
+    xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+    xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <helpers:HideableToolbarItem
+            Command="{Binding CallCommand}" 
+            Icon="IconoTelefono"
+            Priority="0"
+            Order="Primary"
+            IsVisible="{Binding Brand.AllowCall}"/>
+        <ToolbarItem
+            Command="{Binding ReturnHomeCommand}" 
+            Icon="home"
+            Priority="0"
+            Order="Primary"
+            />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <AbsoluteLayout BindingContext="{Binding Categories}" >
+            <Grid 
+                AbsoluteLayout.LayoutBounds="0,0,1,.10"
+                AbsoluteLayout.LayoutFlags="All" 
+                Margin="0,0,10,0"
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="StartAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.80*"/>
+                    <ColumnDefinition Width="0.10*"/>
+                    <ColumnDefinition Width="0.10*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <SearchBar  Grid.Column="0"
+                    Grid.Row="0"
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    BackgroundColor="White"
+                    Margin="0,0,0,0"
+                    HorizontalOptions="FillAndExpand" 
+                    Placeholder="BUSQUEDA DE PRODUCTOS"
+                    Style="{DynamicResource labelGreyStyle}"
+                    Text="{Binding Filter, Mode=TwoWay}"
+                    SearchCommand="{Binding SearchCommand}"
+                    SearchCommandParameter="{Binding Filter}">
+                </SearchBar>
+                <local:ImageOptimizedRenderer
+                    HorizontalOptions="End"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Aspect="AspectFit"
+                    Source="{helpers:ImageResource iconmicrofono.png}">
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding VozCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+                <local:ImageOptimizedRenderer
+                    HorizontalOptions="End"
+                    Grid.Column="2"
+                     Grid.Row="0"
+                    Aspect="AspectFit"
+                    Source="{helpers:ImageResource barcode.png}">
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding ScanCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+            </Grid>
+            <!--Isquierda, Arriba, ancho,alto -->
+            <local:ImageOptimizedRenderer 
+                Aspect="Fill"
+                AbsoluteLayout.LayoutBounds="0,0.15,1,.25"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="StartAndExpand"
+                Source="{helpers:ImageResource titlineas.jpg}"/>
+
+
+            <flv:FlowListView x:Name="CategoriesCollection"
+                              AbsoluteLayout.LayoutBounds="0,0.97,1,0.60"
+                              AbsoluteLayout.LayoutFlags="All" 
+                              FlowColumnCount="3" 
+                              FlowColumnExpand="None"
+                              SeparatorVisibility="None"
+                              HasUnevenRows="True"                              
+                              FlowItemTappedCommand="{Binding SelectCategoryLineCommand}"
+                              FlowLastTappedItem="{Binding CategorySelected}"
+                              Margin="0,0,0,0"
+                              FlowItemsSource="{Binding CategoriesLineCollection}" >
+                <flv:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <ffimageloading:CachedImage 
+                             DownsampleToViewSize="False"
+                             Aspect="AspectFit"
+                              MinimumHeightRequest="80"
+                              HeightRequest="{helpers:ImageHeightRequest 80}"
+                             Source="{Binding ImageFullPath}">
+                        </ffimageloading:CachedImage>
+                        
+                    </DataTemplate>
+                </flv:FlowListView.FlowColumnTemplate>
+
+            </flv:FlowListView>
+
+
+            <local:ImageOptimizedRenderer 
+                Aspect="Fill"
+                AbsoluteLayout.LayoutBounds="0,1,1,0.03"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="Center" 
+                VerticalOptions="EndAndExpand"
+                Source="{helpers:ImageResource rayacierre2.png}">
+            </local:ImageOptimizedRenderer>
+            
+        </AbsoluteLayout>
+    
+    </ContentPage.Content>
+   
+</ContentPage>

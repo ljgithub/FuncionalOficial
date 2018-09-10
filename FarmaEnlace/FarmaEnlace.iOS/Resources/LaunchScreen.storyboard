@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="888">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="887">
+            <objects>
+                <viewController id="888" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="885"/>
+                        <viewControllerLayoutGuide type="bottom" id="886"/>
+                    </layoutGuides>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="894" key="view" adjustsImageSizeForAccessibilityContentSizeCategory="YES" image="splash2.png">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="890" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-484" y="-379"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="splash2.png" width="915" height="1625"/>
+    </resources>
+    <color key="tintColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+</document>

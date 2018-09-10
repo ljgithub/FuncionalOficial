@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:helpers="clr-namespace:FarmaEnlace.Helpers"
+    xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+    x:Class="FarmaEnlace.Views.NewCustomerView"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Command="{Binding ReturnBrandCommand}" Icon="home"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView
+            BindingContext="{Binding NewCustomer}">
+            <StackLayout>
+                <local:ImageOptimizedRenderer  Aspect="AspectFit" 
+                Source="titregistrarse.jpg"/>
+                <Label Margin="0,15"
+                    Text="Ingrese los siguientes datos (Paso 1/2)"
+                    TextColor="#595959"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Center"
+                    FontSize="Medium">
+                </Label>
+                
+                <Frame  HasShadow="False">
+                    <StackLayout Orientation="Vertical">
+                        <helpers:BindableRadioGroup x:Name="RadiouGroup"  Orientation="Vertical" />
+                        <local:ImageEntrySquare
+                            IsEnabled="{Binding IsEnabledIdentification, Mode=TwoWay}"
+                            IsVisible="{Binding IsVisibleRuc, Mode=TwoWay}"
+                            Placeholder="{helpers:Translate EnterID}"
+                            Text="{Binding RUC, Mode=TwoWay}"
+                            Keyboard="Numeric"
+                            Image="iconnumeroident"
+                            HorizontalOptions="FillAndExpand">
+                            <local:ImageEntrySquare.Behaviors>
+                                <helpers:ImageEntrySquareViewBehavior MaxLength="13" />
+                            </local:ImageEntrySquare.Behaviors>
+                        </local:ImageEntrySquare>
+                        <local:ImageEntrySquare
+                            IsEnabled="{Binding IsEnabledIdentification, Mode=TwoWay}"
+                            IsVisible="{Binding IsVisibleCedula, Mode=TwoWay}"
+                            Placeholder="{helpers:Translate EnterID}"
+                             Keyboard="Numeric"
+                            Text="{Binding Cedula, Mode=TwoWay}"
+                            Image="iconnumeroident"
+                            HorizontalOptions="FillAndExpand">
+                            <local:ImageEntrySquare.Behaviors>
+                                <helpers:ImageEntrySquareViewBehavior MaxLength="10" />
+                            </local:ImageEntrySquare.Behaviors>
+                        </local:ImageEntrySquare>
+                        <local:ImageEntrySquare
+                            IsEnabled="{Binding IsEnabledIdentification, Mode=TwoWay}"
+                            IsVisible="{Binding IsVisiblePasaporte, Mode=TwoWay}"
+                            Placeholder="{helpers:Translate EnterID}"
+                            Text="{Binding Passport, Mode=TwoWay}"
+                            Image="iconnumeroident"
+                            HorizontalOptions="FillAndExpand">
+                            <local:ImageEntrySquare.Behaviors>
+                                <helpers:ImageEntrySquareViewBehavior MaxLength="13" />
+                            </local:ImageEntrySquare.Behaviors>
+                        </local:ImageEntrySquare>
+                        <StackLayout Margin="20,20,20,0">
+                            <Button  Text="CONTINUAR"
+                                     TextColor="#FFFFFF"
+                                     BackgroundColor="#72B923"
+                                     FontAttributes="Bold"
+                                     HorizontalOptions="FillAndExpand"
+                                     FontSize="14"
+                                     Style="{DynamicResource labelWhiteStyle}"
+                            Command="{Binding SearchCommand}"
+                            IsEnabled="{Binding IsEnabled, Mode=TwoWay}">
+                            </Button>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+           
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

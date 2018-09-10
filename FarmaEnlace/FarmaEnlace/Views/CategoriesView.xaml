@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="FarmaEnlace.Views.CategoriesView" 
+    xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+    xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"    
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <helpers:HideableToolbarItem
+            Command="{Binding CallCommand}" 
+            Icon="IconoTelefono"
+            Priority="0"
+            Order="Primary"
+            IsVisible="{Binding Brand.AllowCall}"/>
+
+        <ToolbarItem
+            Command="{Binding ReturnHomeCommand}" 
+            Icon="home"
+            Priority="0"
+            Order="Primary"
+            />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <AbsoluteLayout  BindingContext="{Binding Categories}">
+            <Grid 
+                AbsoluteLayout.LayoutBounds="0,0,1,.10"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="StartAndExpand"
+                Margin="0,0,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.80*"/>
+                    <ColumnDefinition Width="0.10*"/>
+                    <ColumnDefinition Width="0.10*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <SearchBar  Grid.Column="0"
+                    Grid.Row="0"
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    BackgroundColor="White"
+                    Margin="0,0,0,0"
+                    HorizontalOptions="FillAndExpand" 
+                    Placeholder="BUSQUEDA DE PRODUCTOS"
+                    Style="{DynamicResource labelGreyStyle}"
+                    Text="{Binding Filter, Mode=TwoWay}"
+                    SearchCommand="{Binding SearchCommand}"
+                    SearchCommandParameter="{Binding Filter}">
+                </SearchBar>
+                <local:ImageOptimizedRenderer
+                    HorizontalOptions="End"
+                    Grid.Column="1"
+                      Grid.Row="0"
+                    Aspect="AspectFit"
+                    Source="{helpers:ImageResource iconmicrofono.png}">
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding VozCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+                <local:ImageOptimizedRenderer
+                    HorizontalOptions="End"
+                    Grid.Column="2"
+                     Grid.Row="0"
+                    Aspect="AspectFit"
+                    Source="{helpers:ImageResource barcode.png}">
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding ScanCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+            </Grid>
+
+            <RelativeLayout  
+                AbsoluteLayout.LayoutBounds="0,0.15,1,.25"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="StartAndExpand">
+                <local:ImageOptimizedRenderer Aspect="AspectFill" Source="{Binding ImageLineParent}"
+                        RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                        RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+                </local:ImageOptimizedRenderer>
+                <Grid x:Name="imgGrid" RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Start" Padding="7,0,0,0">
+                        <Label Text="{Binding DescriptionCategory}" FontSize="15" TextColor="#FFFFFF"  />
+                    </StackLayout>
+                </Grid>
+            </RelativeLayout>
+            <!--Isquierda, Arriba, ancho,alto -->
+            <ListView  x:Name="CategoriesCollection"
+                       AbsoluteLayout.LayoutBounds="0,0.97,1,0.60"
+                              AbsoluteLayout.LayoutFlags="All" 
+                              HorizontalOptions="CenterAndExpand" 
+                              VerticalOptions="EndAndExpand"
+                HasUnevenRows="true"
+                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                SeparatorVisibility="None"
+                ItemsSource="{Binding CategoriesCollection}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                Padding = "0"
+                                CornerRadius="25"
+                                HasShadow="true"
+                                BackgroundColor="#f0f0f0"
+                                Margin="5">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Path=BindingContext.SelectCategoryCommand, Source={x:Reference CategoriesCollection}"
+                                        CommandParameter="{Binding FarmaEnlaceId}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid Margin="15,0,20,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="40"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <ffimageloading:CachedImage 
+                                         DownsampleToViewSize="False"
+                                         Grid.Column="0"
+                                         HorizontalOptions="Start" 
+                                         Aspect="AspectFit"
+                                         Source="{Binding ImageFullPath}">
+                                    </ffimageloading:CachedImage>
+
+                                    <Label 
+                                        Grid.Column="1" 
+                                        HorizontalOptions="Start" 
+                                        FontAttributes="Bold"
+                                        FontSize="14"
+                                        Style="{DynamicResource labelGreyTitlesStyle}"
+                                        Text="{Binding Name}" 
+                                        VerticalOptions="Center">
+                                    </Label>
+                                    <ffimageloading:CachedImage 
+                                         DownsampleToViewSize="False"
+                                         Grid.Column="2"
+                                         HorizontalOptions="End" 
+                                         Aspect="AspectFit"
+                                         Source="{helpers:ImageResource  btnmas.png}">
+                                    </ffimageloading:CachedImage>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Image
+                Aspect="Fill"
+                AbsoluteLayout.LayoutBounds="0,1,1,0.03"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="Center" 
+                VerticalOptions="EndAndExpand"
+                Source="{helpers:ImageResource rayacierre2.png}">
+            </Image>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

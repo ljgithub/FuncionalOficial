@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"        
+    xmlns:i18n="clr-namespace:FarmaEnlace.Helpers"
+    x:Class="FarmaEnlace.Views.DetailCommerceView"
+    xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <helpers:HideableToolbarItem
+            Command="{Binding CallCommand}" 
+            Icon="IconoTelefono"
+            Priority="0"
+            Order="Primary"
+            IsVisible="{Binding Brand.AllowCall}"/>
+
+        <ToolbarItem
+            Command="{Binding ReturnHomeCommand}" 
+            Icon="home"
+            Priority="0"
+            Order="Primary"
+            />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding Commerce}">
+            <Label Grid.Row="0"
+                       Grid.ColumnSpan="2" 
+                    HorizontalOptions="CenterAndExpand" 
+                    FontSize="Large" 
+                    Text="{i18n:Translate FindUs}" 
+                    VerticalOptions="Center">
+            </Label>
+            <maps:Map  Grid.Row="1"
+                           Grid.ColumnSpan="2" 
+                           IsVisible="True"
+                    x:Name="MyMap"
+                    IsShowingUser="true"
+                    MapType="Street">
+            </maps:Map>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

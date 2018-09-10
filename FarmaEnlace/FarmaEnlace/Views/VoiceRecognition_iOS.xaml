@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FarmaEnlace.Views.VoiceRecognition_iOS"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+  <ContentView.Content>
+        <StackLayout x:Name="StackBackground" >
+            <Label 
+                Margin="0,20,0,0"
+                FontSize="Large" 
+                FontAttributes="Bold" 
+                Text="Di algo..." 
+                HorizontalOptions="CenterAndExpand" />
+
+            <Label   
+                FontSize="Medium" 
+                FontAttributes="Bold"
+                HorizontalOptions="CenterAndExpand"  
+                x:Name="textLabeliOS" Text="" />
+
+            <Image
+                Source="iconListening.png"
+                VerticalOptions="End"
+                HorizontalOptions="CenterAndExpand"
+                Scale="0.7"
+                Margin="0,20,0,20" />
+
+            <Button
+                x:Name="ButtonBuscar"
+                Text="Buscar"
+                TextColor="White"
+                BorderRadius="15"
+                BackgroundColor="#808080"
+                FontAttributes="Bold"                    
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand"
+                FontSize="Medium"
+                Margin="10,0,10,10"
+                FontFamily="MYRIADPRO-REGULAR" 
+                Clicked="OnStop" />
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

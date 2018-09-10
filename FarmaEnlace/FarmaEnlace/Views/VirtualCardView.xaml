@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:i18n="clr-namespace:FarmaEnlace.Helpers"
+    xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+    x:Class="FarmaEnlace.Views.VirtualCardView"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+    
+        <ToolbarItem 
+            x:Name="inicio"
+            Command="{Binding ReturnBrandCommand}"
+            Icon="home"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <AbsoluteLayout  BindingContext="{Binding VirtualCard}">
+            <!--<RelativeLayout  
+                AbsoluteLayout.LayoutBounds="0,0,1,0.25"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="StartAndExpand">
+                <local:ImageOptimizedRenderer 
+                    Aspect="AspectFill" 
+                    Source="titgenerarcod.jpg"
+                    RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                    RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+                </local:ImageOptimizedRenderer>
+            </RelativeLayout>-->
+
+            <local:ImageOptimizedRenderer 
+                Aspect="Fill"
+                AbsoluteLayout.LayoutBounds="0,0,1,0.30"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="StartAndExpand"
+                Source="titgenerarcod2.jpg"/>
+
+            <StackLayout 
+                Orientation="Vertical" 
+                AbsoluteLayout.LayoutBounds="0,0.40,1,0.20"
+                AbsoluteLayout.LayoutFlags="All">
+                <Label Margin="20"
+                    Text="Para utilizar su crédito corporativo, y obtener los mejores descuentos en sus compras, genere su código."
+                    TextColor="#595959"
+                    HorizontalTextAlignment="Center" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    FontSize="Medium">
+                </Label>
+            </StackLayout>
+
+            <!--SI SOLO SE GENERA EL CODIGO UNA VEZ CADA VEZ ENTONCES CON ESTE CODIGO VALDRIA, YA QUE HAY QUE TENER CUIDADO CON QUE NO SE SOLAPEN LOS COMP SINO NO SE 
+            HACE CASO AL COMANDO, SI SE DEJA ESTE CODIGO LOS SIGUIENTES DOS STACKLAYOUT SE COMENTA Y EL ULTIMO LOS VALORES SON:
+            0,1,1,0.5-->
+            <!--<StackLayout
+                AbsoluteLayout.LayoutBounds="0,0.85,1,0.50"
+                AbsoluteLayout.LayoutFlags="All"
+                Margin="20,0,20,0">
+                <RelativeLayout IsVisible="{Binding IsVisibleCode, Mode=TwoWay}" x:Name="VirtualCard">
+                    <local:ImageOptimizedRenderer Source="backgenerarcodigo.png"
+                        RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                        RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+                        <local:ImageOptimizedRenderer.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GenerateCommand}"/>                                
+                        </local:ImageOptimizedRenderer.GestureRecognizers>
+                    </local:ImageOptimizedRenderer>
+                    <Grid x:Name="imgGrid" RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">                        
+                        <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0,25,0,0">
+                            <Label Text="{Binding Code}" FontSize="32" TextColor="#001689"  />
+                        </StackLayout>
+                    </Grid>
+                </RelativeLayout>                
+            </StackLayout>-->
+
+
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,1,1,0.50"
+                AbsoluteLayout.LayoutFlags="All"
+                IsVisible="{Binding IsVisibleCode, Mode=TwoWay}"
+                Margin="20,50,20,0">
+                <local:ImageOptimizedRenderer  
+                    Aspect="AspectFit"                    
+                    Source="backgenerarcodigo.png">
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GenerateCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+            </StackLayout>
+
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,1,1,0.50"
+                AbsoluteLayout.LayoutFlags="All"
+                Margin="20,50,20,0">
+                <local:ImageOptimizedRenderer  
+                    Aspect="AspectFit"                    
+                    Source="backgenerarcodigo.png"
+                    x:Name="generaImag"
+                    >
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GenerateCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>                
+            </StackLayout>
+
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,0.96,1,0.28"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="Center" 
+                IsVisible="{Binding IsVisibleCode, Mode=TwoWay}">
+                <Label Text="{Binding Code}" FontSize="Large" TextColor="#001689"  />
+            </StackLayout>
+            
+            
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,0.96,1,0.28"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Start"
+                IsVisible="{Binding IsVisible, Mode=TwoWay}">
+                <Label Text="{Binding Codx}" FontSize="Large" TextColor="#737373"  VerticalOptions="Start"
+                      />
+            </StackLayout>
+
+            <!--<StackLayout
+                AbsoluteLayout.LayoutBounds="0,0.60,1,0.10"
+                AbsoluteLayout.LayoutFlags="All"
+                Margin="20,20,20,0">
+                <local:ImageOptimizedRenderer  
+                    Aspect="AspectFit"
+                    IsVisible="{Binding IsVisible, Mode=TwoWay}"
+                    Source="btngenerarcodigo.png">
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GenerateCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+            </StackLayout>-->
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,1.15,1,0.28"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Start"
+                IsVisible="{Binding IsVisible, Mode=TwoWay}"
+                >
+            <Label
+                    Style="{DynamicResource labelSmallGreyStyle}"
+                    Text="{Binding Message_Time_Elapsed}" 
+                    FontSize="Small"                      
+                    IsVisible="{Binding IsVisible, Mode=TwoWay}"
+                    />
+            </StackLayout>
+            <StackLayout  
+                AbsoluteLayout.LayoutBounds="0,1.05,1,0.15"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="Center" 
+                IsVisible="{Binding IsVisibleCode, Mode=TwoWay}">
+                
+                <Label Text="{Binding RegresiveTime, StringFormat='Tiempo Restante: {0:N}'}" FontSize="Small" TextColor="#737373"  />
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
+    

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+        xmlns="http://xamarin.com/schemas/2014/forms" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+        xmlns:i18n="clr-namespace:FarmaEnlace.Helpers"
+        xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+        x:Class="FarmaEnlace.Views.CommercesView"
+        xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+        BackgroundColor="{StaticResource BackgroundColor}"
+        BindingContext="{Binding Main, Source={StaticResource Locator}}">
+
+    <ContentPage.ToolbarItems>
+        <helpers:HideableToolbarItem
+            Command="{Binding CallCommand}" 
+            Icon="IconoTelefono"
+            Priority="0"
+            Order="Primary"
+            IsVisible="{Binding Brand.AllowCall}"/>
+
+        <ToolbarItem
+            Command="{Binding ReturnHomeCommand}" 
+            Icon="home"
+            Priority="0"
+            Order="Primary"
+            />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <AbsoluteLayout  BindingContext="{Binding Commerces}">
+            <Image
+                Aspect="Fill"
+                AbsoluteLayout.LayoutBounds="0,0,1,0.25"
+                AbsoluteLayout.LayoutFlags="All" 
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="CenterAndExpand"
+                Source="{helpers:ImageResource titencuentra.jpg}">
+            </Image>
+            <!--Isquierda, Arriba, ancho,alto -->
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0.4,1,0.25"
+                            AbsoluteLayout.LayoutFlags="All" >
+                <Label 
+                    Style="{DynamicResource labelGreyTitlesStyle}"
+                    Text="Encuentra todas nuestras farmacias"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="Center"
+                    x:Name="LabelFontSizeTitleDynamic">
+                </Label>
+                <Label 
+                    Style="{DynamicResource labelGreyStyle}"
+                    Text="Puede buscar en nuestra red de farmacias, la que está más cerca de usted, o las que se encuentran de turno el día que lo necesite."
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="Center"
+                    x:Name="LabelFontSizeDymanic1">
+                </Label>
+            </StackLayout>
+
+
+            <Grid AbsoluteLayout.LayoutBounds="0,0.97,1,0.50"
+                              AbsoluteLayout.LayoutFlags="All" 
+                              HorizontalOptions="Center" 
+                              VerticalOptions="CenterAndExpand"
+                       Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalOptions="Center"
+                    Margin="0,0,0,0">
+                    <local:ImageOptimizedRenderer 
+                    Aspect="AspectFit"
+                    VerticalOptions="Center"
+                    Source="{helpers:ImageResource btnbuscar.png}">
+                        <local:ImageOptimizedRenderer.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding SearchPharmaciesCommand}"/>
+                        </local:ImageOptimizedRenderer.GestureRecognizers>
+                    </local:ImageOptimizedRenderer>
+                </StackLayout>
+                <StackLayout Grid.Row="0"
+                    Grid.Column="1"
+                    VerticalOptions="Center"
+                    Margin="0,0,0,0">
+                    <local:ImageOptimizedRenderer 
+                    Aspect="AspectFit"
+                    VerticalOptions="Center"
+                    Source="{helpers:ImageResource btnfarmaciascerc.png}">
+                        <local:ImageOptimizedRenderer.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding NearbyPharmaciesCommand}"/>
+                        </local:ImageOptimizedRenderer.GestureRecognizers>
+                    </local:ImageOptimizedRenderer>
+                </StackLayout>
+                <StackLayout Grid.Row="0"
+                    Grid.Column="2"
+                    VerticalOptions="Center"
+                    Margin="0,0,0,0">
+                    <local:ImageOptimizedRenderer 
+                    Aspect="AspectFit"
+                    VerticalOptions="Center"
+                    Source="{helpers:ImageResource btnfarmacias24h.png}">
+                        <local:ImageOptimizedRenderer.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding TwentyFourHoursPharmaciesCommand}"/>
+                        </local:ImageOptimizedRenderer.GestureRecognizers>
+                    </local:ImageOptimizedRenderer>
+                </StackLayout>
+            </Grid>
+            <Image
+                AbsoluteLayout.LayoutBounds="0,1,1,0.03"
+                AbsoluteLayout.LayoutFlags="All" 
+                Aspect="AspectFill"
+                HeightRequest="15"
+                VerticalOptions="EndAndExpand"
+                Margin="0,0,0,0"
+                Source="{helpers:ImageResource rayacierre2.png}">
+            </Image>
+        </AbsoluteLayout>
+     </ContentPage.Content>
+</ContentPage>

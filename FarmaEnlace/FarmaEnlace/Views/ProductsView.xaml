@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:helpers="clr-namespace:FarmaEnlace.Helpers;assembly=FarmaEnlace"
+    xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    x:Class="FarmaEnlace.Views.ProductsView" 
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <helpers:HideableToolbarItem
+            Command="{Binding CallCommand}" 
+            Icon="IconoTelefono"
+            Priority="0"
+            Order="Primary"
+            IsVisible="{Binding Brand.AllowCall}"/>
+
+        <ToolbarItem
+            Command="{Binding ReturnHomeCommand}" 
+            Icon="home"
+            Priority="0"
+            Order="Primary"
+            />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout BindingContext="{Binding Products}" Padding="0" Spacing="0">
+            <Grid Margin="0,0,10,0" HeightRequest="50" BackgroundColor="#f0f0f0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.80*"/>
+                    <ColumnDefinition Width="0.10*"/>
+                    <ColumnDefinition Width="0.10*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <SearchBar 
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    Margin="0,0,0,0"
+                    Grid.Row="0" 
+                    Grid.Column="0"
+                    HorizontalOptions="FillAndExpand" 
+                    Placeholder="BUSQUEDA DE PRODUCTOS"
+                    Style="{DynamicResource labelGreyStyle}"
+                    Text="{Binding Filter, Mode=TwoWay}"
+                    SearchCommand="{Binding SearchCommand}"
+                    SearchCommandParameter="{Binding Filter}">
+                </SearchBar>
+                <local:ImageOptimizedRenderer
+                    HorizontalOptions="End"
+                    Grid.Column="1"
+                     Grid.Row="0" 
+                    Aspect="AspectFit"
+                    Source="{helpers:ImageResource iconmicrofono.png}">
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding VozCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+                <local:ImageOptimizedRenderer
+                    HorizontalOptions="End"
+                    Grid.Column="2"
+                     Grid.Row="0" 
+                    Aspect="AspectFit"
+                    Source="{helpers:ImageResource barcode.png}">
+                    <local:ImageOptimizedRenderer.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding ScanCommand}"/>
+                    </local:ImageOptimizedRenderer.GestureRecognizers>
+                </local:ImageOptimizedRenderer>
+            </Grid>
+            <Grid Margin="0,0,0,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"
+                    HorizontalOptions="Start" 
+                    Style="{DynamicResource labelGreyTitlesStyle}"
+                       FontSize="13"
+                    TextColor="{Binding TextoResultadoColor}" 
+                    Text="{Binding DescriptionCategory}" 
+                    VerticalOptions="Center">
+                </Label>
+
+            </Grid>
+            <Grid IsVisible="{Binding IsVisibleLabel, Mode=TwoWay}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label 
+                   Grid.Row="0" Grid.Column="0"
+                   Text="No existen resultados, por favor realice una nueva busqueda"                   
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center">
+                </Label>
+            </Grid>
+            <!--<Label 
+                Margin="0,0,0,0"  
+                VerticalOptions="StartAndExpand" 
+                Text="{Binding DescriptionCategory, StringFormat='Res:{0}'}">
+            </Label>
+            <Grid IsVisible="{Binding IsVisibleLabel, Mode=TwoWay}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label 
+                   Grid.Row="0" Grid.Column="0"
+                   Text="No existen resultados, por favor realice una nueva busqueda"                   
+																	
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center">
+                </Label>
+            </Grid>-->
+            <ListView x:Name="Products"
+                HasUnevenRows="true" 
+                Margin="0,0,0,0"
+                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                SeparatorVisibility="None"
+                ItemsSource="{Binding Products}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                Padding = "0" 
+                                Margin="0,3,0,3"
+                                CornerRadius="0"
+                                HasShadow="True">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Path=BindingContext.SelectProductCommand, Source={x:Reference Products}"
+                                        CommandParameter="{Binding InternalCode}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid Margin="10,3,10,3"  RowSpacing="0" ColumnSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.35*"/>
+                                        <ColumnDefinition Width="0.70*"/>
+                                        <ColumnDefinition Width="0.05*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <!--<local:ImageOptimizedRenderer
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        HeightRequest="100"
+                                        Margin="0,0,10,0"
+                                        Aspect="AspectFit"
+                                        VerticalOptions="Center"
+                                        Source="{Binding ImageFullPath}">
+                                    </local:ImageOptimizedRenderer>-->
+                                    <ffimageloading:CachedImage 
+                                            DownsampleToViewSize="False"
+                                            Aspect="AspectFit"
+                                            HeightRequest="100"
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Source="{Binding ImageFullPath}">
+                                    </ffimageloading:CachedImage>
+                                    <StackLayout Grid.Row="0" Grid.Column="1"
+                                                 VerticalOptions="Center">
+                                        <Label 
+                                            HorizontalOptions="StartAndExpand" 
+                                            Style="{DynamicResource labelGreyTitlesStyle}" 
+                                            Margin="0,0,0,0"
+                                            Text="{Binding Name}"
+                                            VerticalOptions="Center">
+                                        </Label>
+                                        <Label 
+                                            HorizontalOptions="StartAndExpand" 
+                                            Style="{DynamicResource labelSmallGreyStyle}"
+                                            Text="{Binding Remarks}"
+                                            VerticalOptions="Center">
+                                        </Label>
+                                    </StackLayout>
+                                    <local:ImageOptimizedRenderer
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        
+                                        HeightRequest="20"
+                                        Aspect="AspectFit"
+                                        VerticalOptions="Center"
+                                        Source="{helpers:ImageResource flechita.png}">
+                                    </local:ImageOptimizedRenderer>
+
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--<local:ImageOptimizedRenderer  Aspect="AspectFill"
+                    HeightRequest="20"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    Margin="0,0,0,0"
+                    Source="{helpers:ImageResource rayacierre2.png}">
+            </local:ImageOptimizedRenderer>-->
+            <local:ImageOptimizedRenderer  
+                    Aspect="AspectFill"
+                    Margin="0,0,0,0"
+                    VerticalOptions="EndAndExpand"
+                    Source="{helpers:ImageResource rayacierre2.png}">
+            </local:ImageOptimizedRenderer>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

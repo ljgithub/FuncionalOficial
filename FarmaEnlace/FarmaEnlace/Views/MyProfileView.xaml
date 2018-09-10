@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:FarmaEnlace.Renderers"
+    xmlns:helpers="clr-namespace:FarmaEnlace.Helpers"
+    x:Class="FarmaEnlace.Views.MyProfileView"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Command="{Binding ReturnBrandCommand}"
+            Icon="home"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout  BindingContext="{Binding MyProfile}">
+                <local:ImageOptimizedRenderer  Aspect="AspectFit" 
+                Source="titactualizarclave.jpg"/>
+                <Label Margin="0,15"
+                    Text="Por favor ingrese su nueva clave"
+                    TextColor="#595959"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Center"
+                    FontSize="Medium">
+                </Label>
+                <Frame  HasShadow="False">
+                    <StackLayout Orientation="Vertical">
+                        <local:ImageEntrySquare
+                            Placeholder="Nueva contraseña"
+                            Image="iconnuevacontrasen"
+                            IsPassword="true"
+                            Text="{Binding NewPassword, Mode=TwoWay}"
+                            HorizontalOptions="FillAndExpand">
+                            <local:ImageEntrySquare.Behaviors>
+                                <helpers:ImageEntrySquareViewBehavior MaxLength="6" />
+                            </local:ImageEntrySquare.Behaviors>
+                        </local:ImageEntrySquare>
+                        <local:ImageEntrySquare
+                            Placeholder="Confirma nueva contraseña"
+                            Image="iconconfcontras"
+                            IsPassword="true"
+                            Text="{Binding ConfirmPassword, Mode=TwoWay}"
+                            HorizontalOptions="FillAndExpand">
+                            <local:ImageEntrySquare.Behaviors>
+                                <helpers:ImageEntrySquareViewBehavior MaxLength="6" />
+                            </local:ImageEntrySquare.Behaviors>
+                        </local:ImageEntrySquare>
+                        <StackLayout Margin="20,20,20,0">
+                            <Button  Text="ACTUALIZAR"
+                                     TextColor="#FFFFFF"
+                                     BackgroundColor="#72B923"
+                                     FontAttributes="Bold"
+                                     HorizontalOptions="FillAndExpand"
+                                     FontSize="14"
+                                     Style="{DynamicResource labelWhiteStyle}"
+                            Command="{Binding SaveCommand}"
+                            IsEnabled="{Binding IsEnabled, Mode=TwoWay}">
+                            </Button>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage> 
+
