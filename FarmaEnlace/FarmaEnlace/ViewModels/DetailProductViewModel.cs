@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
+using CoreLocation;
 using FarmaEnlace.Interfaces;
 using FarmaEnlace.Models;
 using FarmaEnlace.Services;
@@ -30,6 +31,15 @@ namespace FarmaEnlace.ViewModels
         string _nameBrand;
         private bool isCallVoz;
         private bool isCallScan;
+        CLLocationManager cLLocationManager;
+
+
+        public double ContentHeight
+        {
+            get;
+            set;
+        }
+        
         #endregion
 
         #region Services
@@ -39,6 +49,8 @@ namespace FarmaEnlace.ViewModels
         ApiService apiService;
         List<StockProduct> stockProduct;
         List<Product> products;
+        
+
         #endregion
 
         #region Properties
@@ -95,6 +107,15 @@ namespace FarmaEnlace.ViewModels
 
             isCallVoz = false;
             isCallScan = false;
+
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                cLLocationManager = new CLLocationManager();
+            }
+            
+            
+            ContentHeight = App.ScreenHeight - 55 - 50-100;
+
         }
         #endregion
 
@@ -191,6 +212,11 @@ namespace FarmaEnlace.ViewModels
 
         async Task<bool> MoveMapToCurrentPosition()
         {
+
+            if (Device.RuntimePlatform==Device.iOS)
+            {
+                cLLocationManager.RequestWhenInUseAuthorization(); 
+            }
             return await geolocatorService.GetLocation();
         }
 
@@ -219,6 +245,7 @@ namespace FarmaEnlace.ViewModels
                 }
                 else
                 {
+                    
                     bool hasPosition = await MoveMapToCurrentPosition();
 
                     if (hasPosition)

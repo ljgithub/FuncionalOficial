@@ -28,12 +28,14 @@ namespace FarmaEnlace.Services
                
                 var locator = CrossGeolocator.Current;
                 
-                    locator.DesiredAccuracy = 50;
-                    var location = await CrossGeolocator.Current.GetPositionAsync(TimeSpan.FromSeconds(10));
-                    if (location == null)
-            {
-                     location=   await CrossGeolocator.Current.GetLastKnownLocationAsync();
-                    }
+                
+
+                locator.DesiredAccuracy = 50;
+                var location = await CrossGeolocator.Current.GetPositionAsync(TimeSpan.FromSeconds(10));
+                if (location == null)
+                {
+                    location=   await CrossGeolocator.Current.GetLastKnownLocationAsync();
+                }
                 Latitude = location.Latitude;
                 Longitude = location.Longitude;
                 return true;

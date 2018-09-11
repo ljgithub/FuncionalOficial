@@ -57,7 +57,7 @@
     <CodesignKey>iPhone Developer: Jorge Ortiz (TATD3DV2BB)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>Development Tandicorp 2</CodesignProvision>
+    <CodesignProvision>Tu App Farmacia</CodesignProvision>
     <MtouchFloat32>false</MtouchFloat32>
     <MtouchNoSymbolStrip>false</MtouchNoSymbolStrip>
     <MtouchFastDev>false</MtouchFastDev>
@@ -199,6 +199,9 @@
     </PackageReference>
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView">
       <Version>2.0.10</Version>
+    </PackageReference>
+    <PackageReference Include="LiveXAML">
+      <Version>2.1.41</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>11.0.2</Version>

@@ -15,21 +15,18 @@ namespace FarmaEnlace.ViewModels
     public class MainViewModel
     {
 
-       
-
-        public  string PhoneNumber
-        {
-            get;
-            set;
-        }
-      
 
         #region Services
         NavigationService navigationService;
         #endregion
 
         #region Properties
-
+        public string PhoneNumber
+        {
+            get;
+            set;
+        }
+        
         public bool IsVisibleMyMenu
         {
             get;
