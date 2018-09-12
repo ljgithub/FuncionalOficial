@@ -709,5 +709,11 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\titgenerarcod2.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\IconoTelefono.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\FarmaEnlace.Android.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

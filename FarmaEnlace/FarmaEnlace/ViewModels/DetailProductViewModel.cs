@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
+using CoreLocation;
+//using CoreLocation;
 using FarmaEnlace.Interfaces;
 using FarmaEnlace.Models;
 using FarmaEnlace.Services;
@@ -30,6 +32,15 @@ namespace FarmaEnlace.ViewModels
         string _nameBrand;
         private bool isCallVoz;
         private bool isCallScan;
+        CLLocationManager cLLocationManager;
+
+
+        public double ContentHeight
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region Services
@@ -39,6 +50,8 @@ namespace FarmaEnlace.ViewModels
         ApiService apiService;
         List<StockProduct> stockProduct;
         List<Product> products;
+
+
         #endregion
 
         #region Properties
@@ -95,6 +108,15 @@ namespace FarmaEnlace.ViewModels
 
             isCallVoz = false;
             isCallScan = false;
+
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                cLLocationManager = new CLLocationManager();
+            }
+
+
+            ContentHeight = App.ScreenHeight - 55 - 50 - 100;
+
         }
         #endregion
 
@@ -191,10 +213,15 @@ namespace FarmaEnlace.ViewModels
 
         async Task<bool> MoveMapToCurrentPosition()
         {
+
+             if (Device.RuntimePlatform==Device.iOS)
+             {
+                 cLLocationManager.RequestWhenInUseAuthorization(); 
+             }
             return await geolocatorService.GetLocation();
         }
 
- 
+
         private async void SearchStock()
         {
             UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
@@ -219,6 +246,7 @@ namespace FarmaEnlace.ViewModels
                 }
                 else
                 {
+
                     bool hasPosition = await MoveMapToCurrentPosition();
 
                     if (hasPosition)
@@ -241,14 +269,15 @@ namespace FarmaEnlace.ViewModels
 
                         stockProduct = (List<StockProduct>)response.Result;
                     }
-                    else {
+                    else
+                    {
                         await dialogService.ShowMessage(
                         Resources.Resource.Info,
                         Resources.Resource.ErrorNoGPS);
                         UserDialogs.Instance.HideLoading();
                         return;
-                    } 
-                    
+                    }
+
                 }
             }
 

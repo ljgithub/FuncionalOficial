@@ -31,7 +31,7 @@ namespace FarmaEnlace.Services
                     locator.DesiredAccuracy = 50;
                     var location = await CrossGeolocator.Current.GetPositionAsync(TimeSpan.FromSeconds(10));
                     if (location == null)
-            {
+                    {
                      location=   await CrossGeolocator.Current.GetLastKnownLocationAsync();
                     }
                 Latitude = location.Latitude;
