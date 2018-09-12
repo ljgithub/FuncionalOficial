@@ -13,37 +13,58 @@ namespace FarmaEnlace.iOS.Implementations
     {
         public async void Share(string subject, string message, ImageSource image)
         {
+            /* var handler = new ImageLoaderSourceHandler();
+             var uiImage = await handler.LoadImageAsync(image);
+
+             var img = NSObject.FromObject(uiImage);
+             var mess = NSObject.FromObject(message);
+
+             var activityItems = new[] { mess, img };
+             var activityController = new UIActivityViewController(activityItems, null);
+
+             var topController = UIApplication.SharedApplication.KeyWindow.RootViewController;
+
+             if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
+             {
+                 while (topController.PresentedViewController != null)
+                 {
+                     topController = topController.PresentedViewController;
+                 }
+                 topController.PresentViewController(activityController, true, () => { });
+             }
+             else
+             {
+                 //La forma de presentar en el ipad es mediante un Popover por lo que hay que deinirlo el source.
+                 //el rect tambien se define para que no se vea tan arriba
+                 var popover = activityController.PopoverPresentationController;
+                 if (popover != null)
+                 {
+                     popover.SourceView = UIApplication.SharedApplication.KeyWindow.RootViewController.View;
+                     popover.SourceRect = new CoreGraphics.CGRect((UIApplication.SharedApplication.KeyWindow.RootViewController.View.Bounds.Width / 2), (UIApplication.SharedApplication.KeyWindow.RootViewController.View.Bounds.Height / 4), 0, 0);
+                 }
+                 UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(activityController, true, null);*/
+
+
+
+            //}
+
             var handler = new ImageLoaderSourceHandler();
             var uiImage = await handler.LoadImageAsync(image);
-
-            var img = NSObject.FromObject(uiImage);
-            var mess = NSObject.FromObject(message);
-
-            var activityItems = new[] { mess, img };
-            var activityController = new UIActivityViewController(activityItems, null);
-
             var topController = UIApplication.SharedApplication.KeyWindow.RootViewController;
-            
-            if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
+
+            //UIImage imagen = new UIImage(chart.GetImage());
+            NSObject[] activityItems = { uiImage };
+            UIActivityViewController activityViewController = new UIActivityViewController(activityItems, null);
+            UIKit.UIView view = new UIView();
+            activityViewController.ExcludedActivityTypes = new NSString[] { };
+            if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
             {
-                while (topController.PresentedViewController != null)
-                {
-                    topController = topController.PresentedViewController;
-                }
-                topController.PresentViewController(activityController, true, () => { });
+                activityViewController.PopoverPresentationController.SourceView = view;
+                activityViewController.PopoverPresentationController.SourceRect = new CoreGraphics.CGRect((view.Bounds.Width / 2), (view.Bounds.Height / 4), 0, 0);
             }
-            else
-            {
-                //La forma de presentar en el ipad es mediante un Popover por lo que hay que deinirlo el source.
-                //el rect tambien se define para que no se vea tan arriba
-                var popover = activityController.PopoverPresentationController;
-                if (popover != null)
-                {
-                    popover.SourceView = UIApplication.SharedApplication.KeyWindow.RootViewController.View;
-                    popover.SourceRect =  new CoreGraphics.CGRect((UIApplication.SharedApplication.KeyWindow.RootViewController.View.Bounds.Width / 2), (UIApplication.SharedApplication.KeyWindow.RootViewController.View.Bounds.Height / 4), 0, 0);
-                }
-                UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(activityController, true, null);
-            }            
+            topController.PresentViewController(activityViewController, true, () => { });
+            //this.PresentViewController(activityViewController, true, null);
+
         }
     }
 }
