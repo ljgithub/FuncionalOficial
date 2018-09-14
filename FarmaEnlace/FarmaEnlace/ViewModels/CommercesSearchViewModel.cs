@@ -221,8 +221,8 @@ namespace FarmaEnlace.ViewModels
                         mainViewModel.CommercesList.NearbyPharmacies = false;
                         mainViewModel.CommercesList.Filter = FilterSearch;
                         mainViewModel.CommercesList.TwentyFourHours = false;
-                        mainViewModel.CommercesList.Latitude = geolocatorService.Latitude;
-                        mainViewModel.CommercesList.Longitude = geolocatorService.Longitude;
+                        mainViewModel.CommercesList.Latitude = GeolocatorService.Latitude;
+                        mainViewModel.CommercesList.Longitude = GeolocatorService.Longitude;
                         mainViewModel.CommercesList.IsVisible = true;
                         await navigationService.NavigateOnMaster("CommercesListView");
 
@@ -257,7 +257,7 @@ namespace FarmaEnlace.ViewModels
                 if (respuesta)
                 {
                     IPermisosGPS permisoGPS = DependencyService.Get<IPermisosGPS>();
-                    permisoGPS.verificarPermisosGPS();
+                    permisoGPS.activatePermissions();
                 }
             }
             catch (System.Exception)

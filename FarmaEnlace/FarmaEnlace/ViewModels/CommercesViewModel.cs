@@ -137,8 +137,8 @@ namespace FarmaEnlace.ViewModels
                     mainViewModel.CommercesList.Filter = string.Empty;
                     mainViewModel.CommercesList.TwentyFourHours = false;
                     mainViewModel.CommercesList.IsVisible = true;
-                    mainViewModel.CommercesList.Latitude = geolocatorService.Latitude;
-                    mainViewModel.CommercesList.Longitude = geolocatorService.Longitude;
+                    mainViewModel.CommercesList.Latitude = GeolocatorService.Latitude;
+                    mainViewModel.CommercesList.Longitude = GeolocatorService.Longitude;
                     await navigationService.NavigateOnMaster("CommercesListView");
                 }
             }
@@ -186,8 +186,8 @@ namespace FarmaEnlace.ViewModels
                         mainViewModel.CommercesList.Filter = Filter;
                         mainViewModel.CommercesList.TwentyFourHours = false;
                         mainViewModel.CommercesList.IsVisible = true;
-                        mainViewModel.CommercesList.Latitude = geolocatorService.Latitude;
-                        mainViewModel.CommercesList.Longitude = geolocatorService.Longitude;
+                        mainViewModel.CommercesList.Latitude = GeolocatorService.Latitude;
+                        mainViewModel.CommercesList.Longitude = GeolocatorService.Longitude;
                         await navigationService.NavigateOnMaster("CommercesListView");
                     }
 
@@ -232,8 +232,8 @@ namespace FarmaEnlace.ViewModels
                     mainViewModel.CommercesList.Filter = string.Empty;
                     mainViewModel.CommercesList.TwentyFourHours = true;
                     mainViewModel.CommercesList.IsVisible = false;
-                    mainViewModel.CommercesList.Latitude = geolocatorService.Latitude;
-                    mainViewModel.CommercesList.Longitude = geolocatorService.Longitude;
+                    mainViewModel.CommercesList.Latitude = GeolocatorService.Latitude;
+                    mainViewModel.CommercesList.Longitude = GeolocatorService.Longitude;
                     await navigationService.NavigateOnMaster("CommercesListView");
                 }
             }
@@ -251,7 +251,7 @@ namespace FarmaEnlace.ViewModels
             if (respuesta)
             {
                 IPermisosGPS permisoGPS = DependencyService.Get<IPermisosGPS>();
-                permisoGPS.verificarPermisosGPS();
+                permisoGPS.activatePermissions();
             }
             return respuesta;
         }

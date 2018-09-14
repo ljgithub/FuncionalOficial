@@ -474,10 +474,7 @@ namespace FarmaEnlace.ViewModels
         }
 
 
-
         #endregion
-
-
 
     }
 }

@@ -27,12 +27,12 @@ namespace FarmaEnlace.Views
         async void MoveMapToCurrentPosition()
         {
             await geolocatorService.GetLocation();
-            if (geolocatorService.Latitude != 0 ||
-                geolocatorService.Longitude != 0)
+            if (GeolocatorService.Latitude != 0 ||
+                GeolocatorService.Longitude != 0)
             {
                 var position = new Position(
-                    geolocatorService.Latitude,
-                    geolocatorService.Longitude);
+                    GeolocatorService.Latitude,
+                    GeolocatorService.Longitude);
             }
 
             await LoadPins();
@@ -41,7 +41,7 @@ namespace FarmaEnlace.Views
         async Task LoadPins()
         {
             var commercesViewModel = DetailCommerceViewModel.GetInstance();
-            commercesViewModel.LoadPins(geolocatorService.Latitude, geolocatorService.Longitude);
+            commercesViewModel.LoadPins(GeolocatorService.Latitude, GeolocatorService.Longitude);
             bool isFirst = true;
             foreach (var pin in commercesViewModel.Pins)
             {

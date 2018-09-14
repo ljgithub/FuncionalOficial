@@ -18,6 +18,8 @@ using GalaSoft.MvvmLight.Command;
 using Plugin.Geolocator;
 using Xamarin.Forms;
 
+//using Android.Gms.Location;
+
 namespace FarmaEnlace.ViewModels
 {
     public class DetailProductViewModel : BaseViewModel
@@ -33,13 +35,9 @@ namespace FarmaEnlace.ViewModels
         private bool isCallVoz;
         private bool isCallScan;
         CLLocationManager cLLocationManager;
+        public List<Product> ListProduct { get; set; }
 
 
-        public double ContentHeight
-        {
-            get;
-            set;
-        }
 
         #endregion
 
@@ -51,13 +49,25 @@ namespace FarmaEnlace.ViewModels
         List<StockProduct> stockProduct;
         List<Product> products;
 
+        //LocationRequest mLocationRequest;
 
         #endregion
 
         #region Properties
+        public ICommand VozCommand
+        {
+            get
+            {
+                return new RelayCommand(Voz);
+            }
+        }
 
-        public List<Product> ListProduct { get; set; }
 
+        public double ContentHeight
+        {
+            get;
+            set;
+        }
 
         public Product DetailProduct
         {
@@ -147,14 +157,7 @@ namespace FarmaEnlace.ViewModels
 
         #region Commands
 
-        public ICommand VozCommand
-        {
-            get
-            {
-                return new RelayCommand(Voz);
-            }
-        }
-
+      
         async void Voz()
         {
             try
@@ -211,54 +214,62 @@ namespace FarmaEnlace.ViewModels
             }
         }
 
-        async Task<bool> MoveMapToCurrentPosition()
+        bool GetCurrentPosition(bool hasInternetAccess)
         {
 
-             if (Device.RuntimePlatform==Device.iOS)
-             {
-                 cLLocationManager.RequestWhenInUseAuthorization(); 
-             }
-            return await geolocatorService.GetLocation();
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                //xdasdfas
+
+                //poner en un a implementacion o un if pero deberia ser parte del checkLocationAvaibili
+                cLLocationManager.RequestWhenInUseAuthorization();
+            }
+
+            //IGeoLocatorService geoService = DependencyService.Get<IGeoLocatorService>();
+            //geoService.bestProvider();
+
+            DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
+
+            if (GeolocatorService.Latitude != 0 && GeolocatorService.Longitude != 0)
+            { return true; }
+            else { return false; }
+
         }
 
 
         private async void SearchStock()
         {
-            UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-            var mainViewModel = MainViewModel.GetInstance();
-            Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
+            bool avaible = await checkLocationAvaibility();
+
+            if (avaible)
+            {
+                
+                var mainViewModel = MainViewModel.GetInstance();
+              //  Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
+            
+
+            /*YA NO DEBE IR AQUI SINO EN EL CHECKlOCATIONaVA....
             if (locator.IsGeolocationEnabled == false)
             {
                 UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                bool response = await load();
-                UserDialogs.Instance.HideLoading();
-            }
-            else
-            {
-                var connection = await apiService.CheckConnection();
-                if (!connection.IsSuccess)
-                {
-                    await dialogService.ShowMessage(
-                           Resources.Resource.Info,
-                           Resources.Resource.ErrorConection);
-                    UserDialogs.Instance.HideLoading();
-                    return;
-                }
-                else
-                {
-
-                    bool hasPosition = await MoveMapToCurrentPosition();
+                bool response = await checkLocationAvaibility();
+                
+            }*/
+                      
+                    bool hasPosition = GetCurrentPosition(avaible);
 
                     if (hasPosition)
                     {
-                        var urlAPI = Application.Current.Resources["URLAPI"].ToString();
+                        UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
+                        var urlAPI = Application.Current.Resources["URLAPI"].ToString();            
                         var response = await apiService.GetList<StockProduct>(
                             urlAPI,
                             Application.Current.Resources["PrefixAPI"].ToString(),
-                            "/StockProducts?codigoInterno=" + DetailProduct.InternalCode + "&idSucursal=" + mainViewModel.Brand.SearchCode + "&latitude=" + geolocatorService.Latitude.ToString(CultureInfo.InvariantCulture) + "&longitude=" + geolocatorService.Longitude.ToString(CultureInfo.InvariantCulture)
+                            "/StockProducts?codigoInterno=" + DetailProduct.InternalCode + "&idSucursal=" + mainViewModel.Brand.SearchCode + "&latitude=" + GeolocatorService.Latitude.ToString(CultureInfo.InvariantCulture) + "&longitude=" + GeolocatorService.Longitude.ToString(CultureInfo.InvariantCulture)
                             );
+                        UserDialogs.Instance.HideLoading();
 
-                        if (!response.IsSuccess)
+                    if (!response.IsSuccess)
                         {
                             await dialogService.ShowMessage(
                                 Resources.Resource.Error,
@@ -278,38 +289,62 @@ namespace FarmaEnlace.ViewModels
                         return;
                     }
 
+                
+            
+
+                if (stockProduct.Count == 0)
+                {
+                    await dialogService.ShowMessage(
+                        Resources.Resource.Info,
+                        Resources.Resource.NoProductStock);
+                    UserDialogs.Instance.HideLoading();
+                    return;
                 }
-            }
 
-
-            if (stockProduct.Count == 0)
-            {
-                await dialogService.ShowMessage(
-                    Resources.Resource.Info,
-                    Resources.Resource.NoProductStock);
                 UserDialogs.Instance.HideLoading();
-                return;
+                mainViewModel.CommercesList = new CommercesListViewModel();
+                mainViewModel.CommercesList.StockProducts = stockProduct;
+                mainViewModel.CommercesList.Latitude = GeolocatorService.Latitude;
+                mainViewModel.CommercesList.Longitude = GeolocatorService.Longitude;
+                mainViewModel.CommercesList.TextoResultado = DetailProduct.Name;
+                mainViewModel.CommercesList.TypeSale = DetailProduct.TypeSale;
+                await navigationService.NavigateOnMaster("CommercesListView");
+
+            } else {
+                //PONER DIAOLOGO DE ADVERTENCIA DICIENDO QUE NO SE REALIZO LA BUSQUEDA POR TENER LOS SERVICIOS DE UBICACION ABAJO, QUE INTENTE DE NUEVO
             }
 
-            UserDialogs.Instance.HideLoading();
-            mainViewModel.CommercesList = new CommercesListViewModel();
-            mainViewModel.CommercesList.StockProducts = stockProduct;
-            mainViewModel.CommercesList.Latitude = geolocatorService.Latitude;
-            mainViewModel.CommercesList.Longitude = geolocatorService.Longitude;
-            mainViewModel.CommercesList.TextoResultado = DetailProduct.Name;
-            mainViewModel.CommercesList.TypeSale = DetailProduct.TypeSale;
-            await navigationService.NavigateOnMaster("CommercesListView");
         }
 
-        private async Task<bool> load()
+        private async Task<bool> checkLocationAvaibility()
         {
-            bool respuesta = await dialogService.ShowConfirm("", "Para continuar, permite que tu dispositivo active la ubicación, que se usa en el servicio de ubicación.");
-            if (respuesta)
+            //dasdasdasdasd
+            //1.- verificar si }la aplicacion tiene los permisos para usar GPS, si no los tiene, return pedirlos al usuario y retorna false
+            //2.- solo si ya tiene los permisos entonces verifico si tiene activados los servicios de ubicacion, si no los tiene pedir que se activen y retorna false
+            //2.1 el mensaje de la activacion del GPS debe estar en un archivo de recursos
+            //3.- si ya estan activos ambos retorna true;
+
+            var connection = await apiService.CheckConnection();
+            if (!connection.IsSuccess)
             {
-                IPermisosGPS permisoGPS = DependencyService.Get<IPermisosGPS>();
-                permisoGPS.verificarPermisosGPS();
+                await dialogService.ShowMessage(
+                       Resources.Resource.Info,
+                       Resources.Resource.ErrorConection);
+                UserDialogs.Instance.HideLoading();
+                return false;
             }
-            return respuesta;
+            else
+            {
+                bool respuesta = await dialogService.ShowConfirm("", "Para continuar, permite que tu dispositivo active la ubicación, que se usa en el servicio de ubicación.");
+
+                if (respuesta)
+                {
+                    IPermisosGPS permisoGPS = DependencyService.Get<IPermisosGPS>();
+                    permisoGPS.activatePermissions();
+                }
+
+                return respuesta;
+            }
         }
 
         public ICommand SearchStockCommand

@@ -97,6 +97,9 @@
     <PackageReference Include="Xamarin.Forms.Maps">
       <Version>3.0.0.482510</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.GooglePlayServices.Base">
+      <Version>42.1021.1</Version>
+    </PackageReference>
     <PackageReference Include="XLabs.Forms">
       <Version>2.0.5782</Version>
     </PackageReference>
@@ -109,6 +112,7 @@
     <Compile Include="Helper\IntentHelper.cs" />
     <Compile Include="Helper\ListenerHelper.cs" />
     <Compile Include="Implementations\CloseApplication.cs" />
+    <Compile Include="Implementations\GeoLocation.cs" />
     <Compile Include="Implementations\Voice.cs" />
     <Compile Include="Renderers\CustomMapRenderer.cs" />
     <Compile Include="Renderers\CustomPickerRenderer.cs" />
