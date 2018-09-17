@@ -238,7 +238,7 @@ namespace FarmaEnlace.ViewModels
                 if (respuesta)
                 {
                     IPermisosGPS permisoGPS = DependencyService.Get<IPermisosGPS>();
-                    permisoGPS.activatePermissions();
+                    permisoGPS.requestGPSActivation();
                 }
             }
             catch (Exception)

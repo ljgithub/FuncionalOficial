@@ -99,9 +99,21 @@ namespace FarmaEnlace.ViewModels
         }
         #endregion
 
-        async public Task<bool> MoveMapToCurrentPosition()
+        async public Task<bool> MoveMapToCurrentPosition(bool hasInternetAccess)
         {
-            return await geolocatorService.GetLocation();
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                //xdasdfas
+
+                //poner en un a implementacion o un if pero deberia ser parte del checkLocationAvaibili
+                //cLLocationManager.RequestWhenInUseAuthorization(); vovler aa ctivar par aios
+            }
+
+            DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
+
+            if (GeolocatorService.Latitude != 0 && GeolocatorService.Longitude != 0)
+            { return true; }
+            else { return false; }
         }
 
 
@@ -119,27 +131,39 @@ namespace FarmaEnlace.ViewModels
             try
             {
                 Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
-                if (locator.IsGeolocationEnabled == false)
-                {
+
+                bool avaible = await GeolocatorService.checkLocationAvaibility();
+
+                if (avaible) {
                     UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                    bool response = await load();
-                    UserDialogs.Instance.HideLoading();
+
+                    bool hasInternetAccess = true;
+                    bool hasLocation = DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
+
+                    if (hasLocation)
+                    {
+                        UserDialogs.Instance.HideLoading();
+                        var mainViewModel = MainViewModel.GetInstance();
+                        mainViewModel.CommercesList = new CommercesListViewModel();
+                        mainViewModel.CommercesList.NearbyPharmacies = true;
+                        mainViewModel.CommercesList.Filter = string.Empty;
+                        mainViewModel.CommercesList.TwentyFourHours = false;
+                        mainViewModel.CommercesList.IsVisible = true;
+                        mainViewModel.CommercesList.Latitude = GeolocatorService.Latitude;
+                        mainViewModel.CommercesList.Longitude = GeolocatorService.Longitude;
+                        await navigationService.NavigateOnMaster("CommercesListView");
+                    }
+                    else
+                    {
+                        //todo poner biene este mensahe
+                        await dialogService.ShowMessage(
+                        Resources.Resource.Info,
+                        Resources.Resource.ErrorNoGPS);
+                    }                                     
                 }
                 else
                 {
-
-                    UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                    bool resp = await MoveMapToCurrentPosition();
-                    UserDialogs.Instance.HideLoading();
-                    var mainViewModel = MainViewModel.GetInstance();
-                    mainViewModel.CommercesList = new CommercesListViewModel();
-                    mainViewModel.CommercesList.NearbyPharmacies = true;
-                    mainViewModel.CommercesList.Filter = string.Empty;
-                    mainViewModel.CommercesList.TwentyFourHours = false;
-                    mainViewModel.CommercesList.IsVisible = true;
-                    mainViewModel.CommercesList.Latitude = GeolocatorService.Latitude;
-                    mainViewModel.CommercesList.Longitude = GeolocatorService.Longitude;
-                    await navigationService.NavigateOnMaster("CommercesListView");
+                    //agregar un mensaje de error con el formato de la app "No estan habilitados los servicios de ubicacion"
                 }
             }
             catch (Exception)
@@ -171,14 +195,13 @@ namespace FarmaEnlace.ViewModels
                     if (locator.IsGeolocationEnabled == false)
                     {
                         UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                        bool response = await load();
                         UserDialogs.Instance.HideLoading();
                     }
                     else
                     {
 
                         UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                        bool resp = await MoveMapToCurrentPosition();
+                        bool resp = await MoveMapToCurrentPosition(false);
                         UserDialogs.Instance.HideLoading();
                         var mainViewModel = MainViewModel.GetInstance();
                         mainViewModel.CommercesList = new CommercesListViewModel();
@@ -218,13 +241,13 @@ namespace FarmaEnlace.ViewModels
                 if (locator.IsGeolocationEnabled == false)
                 {
                     UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                    bool response = await load();
+                    
                     UserDialogs.Instance.HideLoading();
                 }
                 else
                 {
                     UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                    bool resp = await MoveMapToCurrentPosition();
+                    bool resp = await MoveMapToCurrentPosition(false);
                     UserDialogs.Instance.HideLoading();
                     var mainViewModel = MainViewModel.GetInstance();
                     mainViewModel.CommercesList = new CommercesListViewModel();
@@ -245,17 +268,7 @@ namespace FarmaEnlace.ViewModels
             }
         }
 
-        private async Task<bool> load()
-        {
-            bool respuesta = await dialogService.ShowConfirm("", "Para continuar, permite que tu dispositivo active la ubicación, que se usa en el servicio de ubicación.");
-            if (respuesta)
-            {
-                IPermisosGPS permisoGPS = DependencyService.Get<IPermisosGPS>();
-                permisoGPS.activatePermissions();
-            }
-            return respuesta;
-        }
-
+      
         public ICommand SearchPharmaciesCommand
         {
             get

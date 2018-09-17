@@ -8,8 +8,10 @@ namespace FarmaEnlace.Interfaces
 {
     public interface IPermisosGPS
     {
-         bool estaActivoGPS { get; set; }
-         bool estaActivoRED { get; set; }      
-        void activatePermissions();
+
+        #region Methods
+        void requestGPSActivation();
+        #endregion
+        bool checkGpsPermission();
     }
 }

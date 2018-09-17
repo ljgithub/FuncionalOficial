@@ -109,6 +109,7 @@
     <Compile Include="Implementations\CloseApplication.cs" />
     <Compile Include="Implementations\DeviceSO.cs" />
     <Compile Include="Implementations\FileStore.cs" />
+    <Compile Include="Implementations\GeoLocation.cs" />
     <Compile Include="Implementations\IShareService.cs" />
     <Compile Include="Implementations\Localize.cs" />
     <Compile Include="Implementations\PermisosGPS.cs" />
@@ -227,12 +228,6 @@
     <PackageReference Include="ZXing.Net.Mobile">
       <Version>2.4.1</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FarmaEnlace\FarmaEnlace.csproj">
-      <Project>{877259cc-077c-4f10-8000-d358eef34fbf}</Project>
-      <Name>FarmaEnlace</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\back.png" />
@@ -1812,6 +1807,12 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\titgenerarcod2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FarmaEnlace\FarmaEnlace.csproj">
+      <Project>{877259cc-077c-4f10-8000-d358eef34fbf}</Project>
+      <Name>FarmaEnlace</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -53,6 +53,8 @@
     <BundleAssemblies>false</BundleAssemblies>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <EnableProguard>true</EnableProguard>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -663,12 +665,6 @@
     <AndroidResource Include="Resources\drawable\med_unselected_circle.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FarmaEnlace\FarmaEnlace.csproj">
-      <Project>{877259cc-077c-4f10-8000-d358eef34fbf}</Project>
-      <Name>FarmaEnlace</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\eco_logo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -718,6 +714,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\FarmaEnlace.Android.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FarmaEnlace\FarmaEnlace.csproj">
+      <Project>{877259cc-077c-4f10-8000-d358eef34fbf}</Project>
+      <Name>FarmaEnlace</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -9,9 +9,14 @@ namespace FarmaEnlace.iOS.Implementations
 {
     public class PermisosGPS : IPermisosGPS
     {
+        CLLocationManager cLLocationManager;
+        
+
         public bool estaActivo { get; set; }
-        public PermisosGPS() { }
-        public void verificarPermisosGPS()
+        public PermisosGPS() {
+           
+        }
+        public bool checkGpsPermission()
         {
             // all iOS devices support at least wifi geolocation
             // requestWhenInUseAuthorization must be set in plist
@@ -30,6 +35,14 @@ namespace FarmaEnlace.iOS.Implementations
             {
                 estaActivo = true;
             }
+            return estaActivo;
+        }
+
+        public void requestGPSActivation()
+        {
+            cLLocationManager = new CLLocationManager();
+        
+            cLLocationManager.RequestWhenInUseAuthorization();
         }
 
     }

@@ -105,9 +105,19 @@ namespace FarmaEnlace.ViewModels
         }
         #endregion
 
-        async Task<bool> MoveMapToCurrentPosition()
+        async Task<bool> MoveMapToCurrentPosition(bool hasInternetAccess)
         {
-            return await geolocatorService.GetLocation();
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                //poner en un a implementacion o un if pero deberia ser parte del checkLocationAvaibili
+                //cLLocationManager.RequestWhenInUseAuthorization(); vovler a activar para ios
+            }
+
+            DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
+
+            if (GeolocatorService.Latitude != 0 && GeolocatorService.Longitude != 0)
+            { return true; }
+            else { return false; }
         }
 
 
@@ -214,7 +224,7 @@ namespace FarmaEnlace.ViewModels
                     else
                     {
                         UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                        bool resp = await MoveMapToCurrentPosition();
+                        bool resp = await MoveMapToCurrentPosition(false);
                         UserDialogs.Instance.HideLoading();
                         var mainViewModel = MainViewModel.GetInstance();
                         mainViewModel.CommercesList = new CommercesListViewModel();
@@ -257,7 +267,7 @@ namespace FarmaEnlace.ViewModels
                 if (respuesta)
                 {
                     IPermisosGPS permisoGPS = DependencyService.Get<IPermisosGPS>();
-                    permisoGPS.activatePermissions();
+                    permisoGPS.requestGPSActivation();
                 }
             }
             catch (System.Exception)

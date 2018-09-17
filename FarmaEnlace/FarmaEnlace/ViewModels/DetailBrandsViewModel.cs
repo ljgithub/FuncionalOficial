@@ -11,6 +11,9 @@ using Xamarin.Forms;
 using FarmaEnlace.Helpers;
 using Acr.UserDialogs;
 using System.Threading.Tasks;
+using CoreLocation;
+using FarmaEnlace.Interfaces;
+using Plugin.Geolocator;
 
 namespace FarmaEnlace.ViewModels
 {
@@ -22,7 +25,6 @@ namespace FarmaEnlace.ViewModels
         #region Services
         ApiService apiService;
         DataService dataService;
-        DialogService dialogService;
         NavigationService navigationService;
 
         #endregion
@@ -35,7 +37,10 @@ namespace FarmaEnlace.ViewModels
         private string _phoneNumber;
         List<ImageBrand> imagebrands;
         ImageBrand _itemSelected;
+        CLLocationManager cLLocationManager;
         private ObservableCollection<ImageBrand> _imagebrandsCollection;
+        DialogService dialogService;
+
         #endregion
 
 
@@ -43,7 +48,7 @@ namespace FarmaEnlace.ViewModels
         #region Properties
 
         public List<ImageBrand> Imagebrands { get; set; }
-
+        
         public bool IsEnabled
         {
             get { return this._isEnabled; }
@@ -103,9 +108,9 @@ namespace FarmaEnlace.ViewModels
             var mainViewModel = MainViewModel.GetInstance();
             apiService = new ApiService();
             dataService = new DataService();
-            dialogService = new DialogService();
             navigationService = new NavigationService();
             ImagesCollection = new ObservableCollection<ImageBrand>();
+            dialogService = new DialogService();
             CurrentPhoto = 0;
             LoadImagesBrand();
             PositionCommand = new Command((Position));
@@ -231,6 +236,7 @@ namespace FarmaEnlace.ViewModels
         }
 
         #endregion
+
 
         #region Methods
 
@@ -464,17 +470,51 @@ namespace FarmaEnlace.ViewModels
 
         async void Products()
         {
+            bool available = false;
             var mainViewModel = MainViewModel.GetInstance();
 
             #region SaveStatisticsProducts
             SaveStatistics(1, 0);
             #endregion
 
-            mainViewModel.Categories = CategoriesViewModel.GetInstance();
-            mainViewModel.Categories.CategoriesLineCollection = null;
-            mainViewModel.Categories.LoadLineCategories();
-            await navigationService.NavigateOnMaster("CategoriesLineView");
+            UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);          
+            //available = await GeolocatorService.checkLocationAvaibility();
+          
+            if (available)
+            {
+                bool hasInternetAccess = await CheckIntenetAvaibility();
+                DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().requestLocationUpdates(hasInternetAccess);
+                mainViewModel.Categories = CategoriesViewModel.GetInstance();
+                mainViewModel.Categories.CategoriesLineCollection = null;
+                mainViewModel.Categories.LoadLineCategories();
+                await navigationService.NavigateOnMaster("CategoriesLineView");
+            }
+            UserDialogs.Instance.HideLoading();
+
         }
+
+        
+        
+
+        
+        public async Task<bool> CheckIntenetAvaibility()
+        {
+            var connection = await apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                await dialogService.ShowMessage(
+                       Resources.Resource.Info,
+                       Resources.Resource.ErrorConection);
+                UserDialogs.Instance.HideLoading();
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        
 
         public ICommand CommercesCommand
         {
@@ -490,25 +530,67 @@ namespace FarmaEnlace.ViewModels
             #region SaveStatisticsFarmacias
             SaveStatistics(0, 1);
             #endregion
+            bool avaible=await GeolocatorService.checkLocationAvaibility();
 
-            UserDialogs.Instance.ShowLoading(String.Empty, MaskType.Black);
+            //UserDialogs.Instance.ShowLoading(String.Empty, MaskType.Black);
             var connection = await apiService.CheckConnection();
-            if (!connection.IsSuccess)
+            if (connection.IsSuccess)
+            {
+                if (avaible)
+                {
+
+                    bool hasInternetAccess = await CheckIntenetAvaibility();
+                    DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().requestLocationUpdates(hasInternetAccess);
+
+                    mainViewModel.Commerces = CommercesViewModel.GetInstance();
+                    await navigationService.NavigateOnMaster("CommercesView");
+                } else {
+                    //TODO mostar ensaje de error de que no estaba listo el GPS, mensaje sacar e archivo de recursops
+                }
+            }
+            else
             {
                 mainViewModel.CommercesList = new CommercesListViewModel();
                 mainViewModel.CommercesList.NearbyPharmacies = false;
                 mainViewModel.CommercesList.Filter = string.Empty;
                 mainViewModel.CommercesList.TwentyFourHours = false;
-                UserDialogs.Instance.HideLoading();
                 await navigationService.NavigateOnMaster("CommercesListView");
+                
+            }
+
+            //UserDialogs.Instance.HideLoading();
+
+        }
+
+
+        public async Task <bool> checkAviabilityIOS()
+        {
+            //verifica si la aplicacion esta lista para usar el GPS, para ello debe verificar si la opcion en el telefono esta activa y tambien verificar
+            //si tiene el permiso necesario. Solo si ambas condiciones estan correctas retorno true, sino false.
+            DialogService dialogService = new DialogService();
+            bool isGPSActive = false;
+            bool hasGPSPermissions = false;
+
+            IPermisosGPS permisoGPS = DependencyService.Get<IPermisosGPS>();
+
+            Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
+            if (locator.IsGeolocationEnabled == false)
+            {
+                bool respuesta = await dialogService.ShowConfirm("", "Para continuar, permite que tu dispositivo active la ubicación, que se usa en el servicio de ubicación.");
+                if (respuesta)
+                    permisoGPS.requestGPSActivation();//cambiart nombre                                   
+
+                isGPSActive = false;
             }
             else
             {
-                mainViewModel.Commerces = CommercesViewModel.GetInstance();
-                UserDialogs.Instance.HideLoading();
-                await navigationService.NavigateOnMaster("CommercesView");
+                isGPSActive = true;
             }
 
+            //hasGPSPermissions revisar permisos para GPS
+            hasGPSPermissions = permisoGPS.checkGpsPermission();
+
+            return (isGPSActive && hasGPSPermissions);
         }
 
 
