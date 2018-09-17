@@ -11,9 +11,9 @@ using Xamarin.Forms;
 using FarmaEnlace.Helpers;
 using Acr.UserDialogs;
 using System.Threading.Tasks;
-using CoreLocation;
-using FarmaEnlace.Interfaces;
 using Plugin.Geolocator;
+using FarmaEnlace.Interfaces;
+using CoreLocation;
 
 namespace FarmaEnlace.ViewModels
 {
@@ -470,31 +470,27 @@ namespace FarmaEnlace.ViewModels
 
         async void Products()
         {
-            bool available = false;
             var mainViewModel = MainViewModel.GetInstance();
 
             #region SaveStatisticsProducts
             SaveStatistics(1, 0);
             #endregion
 
-            UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);          
-            //available = await GeolocatorService.checkLocationAvaibility();
-          
+            bool available = await GeolocatorService.checkLocationAvaibility();
             if (available)
             {
+
                 bool hasInternetAccess = await CheckIntenetAvaibility();
                 DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().requestLocationUpdates(hasInternetAccess);
+
                 mainViewModel.Categories = CategoriesViewModel.GetInstance();
                 mainViewModel.Categories.CategoriesLineCollection = null;
                 mainViewModel.Categories.LoadLineCategories();
                 await navigationService.NavigateOnMaster("CategoriesLineView");
             }
-            UserDialogs.Instance.HideLoading();
 
         }
-
-        
-        
+   
 
         
         public async Task<bool> CheckIntenetAvaibility()
@@ -560,37 +556,6 @@ namespace FarmaEnlace.ViewModels
 
             //UserDialogs.Instance.HideLoading();
 
-        }
-
-
-        public async Task <bool> checkAviabilityIOS()
-        {
-            //verifica si la aplicacion esta lista para usar el GPS, para ello debe verificar si la opcion en el telefono esta activa y tambien verificar
-            //si tiene el permiso necesario. Solo si ambas condiciones estan correctas retorno true, sino false.
-            DialogService dialogService = new DialogService();
-            bool isGPSActive = false;
-            bool hasGPSPermissions = false;
-
-            IPermisosGPS permisoGPS = DependencyService.Get<IPermisosGPS>();
-
-            Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
-            if (locator.IsGeolocationEnabled == false)
-            {
-                bool respuesta = await dialogService.ShowConfirm("", "Para continuar, permite que tu dispositivo active la ubicación, que se usa en el servicio de ubicación.");
-                if (respuesta)
-                    permisoGPS.requestGPSActivation();//cambiart nombre                                   
-
-                isGPSActive = false;
-            }
-            else
-            {
-                isGPSActive = true;
-            }
-
-            //hasGPSPermissions revisar permisos para GPS
-            hasGPSPermissions = permisoGPS.checkGpsPermission();
-
-            return (isGPSActive && hasGPSPermissions);
         }
 
 

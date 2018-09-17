@@ -215,15 +215,7 @@ namespace FarmaEnlace.ViewModels
         }
 
 
-        async Task<bool> MoveMapToCurrentPosition()
-        {
-
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                cLLocationManager.RequestWhenInUseAuthorization();
-            }
-            return await geolocatorService.GetLocation();
-        }
+      
 
         private async void SearchStock()
         {
@@ -240,62 +232,58 @@ namespace FarmaEnlace.ViewModels
                     {
                         hasInternetAccess = true;
                     }
-                    if (Device.RuntimePlatform==Device.Android) {
-                        hasPosition = DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
-                    }
-                    else {
-                        hasPosition = await MoveMapToCurrentPosition();
-                    }
-                        if (hasPosition)
-                        {
+                         hasPosition = DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
+                  
+                    if (hasPosition)
+                    {
 
-                            var urlAPI = Application.Current.Resources["URLAPI"].ToString();
-                            var response = await apiService.GetList<StockProduct>(
-                                urlAPI,
-                                Application.Current.Resources["PrefixAPI"].ToString(),
-                                "/StockProducts?codigoInterno=" + DetailProduct.InternalCode + "&idSucursal=" + mainViewModel.Brand.SearchCode + "&latitude=" + GeolocatorService.Latitude.ToString(CultureInfo.InvariantCulture) + "&longitude=" + GeolocatorService.Longitude.ToString(CultureInfo.InvariantCulture)
-                                );
+                        var urlAPI = Application.Current.Resources["URLAPI"].ToString();
+                        var response = await apiService.GetList<StockProduct>(
+                            urlAPI,
+                            Application.Current.Resources["PrefixAPI"].ToString(),
+                            "/StockProducts?codigoInterno=" + DetailProduct.InternalCode + "&idSucursal=" + mainViewModel.Brand.SearchCode + "&latitude=" + GeolocatorService.Latitude.ToString(CultureInfo.InvariantCulture) + "&longitude=" + GeolocatorService.Longitude.ToString(CultureInfo.InvariantCulture)
+                            );
 
 
-                            if (!response.IsSuccess)
-                            {
-                                await dialogService.ShowMessage(
-                                    Resources.Resource.Error,
-                                    response.Message);
-                                UserDialogs.Instance.HideLoading();
-                                return;
-                            }
-
-                            stockProduct = (List<StockProduct>)response.Result;
-
-                            if (stockProduct.Count == 0)
-                            {
-                                await dialogService.ShowMessage(
-                                    Resources.Resource.Info,
-                                    Resources.Resource.NoProductStock);
-                                UserDialogs.Instance.HideLoading();
-                                return;
-                            }
-
-                            mainViewModel.CommercesList = new CommercesListViewModel();
-                            mainViewModel.CommercesList.StockProducts = stockProduct;
-                            mainViewModel.CommercesList.Latitude = GeolocatorService.Latitude;
-                            mainViewModel.CommercesList.Longitude = GeolocatorService.Longitude;
-                            mainViewModel.CommercesList.TextoResultado = DetailProduct.Name;
-                            mainViewModel.CommercesList.TypeSale = DetailProduct.TypeSale;
-                            await navigationService.NavigateOnMaster("CommercesListView");
-
-                        }
-                        else
+                        if (!response.IsSuccess)
                         {
                             await dialogService.ShowMessage(
-                            Resources.Resource.Info,
-                            Resources.Resource.ErrorNoGPS);
+                                Resources.Resource.Error,
+                                response.Message);
                             UserDialogs.Instance.HideLoading();
                             return;
                         }
 
+                        stockProduct = (List<StockProduct>)response.Result;
+
+                        if (stockProduct.Count == 0)
+                        {
+                            await dialogService.ShowMessage(
+                                Resources.Resource.Info,
+                                Resources.Resource.NoProductStock);
+                            UserDialogs.Instance.HideLoading();
+                            return;
+                        }
+
+                        mainViewModel.CommercesList = new CommercesListViewModel();
+                        mainViewModel.CommercesList.StockProducts = stockProduct;
+                        mainViewModel.CommercesList.Latitude = GeolocatorService.Latitude;
+                        mainViewModel.CommercesList.Longitude = GeolocatorService.Longitude;
+                        mainViewModel.CommercesList.TextoResultado = DetailProduct.Name;
+                        mainViewModel.CommercesList.TypeSale = DetailProduct.TypeSale;
+                        await navigationService.NavigateOnMaster("CommercesListView");
+
                     }
+                    else
+                    {
+                        await dialogService.ShowMessage(
+                        Resources.Resource.Info,
+                        Resources.Resource.ErrorNoGPS);
+                        UserDialogs.Instance.HideLoading();
+                        return;
+                    }
+                    
+                }
                 else
                 {
                     //PONER DIAOLOGO DE ADVERTENCIA DICIENDO QUE NO SE REALIZO LA BUSQUEDA POR TENER LOS SERVICIOS DE UBICACION ABAJO, QUE INTENTE DE NUEVO

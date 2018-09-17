@@ -137,10 +137,6 @@ namespace FarmaEnlace.Android.Implementations
 
         }
 
-        public Task<bool> findLocationAsync(bool hasInternetAccess)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
 
     }
