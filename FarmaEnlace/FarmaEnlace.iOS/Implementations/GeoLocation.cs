@@ -13,7 +13,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(GeoLocation))]
 namespace FarmaEnlace.iOS.Implementations
 {
-    class GeoLocation : IGeoLocatorService
+    class GeoLocation 
     {
 
         #region Properties
@@ -27,17 +27,17 @@ namespace FarmaEnlace.iOS.Implementations
         }
         #endregion
 
-        public  async Task<bool> findLocationAsync(bool hasInternetAccess)
+       /* public  bool findLocation(bool hasInternetAccess)
         {                          
             //locationProvider = locationManager.GetBestProvider(locationCriteria, true);
             try
             {
                 var locator = CrossGeolocator.Current;
                 locator.DesiredAccuracy = 50;
-                var location =  await CrossGeolocator.Current.GetPositionAsync(TimeSpan.FromSeconds(10));
+                var location =   CrossGeolocator.Current.GetPositionAsync(TimeSpan.FromSeconds(10));
                 if (location == null)
                 {
-                    location =  await CrossGeolocator.Current.GetLastKnownLocationAsync();
+                    location =   CrossGeolocator.Current.GetLastKnownLocationAsync();
                 }
                 Latitude = location .Latitude;
                 Longitude = location.Longitude;
@@ -54,6 +54,6 @@ namespace FarmaEnlace.iOS.Implementations
         public void requestLocationUpdates(bool hasInternetAccess)
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }

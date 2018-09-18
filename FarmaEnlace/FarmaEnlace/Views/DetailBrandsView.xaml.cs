@@ -13,8 +13,6 @@ namespace FarmaEnlace.Views
             InitializeComponent();
             var detailBrandsViewModel = ViewModels.DetailBrandsViewModel.GetInstance();
 
-            
-
 
              CarouselImages.ItemSelected += (sender, args) =>
              {

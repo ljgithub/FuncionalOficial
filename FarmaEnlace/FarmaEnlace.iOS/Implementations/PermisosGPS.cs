@@ -40,9 +40,9 @@ namespace FarmaEnlace.iOS.Implementations
 
         public void requestGPSActivation()
         {
-            cLLocationManager = new CLLocationManager();
-        
-            cLLocationManager.RequestWhenInUseAuthorization();
+            NSString settingsString = UIApplication.OpenSettingsUrlString;
+            NSUrl url = new NSUrl(settingsString);
+            UIApplication.SharedApplication.OpenUrl(url);
         }
 
     }
