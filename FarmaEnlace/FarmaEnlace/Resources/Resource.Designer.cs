@@ -232,6 +232,15 @@ namespace FarmaEnlace.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dear user, the Location service has been denied for this app. If you want to use its features you have to go to your phone settings and enable or reset this permissions..
+        /// </summary>
+        public static string ErrorGPSDenied {
+            get {
+                return ResourceManager.GetString("ErrorGPSDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dear user, please try again..
         /// </summary>
         public static string ErrorMessage {

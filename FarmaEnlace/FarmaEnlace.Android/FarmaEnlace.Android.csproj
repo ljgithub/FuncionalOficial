@@ -146,6 +146,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\splash.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\splash.png" />
+    <AndroidResource Include="Resources\drawable\med_home.png" />
     <AndroidResource Include="Resources\drawable\splash.png" />
     <AndroidResource Include="Resources\drawable\Toolbar.axml" />
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -612,9 +613,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\med_flechita.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\med_home.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\med_icondireccion.png" />

@@ -11,6 +11,7 @@ using Xamarin.Forms;
 using FarmaEnlace.Helpers;
 using Acr.UserDialogs;
 using System.Threading.Tasks;
+using FarmaEnlace.Views;
 
 namespace FarmaEnlace.ViewModels
 {
@@ -37,6 +38,7 @@ namespace FarmaEnlace.ViewModels
         string _imagePuntoNatural;
         private ObservableCollection<BrandItemViewModel> _brandsCollection;
         private ObservableCollection<ImageBrand> _imagebrandsCollection;
+        private bool controlUnicoClic = false;
         #endregion
 
 
@@ -116,20 +118,10 @@ namespace FarmaEnlace.ViewModels
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.IsVisibleMyMenu = true;
             mainViewModel.IsVisibleMyMenuUser = false;
+            controlUnicoClic = false;
         }
 
-        #region Sigleton
-        static BrandsViewModel instance;
-        public static BrandsViewModel GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new BrandsViewModel();
-            }
-
-            return instance;
-        }
-        #endregion
+        
 
 
         
@@ -216,6 +208,19 @@ namespace FarmaEnlace.ViewModels
 
         #endregion
 
+        #region Sigleton
+        static BrandsViewModel instance;
+        public static BrandsViewModel GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new BrandsViewModel();
+            }
+
+            return instance;
+        }
+        #endregion
+
         #region Methods
         void SaveBrandsOnDB()
         {
@@ -259,27 +264,34 @@ namespace FarmaEnlace.ViewModels
         {
             try
             {
-                UserDialogs.Instance.ShowLoading(String.Empty, MaskType.Black);
-                await Task.Delay(500);
-                var mainViewModel = MainViewModel.GetInstance();
-                mainViewModel.IsVisibleMyMenu = false;
-                mainViewModel.IsVisibleMyMenuUser = true;
-                mainViewModel.Brand = brands.Find(x => x.BrandId == 1);
-                var token = dataService.First<TokenResponse>(false);
-                if (token != null &&
-                    token.IsRemembered &&
-                    token.Expires > DateTime.Now)
-                {
-                    mainViewModel.Token = token;
-                    MainViewModel.GetInstance().VirtualCard = new VirtualCardViewModel();
-                    await navigationService.SetMainPage("MasterView");
+                if (!controlUnicoClic) {
+                    controlUnicoClic = true;
+
+                    UserDialogs.Instance.ShowLoading(String.Empty, MaskType.Black);
+                    await Task.Delay(500);
+                    var mainViewModel = MainViewModel.GetInstance();
+                    mainViewModel.IsVisibleMyMenu = false;
+                    mainViewModel.IsVisibleMyMenuUser = true;
+                    mainViewModel.Brand = brands.Find(x => x.BrandId == 1);
+                    var token = dataService.First<TokenResponse>(false);
+                    if (token != null &&
+                        token.IsRemembered &&
+                        token.Expires > DateTime.Now)
+                    {
+                        mainViewModel.Token = token;
+                        MainViewModel.GetInstance().VirtualCard = new VirtualCardViewModel();
+                        await navigationService.SetMainPage("MasterView");
+                    }
+                    else
+                    {
+                        MainViewModel.GetInstance().Login = new LoginViewModel();
+                        await navigationService.SetMainPage("LoginView");
+                    }
+                    UserDialogs.Instance.HideLoading();
+
+                    controlUnicoClic = false;
                 }
-                else
-                {
-                    MainViewModel.GetInstance().Login = new LoginViewModel();
-                    await navigationService.SetMainPage("LoginView");
-                }
-                UserDialogs.Instance.HideLoading();
+                
             }
             catch (Exception)
             {
@@ -302,17 +314,24 @@ namespace FarmaEnlace.ViewModels
 
         public async void RedirectionPuntoNatural()
         {
+            
             try
             {
-                UserDialogs.Instance.ShowLoading(String.Empty, MaskType.Black);
-                await Task.Delay(500);
-                UserDialogs.Instance.HideLoading();
-                var mainViewModel = MainViewModel.GetInstance();
-                mainViewModel.Brand = brands.Find(x => x.BrandId == 4);
-                mainViewModel.IsVisibleMyMenu = true;
-                mainViewModel.IsVisibleMyMenuUser = false;
-                mainViewModel.DetailBrands = new DetailBrandsViewModel();
-                await navigationService.SetMainPage("DetailBrandsView");
+                if (!controlUnicoClic)
+                {
+                    controlUnicoClic = true;
+                    UserDialogs.Instance.ShowLoading(String.Empty, MaskType.Black);
+                    await Task.Delay(500);
+                    UserDialogs.Instance.HideLoading();
+                    var mainViewModel = MainViewModel.GetInstance();
+                    mainViewModel.Brand = brands.Find(x => x.BrandId == 4);
+                    mainViewModel.IsVisibleMyMenu = true;
+                    mainViewModel.IsVisibleMyMenuUser = false;
+                    mainViewModel.DetailBrands = new DetailBrandsViewModel();
+                    await navigationService.SetMainPage("DetailBrandsView");
+                    controlUnicoClic = false;
+                }
+                
             }
             catch (Exception)
             {
@@ -333,15 +352,20 @@ namespace FarmaEnlace.ViewModels
         {
             try
             {
-                UserDialogs.Instance.ShowLoading(String.Empty, MaskType.Black);
-                await Task.Delay(500);
-                UserDialogs.Instance.HideLoading();
-                var mainViewModel = MainViewModel.GetInstance();
-                mainViewModel.Brand = brands.Find(x => x.BrandId == 2);
-                mainViewModel.IsVisibleMyMenu = true;
-                mainViewModel.IsVisibleMyMenuUser = false;
-                mainViewModel.DetailBrands = new DetailBrandsViewModel();
-                await navigationService.SetMainPage("DetailBrandsView");
+                if (!controlUnicoClic)
+                {
+                    controlUnicoClic = true;
+                    UserDialogs.Instance.ShowLoading(String.Empty, MaskType.Black);
+                    await Task.Delay(500);
+                    UserDialogs.Instance.HideLoading();
+                    var mainViewModel = MainViewModel.GetInstance();
+                    mainViewModel.Brand = brands.Find(x => x.BrandId == 2);
+                    mainViewModel.IsVisibleMyMenu = true;
+                    mainViewModel.IsVisibleMyMenuUser = false;
+                    mainViewModel.DetailBrands = new DetailBrandsViewModel();
+                    await navigationService.SetMainPage("DetailBrandsView");
+                    controlUnicoClic = false;
+                }
             }
             catch (Exception)
             {
@@ -364,15 +388,20 @@ namespace FarmaEnlace.ViewModels
         {
             try
             {
-                UserDialogs.Instance.ShowLoading(String.Empty, MaskType.Black);
-                await Task.Delay(500);
-                UserDialogs.Instance.HideLoading();
-                var mainViewModel = MainViewModel.GetInstance();
-                mainViewModel.Brand = brands.Find(x => x.BrandId == 3);
-                mainViewModel.IsVisibleMyMenu = true;
-                mainViewModel.IsVisibleMyMenuUser = false;
-                mainViewModel.DetailBrands = new DetailBrandsViewModel();
-                await navigationService.SetMainPage("DetailBrandsView");
+                if (!controlUnicoClic)
+                {
+                    controlUnicoClic = true;
+                    UserDialogs.Instance.ShowLoading(String.Empty, MaskType.Black);
+                    await Task.Delay(500);
+                    UserDialogs.Instance.HideLoading();
+                    var mainViewModel = MainViewModel.GetInstance();
+                    mainViewModel.Brand = brands.Find(x => x.BrandId == 3);
+                    mainViewModel.IsVisibleMyMenu = true;
+                    mainViewModel.IsVisibleMyMenuUser = false;
+                    mainViewModel.DetailBrands = new DetailBrandsViewModel();
+                    await navigationService.SetMainPage("DetailBrandsView");
+                    controlUnicoClic = false;
+                }
             }
             catch (Exception e)
             {

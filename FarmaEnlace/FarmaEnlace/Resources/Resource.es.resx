@@ -333,4 +333,7 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>Estimado usuario, por favor, reintente su búsqueda.</value>
   </data>
+  <data name="ErrorGPSDenied" xml:space="preserve">
+    <value>Estimado usuario, los servicios de ubicacion han sido bloqueados para esta aplicacion. Si desea usar sus funcionalidades debe ir a la configuracion de su dispositivo y habilitarlos.</value>
+  </data>
 </root>

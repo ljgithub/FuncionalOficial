@@ -47,7 +47,8 @@
                 Aspect="AspectFit"
                 Source="{Binding ImageMedicity}">
                 <ffimageloading:CachedImage.GestureRecognizers>
-                    <TapGestureRecognizer  Command="{Binding RedirectionMedicityCommand}"/>
+                    <TapGestureRecognizer  Command="{Binding RedirectionMedicityCommand}"
+                                 x:Name="botoMedicity"          />
                 </ffimageloading:CachedImage.GestureRecognizers>
             </ffimageloading:CachedImage>
             <ffimageloading:CachedImage 
@@ -57,7 +58,8 @@
                 Aspect="AspectFit"
                 Source="{Binding ImageEconomica}">
                 <ffimageloading:CachedImage.GestureRecognizers>
-                    <TapGestureRecognizer  Command="{Binding RedirectionEconomicasCommand}"/>
+                    <TapGestureRecognizer  Command="{Binding RedirectionEconomicasCommand}"
+                                x:Name="botonEconomicas"/>
                 </ffimageloading:CachedImage.GestureRecognizers>
             </ffimageloading:CachedImage>
 
@@ -68,7 +70,8 @@
                 Aspect="AspectFit"
                 Source="{Binding ImagePuntoNatural}">
                 <ffimageloading:CachedImage.GestureRecognizers>
-                    <TapGestureRecognizer  Command="{Binding RedirectionPuntoNaturalCommand}"/>
+                    <TapGestureRecognizer  Command="{Binding RedirectionPuntoNaturalCommand}"
+                                           x:Name="botonPunto"/>
                 </ffimageloading:CachedImage.GestureRecognizers>
             </ffimageloading:CachedImage>
             <ffimageloading:CachedImage 
