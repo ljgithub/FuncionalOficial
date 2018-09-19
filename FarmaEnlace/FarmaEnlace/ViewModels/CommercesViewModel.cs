@@ -143,7 +143,7 @@ namespace FarmaEnlace.ViewModels
                 {
                         UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
                         bool hasInternetAccess = await CheckIntenetAvaibility();
-                        bool hasLocation = DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
+                        bool hasLocation = await DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
 
                         if (hasLocation)
                         {
@@ -244,7 +244,7 @@ namespace FarmaEnlace.ViewModels
                 {
                     UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
                     bool hasInternetAccess = await CheckIntenetAvaibility();
-                    bool hasLocation = DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
+                    bool hasLocation = await DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
 
                     if (hasLocation)
                     {
@@ -292,7 +292,7 @@ namespace FarmaEnlace.ViewModels
                 {
                     UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
                     bool hasInternetAccess = await CheckIntenetAvaibility();
-                    bool hasLocation = DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
+                    bool hasLocation = await DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
 
                     if (hasLocation)
                     {

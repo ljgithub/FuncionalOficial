@@ -20,14 +20,12 @@ namespace FarmaEnlace.iOS.Implementations
         {
             // all iOS devices support at least wifi geolocation
             // requestWhenInUseAuthorization must be set in plist
-
-            if (CLLocationManager.Status == CLAuthorizationStatus.Denied)
+            cLLocationManager = new CLLocationManager();
+            if (CLLocationManager.Status <= CLAuthorizationStatus.Denied)
             {
                 if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
                 {
-                    NSString settingsString = UIApplication.OpenSettingsUrlString;
-                    NSUrl url = new NSUrl(settingsString);
-                    UIApplication.SharedApplication.OpenUrl(url);
+                    cLLocationManager.RequestWhenInUseAuthorization();
                 }
                 estaActivo = false;
             }

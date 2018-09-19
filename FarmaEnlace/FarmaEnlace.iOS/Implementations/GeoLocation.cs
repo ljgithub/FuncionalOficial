@@ -5,15 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using FarmaEnlace.Interfaces;
 using FarmaEnlace.iOS.Implementations;
+using FarmaEnlace.Services;
 using Foundation;
 using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
 using UIKit;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(GeoLocation))]
 namespace FarmaEnlace.iOS.Implementations
 {
-    class GeoLocation 
+    class GeoLocation : IGeoLocatorService
     {
 
         #region Properties
@@ -21,28 +23,31 @@ namespace FarmaEnlace.iOS.Implementations
 
         public static double Longitude { get; set; }
 
-        public bool findLocation(bool hasInternetAccess)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
 
-       /* public  bool findLocation(bool hasInternetAccess)
+        public async Task<bool> findLocation(bool hasInternetAccess)
         {                          
             //locationProvider = locationManager.GetBestProvider(locationCriteria, true);
             try
             {
                 var locator = CrossGeolocator.Current;
                 locator.DesiredAccuracy = 50;
-                var location =   CrossGeolocator.Current.GetPositionAsync(TimeSpan.FromSeconds(10));
+                var location =  await CrossGeolocator.Current.GetPositionAsync(TimeSpan.FromSeconds(10));
+
                 if (location == null)
                 {
-                    location =   CrossGeolocator.Current.GetLastKnownLocationAsync();
+                    location =  await CrossGeolocator.Current.GetLastKnownLocationAsync();
                 }
-                Latitude = location .Latitude;
-                Longitude = location.Longitude;
-                Console.WriteLine("Long: " + Longitude + " Lat :" + Latitude);
-                return true;
+                if (location != null)
+                {
+                    GeolocatorService.Latitude = location.Latitude;
+                    GeolocatorService.Longitude = location.Longitude;
+                    return true;
+                } 
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {
@@ -53,7 +58,7 @@ namespace FarmaEnlace.iOS.Implementations
              
         public void requestLocationUpdates(bool hasInternetAccess)
         {
-            throw new NotImplementedException();
-        }*/
+            
+        }
     }
 }

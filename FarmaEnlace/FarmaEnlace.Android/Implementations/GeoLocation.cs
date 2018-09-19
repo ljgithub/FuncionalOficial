@@ -81,14 +81,15 @@ namespace FarmaEnlace.Android.Implementations
             Console.WriteLine("Meotodo OnStatusChanged");
         }
 
-        bool IGeoLocatorService.findLocation(bool hasInternetAccess)
+        async Task<bool> IGeoLocatorService.findLocation(bool hasInternetAccess)
         {
             String provider = getBestProviderName(hasInternetAccess);
 
             //construyo los servicios de ubicacion si estuvieran abajo
             if (locationManager == null)
             {
-                locationManager = (LocationManager)context.GetSystemService(Context.LocationService);
+               locationManager = (LocationManager)context.GetSystemService(Context.LocationService);
+
                 locationManager.RequestLocationUpdates(
                          provider,
                          MIN_TIME_BW_UPDATES,
@@ -96,6 +97,7 @@ namespace FarmaEnlace.Android.Implementations
             }
 
             if (GeolocatorService.Latitude==0 || GeolocatorService.Longitude==0) {
+
                 Location lastKnown = locationManager.GetLastKnownLocation(provider);
 
                 if (lastKnown == null)

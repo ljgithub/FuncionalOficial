@@ -230,9 +230,13 @@ namespace FarmaEnlace.ViewModels
                     var connection = await apiService.CheckConnection();
                     if (!connection.IsSuccess)
                     {
-                        hasInternetAccess = true;
+                        await dialogService.ShowMessage(
+                                Resources.Resource.Error,
+                                "No dispone de conexión a internet, intente mas tarde.");
+                        UserDialogs.Instance.HideLoading();
+                        return;
                     }
-                         hasPosition = DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
+                         hasPosition = await DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
                   
                     if (hasPosition)
                     {
