@@ -88,8 +88,7 @@ namespace FarmaEnlace.Android.Implementations
             //construyo los servicios de ubicacion si estuvieran abajo
             if (locationManager == null)
             {
-               locationManager = (LocationManager)context.GetSystemService(Context.LocationService);
-
+                locationManager = (LocationManager)context.GetSystemService(Context.LocationService);
                 locationManager.RequestLocationUpdates(
                          provider,
                          MIN_TIME_BW_UPDATES,
@@ -97,10 +96,9 @@ namespace FarmaEnlace.Android.Implementations
             }
 
             if (GeolocatorService.Latitude==0 || GeolocatorService.Longitude==0) {
-
                 Location lastKnown = locationManager.GetLastKnownLocation(provider);
 
-                if (lastKnown == null)
+                if (lastKnown != null)
                 {
                     GeolocatorService.Latitude = lastKnown.Latitude;
                     GeolocatorService.Longitude = lastKnown.Longitude;

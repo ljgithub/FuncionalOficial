@@ -70,7 +70,7 @@ namespace FarmaEnlace.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must enter the Birthday Correct..
+        ///   Looks up a localized string similar to You must enter a valid Birthday date..
         /// </summary>
         public static string BirthDayValidation {
             get {
@@ -223,7 +223,7 @@ namespace FarmaEnlace.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dear user does not have internet connection..
+        ///   Looks up a localized string similar to Dear user, there is not an active internet connection..
         /// </summary>
         public static string ErrorConection {
             get {
@@ -232,11 +232,29 @@ namespace FarmaEnlace.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not establish your location. Please try again..
+        ///   Looks up a localized string similar to Dear user, please try again..
+        /// </summary>
+        public static string ErrorMessage {
+            get {
+                return ResourceManager.GetString("ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your location could not be establish. Please try again..
         /// </summary>
         public static string ErrorNoGPS {
             get {
                 return ResourceManager.GetString("ErrorNoGPS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dear user, the location service is not available..
+        /// </summary>
+        public static string ErrorNoGPSAvaible {
+            get {
+                return ResourceManager.GetString("ErrorNoGPSAvaible", resourceCulture);
             }
         }
         
@@ -367,7 +385,7 @@ namespace FarmaEnlace.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must enter the Month od birth.
+        ///   Looks up a localized string similar to You must enter a valid birth month..
         /// </summary>
         public static string MonthValidation {
             get {
@@ -403,7 +421,7 @@ namespace FarmaEnlace.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The new password and confirm, does not match..
+        ///   Looks up a localized string similar to The new password and confirmation, does not match..
         /// </summary>
         public static string NewPasswordConfirmNotMatch {
             get {
@@ -412,7 +430,7 @@ namespace FarmaEnlace.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The new password must have 4 numeric characters length..
+        ///   Looks up a localized string similar to The new password must be 4 numeric characters length..
         /// </summary>
         public static string NewPasswordLengthValidation {
             get {
@@ -565,7 +583,7 @@ namespace FarmaEnlace.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Result of the search: {0}.
+        ///   Looks up a localized string similar to Search result: {0}.
         /// </summary>
         public static string ResultSearch {
             get {
@@ -601,7 +619,7 @@ namespace FarmaEnlace.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search Stock.
+        ///   Looks up a localized string similar to Find stock.
         /// </summary>
         public static string SearchStock {
             get {
@@ -646,7 +664,7 @@ namespace FarmaEnlace.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Su código ha caducado, por favor generelo nuevamente..
+        ///   Looks up a localized string similar to Your code has expired,  try again..
         /// </summary>
         public static string TimeElapsedCode {
             get {
@@ -655,7 +673,7 @@ namespace FarmaEnlace.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Estimado usuario, por favor, reintente su busqueda.
+        ///   Looks up a localized string similar to Dear user, please try again..
         /// </summary>
         public static string TryAgain {
             get {

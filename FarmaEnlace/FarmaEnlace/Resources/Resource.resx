@@ -163,7 +163,7 @@
     <value>Error</value>
   </data>
   <data name="ErrorConection" xml:space="preserve">
-    <value>Dear user does not have internet connection.</value>
+    <value>Dear user, there is not an active internet connection.</value>
   </data>
   <data name="ErrorService" xml:space="preserve">
     <value>The service is not available, please try latter.</value>
@@ -211,10 +211,10 @@
     <value>New Password</value>
   </data>
   <data name="NewPasswordConfirmNotMatch" xml:space="preserve">
-    <value>The new password and confirm, does not match.</value>
+    <value>The new password and confirmation, does not match.</value>
   </data>
   <data name="NewPasswordLengthValidation" xml:space="preserve">
-    <value>The new password must have 4 numeric characters length.</value>
+    <value>The new password must be 4 numeric characters length.</value>
   </data>
   <data name="NewPasswordValidation" xml:space="preserve">
     <value>You must enter a new password.</value>
@@ -262,7 +262,7 @@
     <value>Remember Me</value>
   </data>
   <data name="ResultSearch" xml:space="preserve">
-    <value>Result of the search: {0}</value>
+    <value>Search result: {0}</value>
   </data>
   <data name="Return" xml:space="preserve">
     <value>Return</value>
@@ -271,7 +271,7 @@
     <value>Search</value>
   </data>
   <data name="SearchStock" xml:space="preserve">
-    <value>Search Stock</value>
+    <value>Find stock</value>
   </data>
   <data name="SeeList" xml:space="preserve">
     <value>See list</value>
@@ -313,18 +313,24 @@
     <value>You must enter the Day of birth</value>
   </data>
   <data name="MonthValidation" xml:space="preserve">
-    <value>You must enter the Month od birth</value>
+    <value>You must enter a valid birth month.</value>
   </data>
   <data name="BirthDayValidation" xml:space="preserve">
-    <value>You must enter the Birthday Correct.</value>
+    <value>You must enter a valid Birthday date.</value>
   </data>
   <data name="ErrorNoGPS" xml:space="preserve">
-    <value>Could not establish your location. Please try again.</value>
+    <value>Your location could not be establish. Please try again.</value>
   </data>
   <data name="TryAgain" xml:space="preserve">
-    <value>Estimado usuario, por favor, reintente su busqueda</value>
+    <value>Dear user, please try again.</value>
   </data>
   <data name="TimeElapsedCode" xml:space="preserve">
-    <value>Su código ha caducado, por favor generelo nuevamente.</value>
+    <value>Your code has expired,  try again.</value>
+  </data>
+  <data name="ErrorNoGPSAvaible" xml:space="preserve">
+    <value>Dear user, the location service is not available.</value>
+  </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Dear user, please try again.</value>
   </data>
 </root>

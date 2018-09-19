@@ -379,7 +379,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                   Resources.Resource.Error,
-                   "Estimado usuario, por favor, reintente su busqueda");
+                   Resources.Resource.ErrorMessage);
             }
             finally
             {
@@ -440,7 +440,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                     Resources.Resource.Error,
-                     "Estimado usuario, por favor, reintente su busqueda");
+                     Resources.Resource.ErrorMessage);
             }
             finally
             {
@@ -559,7 +559,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                     Resources.Resource.Error,
-                     "Estimado usuario, por favor, reintente su busqueda");
+                     Resources.Resource.ErrorMessage);
                 isCallVoz = false;
             }
         }
@@ -592,7 +592,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                     Resources.Resource.Error,
-                     "Estimado usuario, por favor, reintente su busqueda");
+                     Resources.Resource.ErrorMessage);
             }
 
         }
@@ -630,7 +630,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                     Resources.Resource.Error,
-                     "Estimado usuario, por favor, reintente su busqueda");
+                     Resources.Resource.ErrorMessage);
             }
 
 
@@ -666,7 +666,7 @@ namespace FarmaEnlace.ViewModels
 
                 await dialogService.ShowMessage(
                       Resources.Resource.Error,
-                       "Estimado usuario, por favor, reintente su busqueda");
+                       Resources.Resource.ErrorMessage);
                 UserDialogs.Instance.HideLoading();
                 return;
             }
@@ -708,7 +708,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                     Resources.Resource.Error,
-                     "Estimado usuario, por favor, reintente su busqueda");
+                     Resources.Resource.ErrorMessage);
                 UserDialogs.Instance.HideLoading();
             }
         }
@@ -730,7 +730,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                     Resources.Resource.Error,
-                     "Estimado usuario, por favor, reintente su busqueda");
+                     Resources.Resource.ErrorMessage);
                 UserDialogs.Instance.HideLoading();
             }
         }
@@ -755,7 +755,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                    Resources.Resource.Error,
-                    "Estimado usuario, por favor, reintente su busqueda");
+                    Resources.Resource.ErrorMessage);
                 UserDialogs.Instance.HideLoading();
                 isCallScan = false;
             }

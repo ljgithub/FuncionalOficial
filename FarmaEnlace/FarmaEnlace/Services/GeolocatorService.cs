@@ -62,11 +62,11 @@ namespace FarmaEnlace.Services
             Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
             if (locator.IsGeolocationEnabled == false)
             {
-                bool respuesta = await dialogService.ShowConfirm("", "Para continuar, permite que tu dispositivo active la ubicación, que se usa en el servicio de ubicación.");
-                if (respuesta)
-                {
+                //bool respuesta = await dialogService.ShowConfirm("", "Para continuar, permite que tu dispositivo active la ubicación, que se usa en el servicio de ubicación.");
+                //if (respuesta)
+                //{
                     permisoGPS.requestGPSActivation();//cambiart nombre    
-                }
+                //}
                 isGPSActive = false;
             }
             else

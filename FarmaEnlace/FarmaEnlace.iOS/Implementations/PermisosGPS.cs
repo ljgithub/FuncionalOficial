@@ -38,7 +38,7 @@ namespace FarmaEnlace.iOS.Implementations
 
         public void requestGPSActivation()
         {
-            NSString settingsString = UIApplication.OpenSettingsUrlString;
+            NSString settingsString = UIApplication.LaunchOptionsLocationKey;
             NSUrl url = new NSUrl(settingsString);
             UIApplication.SharedApplication.OpenUrl(url);
         }

@@ -186,7 +186,7 @@ namespace FarmaEnlace.ViewModels
                         {
                             await dialogService.ShowMessage(
                                 Resources.Resource.Error,
-                                "Estimado usuario, por favor, reintente su busqueda");
+                                Resources.Resource.ErrorMessage);
                             return;
                         }
                         brands = (List<Brand>)response.Result;
@@ -203,7 +203,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                      Resources.Resource.Error,
-                      "Estimado usuario, por favor, reintente su busqueda");
+                      Resources.Resource.ErrorMessage);
                 return;
             }
             finally
@@ -285,7 +285,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                       Resources.Resource.Error,
-                       "Estimado usuario, por favor, reintente su busqueda");
+                       Resources.Resource.ErrorMessage);
                 UserDialogs.Instance.HideLoading();
                 return;
             }
@@ -429,7 +429,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                    Resources.Resource.Error,
-                    "Estimado usuario, por favor, reintente su busqueda");
+                    Resources.Resource.ErrorMessage);
             }
             
         }

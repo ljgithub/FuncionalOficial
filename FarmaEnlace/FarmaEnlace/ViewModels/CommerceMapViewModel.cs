@@ -175,7 +175,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                  Resources.Resource.Error,
-                  "Estimado usuario, por favor, reintente su busqueda");
+                  Resources.Resource.ErrorMessage);
                 isCallVoz = false;
             }
             
@@ -219,7 +219,7 @@ namespace FarmaEnlace.ViewModels
 
                 await dialogService.ShowMessage(
                  Resources.Resource.Error,
-                  "Estimado usuario, por favor, reintente su busqueda");
+                  Resources.Resource.ErrorMessage);
             }
             
         }
@@ -279,7 +279,7 @@ namespace FarmaEnlace.ViewModels
 
                 await dialogService.ShowMessage(
                 Resources.Resource.Error,
-                 "Estimado usuario, por favor, reintente su busqueda");
+                 Resources.Resource.ErrorMessage);
             }
             
             IsRefreshing = false;
@@ -304,7 +304,7 @@ namespace FarmaEnlace.ViewModels
 
                 await dialogService.ShowMessage(
                Resources.Resource.Error,
-                "Estimado usuario, por favor, reintente su busqueda");
+                Resources.Resource.ErrorMessage);
             }
             
             return respuesta;

@@ -451,7 +451,7 @@ namespace FarmaEnlace.Services
                 var client = new HttpClient();
 
                 client.BaseAddress = new Uri(urlBase);
-                client.Timeout = TimeSpan.FromMilliseconds(10000);
+                client.Timeout = TimeSpan.FromMilliseconds(50000);
                 var url = string.Format("{0}{1}", servicePrefix, controller);
                 var response = await client.GetAsync(url);
                 var result = await response.Content.ReadAsStringAsync();

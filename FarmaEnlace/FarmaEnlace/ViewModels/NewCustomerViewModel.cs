@@ -582,7 +582,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                      Resources.Resource.Error,
-                      "Estimado usuario, por favor, reintente su busqueda");
+                      Resources.Resource.ErrorMessage);
             }
             finally
             {

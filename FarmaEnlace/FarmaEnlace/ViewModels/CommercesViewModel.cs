@@ -17,7 +17,7 @@ namespace FarmaEnlace.ViewModels
 {
     public class CommercesViewModel : BaseViewModel
     {
-        
+
 
         #region Attributes
         bool _isToggled;
@@ -36,7 +36,7 @@ namespace FarmaEnlace.ViewModels
             get { return this._isToggled; }
             set { SetValue(ref this._isToggled, value); }
         }
-        
+
         public string Filter
         {
             get { return this._filter; }
@@ -64,7 +64,7 @@ namespace FarmaEnlace.ViewModels
             get { return this._isVisibleButton; }
             set { SetValue(ref this._isVisibleButton, value); }
         }
-        
+
 
         #endregion
 
@@ -100,7 +100,7 @@ namespace FarmaEnlace.ViewModels
         }
         #endregion
 
-       
+
 
         #region Commands
         public ICommand NearbyPharmaciesCommand
@@ -132,95 +132,109 @@ namespace FarmaEnlace.ViewModels
 
         async public void NearbyPharmacies()
         {
-            IGeolocator locator =  CrossGeolocator.Current;
-            bool available=false;
-            try
-            {                
-                if (locator.IsGeolocationEnabled==false)
-                {
-                     available = await GeolocatorService.checkLocationAvaibility();
-                }else                
-                {
-                        UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                        bool hasInternetAccess = await CheckIntenetAvaibility();
-                        bool hasLocation = await DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
-
-                        if (hasLocation)
-                        {
-                            UserDialogs.Instance.HideLoading();
-                            var mainViewModel = MainViewModel.GetInstance();
-                            mainViewModel.CommercesList = new CommercesListViewModel();
-                            mainViewModel.CommercesList.NearbyPharmacies = true;
-                            mainViewModel.CommercesList.Filter = string.Empty;
-                            mainViewModel.CommercesList.TwentyFourHours = false;
-                            mainViewModel.CommercesList.IsVisible = true;
-                            mainViewModel.CommercesList.Latitude = GeolocatorService.Latitude;
-                            mainViewModel.CommercesList.Longitude = GeolocatorService.Longitude;
-                            await navigationService.NavigateOnMaster("CommercesListView");
-                        }
-                }
-                
-            }
-            catch (Exception e)
-            {
-
-                UserDialogs.Instance.HideLoading();
-                await dialogService.ShowMessage(
-               Resources.Resource.Error,
-                "Estimado usuario, por favor, reintente su busqueda");
-            }
-
-            
-        }
-
-     /*   public ICommand SearchCommerceCommand
-        {
-            get
-            {
-                return new RelayCommand(SearchCommerce);
-            }
-        }
-
-        async void SearchCommerce()
-        {
-            
+            IGeolocator locator = CrossGeolocator.Current;
+            bool available = false;
             try
             {
-                if (!string.IsNullOrEmpty(Filter))
+                UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
+                available = await GeolocatorService.checkLocationAvaibility();
+                if (available)
                 {
-                    Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
-                    if (locator.IsGeolocationEnabled == false)
-                    {
-                        UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                        UserDialogs.Instance.HideLoading();
-                    }
-                    else
-                    {
+                    bool hasInternetAccess = await CheckIntenetAvaibility();
+                    bool hasLocation = await DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
 
-                        UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                        bool resp = await MoveMapToCurrentPosition(false);
-                        UserDialogs.Instance.HideLoading();
+                    if (hasLocation)
+                    {
                         var mainViewModel = MainViewModel.GetInstance();
                         mainViewModel.CommercesList = new CommercesListViewModel();
-                        mainViewModel.CommercesList.NearbyPharmacies = false;
-                        mainViewModel.CommercesList.Filter = Filter;
+                        mainViewModel.CommercesList.NearbyPharmacies = true;
+                        mainViewModel.CommercesList.Filter = string.Empty;
                         mainViewModel.CommercesList.TwentyFourHours = false;
                         mainViewModel.CommercesList.IsVisible = true;
                         mainViewModel.CommercesList.Latitude = GeolocatorService.Latitude;
                         mainViewModel.CommercesList.Longitude = GeolocatorService.Longitude;
                         await navigationService.NavigateOnMaster("CommercesListView");
                     }
+                    else
+                    {
+                        await dialogService.ShowMessage(
+                        Resources.Resource.Info,
+                        Resources.Resource.ErrorNoGPS);
+                        UserDialogs.Instance.HideLoading();
+                        return;
+                    }
+                } else
+                {
+                    await dialogService.ShowMessage(
+                        Resources.Resource.Info,
+                        Resources.Resource.ErrorNoGPSAvaible);
+                    UserDialogs.Instance.HideLoading();
+                    return;
 
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 await dialogService.ShowMessage(
-                   Resources.Resource.Error,
-                    "Estimado usuario, por favor, reintente su busqueda");
+                Resources.Resource.Error,
+                Resources.Resource.ErrorMessage);
             }
-        }*/
+            finally
+            {
+                UserDialogs.Instance.HideLoading();
+            }
+
+        }
+
+        /*   public ICommand SearchCommerceCommand
+           {
+               get
+               {
+                   return new RelayCommand(SearchCommerce);
+               }
+           }
+
+           async void SearchCommerce()
+           {
+
+               try
+               {
+                   if (!string.IsNullOrEmpty(Filter))
+                   {
+                       Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
+                       if (locator.IsGeolocationEnabled == false)
+                       {
+                           UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
+                           UserDialogs.Instance.HideLoading();
+                       }
+                       else
+                       {
+
+                           UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
+                           bool resp = await MoveMapToCurrentPosition(false);
+                           UserDialogs.Instance.HideLoading();
+                           var mainViewModel = MainViewModel.GetInstance();
+                           mainViewModel.CommercesList = new CommercesListViewModel();
+                           mainViewModel.CommercesList.NearbyPharmacies = false;
+                           mainViewModel.CommercesList.Filter = Filter;
+                           mainViewModel.CommercesList.TwentyFourHours = false;
+                           mainViewModel.CommercesList.IsVisible = true;
+                           mainViewModel.CommercesList.Latitude = GeolocatorService.Latitude;
+                           mainViewModel.CommercesList.Longitude = GeolocatorService.Longitude;
+                           await navigationService.NavigateOnMaster("CommercesListView");
+                       }
+
+                   }
+
+               }
+               catch (Exception)
+               {
+                   await dialogService.ShowMessage(
+                      Resources.Resource.Error,
+                       Resources.Resource.ErrorMessage);
+               }
+           }*/
 
         public ICommand TwentyFourHoursPharmaciesCommand
         {
@@ -236,20 +250,15 @@ namespace FarmaEnlace.ViewModels
             bool available = false;
             try
             {
-                if (locator.IsGeolocationEnabled == false)
+                UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
+                available = await GeolocatorService.checkLocationAvaibility();
+                if (available)
                 {
-                    available = await GeolocatorService.checkLocationAvaibility();
-                }
-                else
-                {
-                    UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
                     bool hasInternetAccess = await CheckIntenetAvaibility();
                     bool hasLocation = await DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
 
                     if (hasLocation)
                     {
-                        UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                        UserDialogs.Instance.HideLoading();
                         var mainViewModel = MainViewModel.GetInstance();
                         mainViewModel.CommercesList = new CommercesListViewModel();
                         mainViewModel.CommercesList.NearbyPharmacies = false;
@@ -258,13 +267,32 @@ namespace FarmaEnlace.ViewModels
                         mainViewModel.CommercesList.IsVisible = false;
                         await navigationService.NavigateOnMaster("CommercesListView");
                     }
+                    else
+                    {
+                        await dialogService.ShowMessage(
+                        Resources.Resource.Info,
+                        Resources.Resource.ErrorNoGPS);
+                        UserDialogs.Instance.HideLoading();
+                        return;
+                    }
+                }
+                else
+                {
+                    await dialogService.ShowMessage(
+                        Resources.Resource.Info,
+                        Resources.Resource.ErrorNoGPSAvaible);
+                    UserDialogs.Instance.HideLoading();
+                    return;
                 }
             }
             catch (Exception)
             {
                 await dialogService.ShowMessage(
                    Resources.Resource.Error,
-                    "Estimado usuario, por favor, reintente su busqueda");
+                    Resources.Resource.ErrorMessage);
+            } finally
+            {
+                UserDialogs.Instance.HideLoading();
             }
         }
 
@@ -284,33 +312,46 @@ namespace FarmaEnlace.ViewModels
             bool available = false;
             try
             {
-                if (locator.IsGeolocationEnabled == false)
+                UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
+                available = await GeolocatorService.checkLocationAvaibility();
+                if (available)
                 {
-                    available = await GeolocatorService.checkLocationAvaibility();
-                }
-                else
-                {
-                    UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
                     bool hasInternetAccess = await CheckIntenetAvaibility();
                     bool hasLocation = await DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
 
                     if (hasLocation)
                     {
-                        UserDialogs.Instance.ShowLoading(String.Empty, MaskType.Black);
                         mainViewModel.CommercesSearch = new CommercesSearchViewModel();
                         await navigationService.NavigateOnMaster("CommercesSearchView");
-                        UserDialogs.Instance.HideLoading();
                     }
+                    else
+                    {
+                        await dialogService.ShowMessage(
+                        Resources.Resource.Info,
+                        Resources.Resource.ErrorNoGPS);
+                        UserDialogs.Instance.HideLoading();
+                        return;
+                    }
+                }
+                else
+                {
+                    await dialogService.ShowMessage(
+                        Resources.Resource.Info,
+                        Resources.Resource.ErrorNoGPSAvaible);
+                    UserDialogs.Instance.HideLoading();
+                    return;
                 }
             }
             catch (Exception)
             {
-
                 await dialogService.ShowMessageBrand(
                 Resources.Resource.Error,
-                  "Estimado usuario, por favor, reintente su busqueda",
+                  Resources.Resource.ErrorMessage,
                   "iconinfo",
                   mainViewModel.Brand.SearchCode);
+                UserDialogs.Instance.HideLoading();
+            } finally
+            {
                 UserDialogs.Instance.HideLoading();
             }
             

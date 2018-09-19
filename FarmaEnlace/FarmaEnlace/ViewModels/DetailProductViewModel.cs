@@ -290,11 +290,19 @@ namespace FarmaEnlace.ViewModels
                 }
                 else
                 {
-                    //PONER DIAOLOGO DE ADVERTENCIA DICIENDO QUE NO SE REALIZO LA BUSQUEDA POR TENER LOS SERVICIOS DE UBICACION ABAJO, QUE INTENTE DE NUEVO
+                    await dialogService.ShowMessage(
+                        Resources.Resource.Info,
+                        Resources.Resource.ErrorNoGPSAvaible);
+                    UserDialogs.Instance.HideLoading();
+                    return;
                 }
 
             } catch (Exception e) {
-
+                await dialogService.ShowMessage(
+                   Resources.Resource.Error,
+                    Resources.Resource.TryAgain);
+                UserDialogs.Instance.HideLoading();
+                isCallScan = false;
             }
             finally {
                 UserDialogs.Instance.HideLoading();

@@ -190,7 +190,7 @@ namespace FarmaEnlace.ViewModels
                 var mainViewModel = MainViewModel.GetInstance();
                 await dialogService.ShowMessageBrand(
                               Resources.Resource.Error,
-                              "Estimado usuario, por favor, reintente su busqueda",
+                              Resources.Resource.ErrorMessage,
                               "iconinfo",
                               mainViewModel.Brand.SearchCode);
                 isCallVoz = false;
@@ -249,7 +249,7 @@ namespace FarmaEnlace.ViewModels
             {
                 await dialogService.ShowMessage(
                 Resources.Resource.Error,
-                 "Estimado usuario, por favor, reintente su busqueda");
+                 Resources.Resource.ErrorMessage);
             }
             
 
@@ -275,7 +275,7 @@ namespace FarmaEnlace.ViewModels
 
                 await dialogService.ShowMessage(
                 Resources.Resource.Error,
-                 "Estimado usuario, por favor, reintente su busqueda");
+                 Resources.Resource.ErrorMessage);
             }
            
             return respuesta;

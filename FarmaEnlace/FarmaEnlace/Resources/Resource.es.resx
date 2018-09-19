@@ -184,7 +184,7 @@
     <value>Identificación</value>
   </data>
   <data name="IdentificationTypeValidation" xml:space="preserve">
-    <value>Por favor ingrese su tipo de identificación</value>
+    <value>Por favor ingrese su tipo de identificación.</value>
   </data>
   <data name="IdentificationValidation" xml:space="preserve">
     <value>Debe ingresar su identificación</value>
@@ -229,16 +229,16 @@
     <value>*********</value>
   </data>
   <data name="PasswordChangeSuccessful" xml:space="preserve">
-    <value>El cambio de password se realizo con éxito</value>
+    <value>El cambio de password se realizo con éxito.</value>
   </data>
   <data name="PasswordConfirmValidation" xml:space="preserve">
     <value>Debe ingresar la confirmación de su contraseña.</value>
   </data>
   <data name="PasswordCurrentValidation" xml:space="preserve">
-    <value>La contraseña actual no es válida</value>
+    <value>La contraseña actual no es válida.</value>
   </data>
   <data name="PasswordSentEmail" xml:space="preserve">
-    <value>Su password fue enviado a su correo!</value>
+    <value>Su password fue enviado a su correo!.</value>
   </data>
   <data name="PasswordValidation" xml:space="preserve">
     <value>Debe ingresar la contraseña actual.</value>
@@ -319,12 +319,18 @@
     <value>Ingrese el mes de nacimiento</value>
   </data>
   <data name="ErrorNoGPS" xml:space="preserve">
-    <value>No se pudo obtener su ubicación, por favor intente de nuevo</value>
+    <value>No se pudo obtener su ubicación, por favor intente de nuevo.</value>
   </data>
   <data name="TryAgain" xml:space="preserve">
-    <value>Estimado usuario, por favor, reintente su busqueda</value>
+    <value>Estimado usuario, por favor, reintente su busqueda.</value>
   </data>
   <data name="TimeElapsedCode" xml:space="preserve">
     <value>Su código ha caducado, por favor generelo nuevamente.</value>
+  </data>
+  <data name="ErrorNoGPSAvaible" xml:space="preserve">
+    <value>Estimado usuario, los servicios de ubicación no se encuentran disponibles.</value>
+  </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Estimado usuario, por favor, reintente su búsqueda.</value>
   </data>
 </root>
