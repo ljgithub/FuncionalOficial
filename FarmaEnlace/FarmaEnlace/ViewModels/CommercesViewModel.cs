@@ -133,12 +133,12 @@ namespace FarmaEnlace.ViewModels
         async public void NearbyPharmacies()
         {
             IGeolocator locator = CrossGeolocator.Current;
-            bool available = false;
+            int avaible = GeolocatorService.ALLOWED;
             try
             {
                 UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                available = await GeolocatorService.checkLocationAvaibility();
-                if (available)
+                avaible = await GeolocatorService.checkLocationAvaibility();
+                if (avaible == GeolocatorService.ALLOWED)
                 {
                     bool hasInternetAccess = await CheckIntenetAvaibility();
                     bool hasLocation = await DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
@@ -160,17 +160,20 @@ namespace FarmaEnlace.ViewModels
                         await dialogService.ShowMessage(
                         Resources.Resource.Info,
                         Resources.Resource.ErrorNoGPS);
-                        UserDialogs.Instance.HideLoading();
-                        return;
+                        
                     }
-                } else
+                }
+                else if (avaible == GeolocatorService.UNDEFINED)
                 {
                     await dialogService.ShowMessage(
-                        Resources.Resource.Info,
-                        Resources.Resource.ErrorNoGPSAvaible);
-                    UserDialogs.Instance.HideLoading();
-                    return;
-
+                    Resources.Resource.Info,
+                    Resources.Resource.ErrorNoGPSAvaible);
+                }
+                else if (avaible == GeolocatorService.DENIED)
+                {
+                    await dialogService.ShowMessage(
+                    Resources.Resource.Info,
+                    Resources.Resource.ErrorGPSDenied);
                 }
 
             }
@@ -247,12 +250,12 @@ namespace FarmaEnlace.ViewModels
         async void TwentyFourHoursPharmacies()
         {
             IGeolocator locator = CrossGeolocator.Current;
-            bool available = false;
+            int avaible = GeolocatorService.ALLOWED;
             try
             {
                 UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                available = await GeolocatorService.checkLocationAvaibility();
-                if (available)
+                avaible = await GeolocatorService.checkLocationAvaibility();
+                if (avaible == GeolocatorService.ALLOWED)
                 {
                     bool hasInternetAccess = await CheckIntenetAvaibility();
                     bool hasLocation = await DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
@@ -272,17 +275,20 @@ namespace FarmaEnlace.ViewModels
                         await dialogService.ShowMessage(
                         Resources.Resource.Info,
                         Resources.Resource.ErrorNoGPS);
-                        UserDialogs.Instance.HideLoading();
                         return;
                     }
                 }
-                else
+                else if (avaible == GeolocatorService.UNDEFINED)
                 {
                     await dialogService.ShowMessage(
-                        Resources.Resource.Info,
-                        Resources.Resource.ErrorNoGPSAvaible);
-                    UserDialogs.Instance.HideLoading();
-                    return;
+                    Resources.Resource.Info,
+                    Resources.Resource.ErrorNoGPSAvaible);
+                }
+                else if (avaible == GeolocatorService.DENIED)
+                {
+                    await dialogService.ShowMessage(
+                    Resources.Resource.Info,
+                    Resources.Resource.ErrorGPSDenied);
                 }
             }
             catch (Exception)
@@ -309,12 +315,12 @@ namespace FarmaEnlace.ViewModels
         {
             var mainViewModel = MainViewModel.GetInstance();
             IGeolocator locator = CrossGeolocator.Current;
-            bool available = false;
+            int avaible = GeolocatorService.ALLOWED;
             try
             {
                 UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                available = await GeolocatorService.checkLocationAvaibility();
-                if (available)
+                avaible = await GeolocatorService.checkLocationAvaibility();
+                if (avaible == GeolocatorService.ALLOWED)
                 {
                     bool hasInternetAccess = await CheckIntenetAvaibility();
                     bool hasLocation = await DependencyService.Get<FarmaEnlace.Interfaces.IGeoLocatorService>().findLocation(hasInternetAccess);
@@ -333,13 +339,17 @@ namespace FarmaEnlace.ViewModels
                         return;
                     }
                 }
-                else
+                else if (avaible == GeolocatorService.UNDEFINED)
                 {
                     await dialogService.ShowMessage(
-                        Resources.Resource.Info,
-                        Resources.Resource.ErrorNoGPSAvaible);
-                    UserDialogs.Instance.HideLoading();
-                    return;
+                    Resources.Resource.Info,
+                    Resources.Resource.ErrorNoGPSAvaible);
+                }
+                else if (avaible == GeolocatorService.DENIED)
+                {
+                    await dialogService.ShowMessage(
+                    Resources.Resource.Info,
+                    Resources.Resource.ErrorGPSDenied);
                 }
             }
             catch (Exception)
@@ -349,7 +359,7 @@ namespace FarmaEnlace.ViewModels
                   Resources.Resource.ErrorMessage,
                   "iconinfo",
                   mainViewModel.Brand.SearchCode);
-                UserDialogs.Instance.HideLoading();
+
             } finally
             {
                 UserDialogs.Instance.HideLoading();

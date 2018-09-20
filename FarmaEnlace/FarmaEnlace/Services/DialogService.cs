@@ -63,5 +63,14 @@ namespace FarmaEnlace.Services
                 "No");
 		}
 
-	}
+        public async Task<bool> ShowNotification(string title, string message)
+        {
+            await Application.Current.MainPage.DisplayAlert(
+                title,
+                message,
+                Resources.Resource.Accept);
+            return true;
+        }
+
+    }
 }

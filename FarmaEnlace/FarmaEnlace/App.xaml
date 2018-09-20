@@ -12,21 +12,21 @@
             <infrastructure:InstanceLocator x:Key="Locator"/>
             <!-- Parameters -->
 
-             <!--APTO PARA IPV6-->
+             <!--APTO PARA IPV6
             <x:String x:Key="URLAPI">http://appfarmaprod.ddns.net:8084</x:String>
             <x:String x:Key="PrefixAPI">/ApiFarmaenlace/api</x:String>
             <x:String x:Key="PrefixAPIToken">ApiFarmaenlace/Token</x:String>
             <x:String x:Key="AdministradorAppFarmaEnlace">http://appfarmaprod.ddns.net:8084/AdministradorAppFarmaEnlace/{0}</x:String>
-            <x:String x:Key="ApiFarmaenlace">http://appfarmaprod.ddns.net:8084/ApiFarmaenlace/{0}</x:String>
+            <x:String x:Key="ApiFarmaenlace">http://appfarmaprod.ddns.net:8084/ApiFarmaenlace/{0}</x:String>-->
 
 
 
-            <!--PRODUCCION
+            <!--PRODUCCION-->
             <x:String x:Key="URLAPI">http://181.198.110.230:8084</x:String>
             <x:String x:Key="PrefixAPI">/ApiFarmaenlace/api</x:String>
             <x:String x:Key="PrefixAPIToken">ApiFarmaenlace/Token</x:String>
             <x:String x:Key="AdministradorAppFarmaEnlace">http://181.198.110.230:8084/AdministradorAppFarmaEnlace/{0}</x:String>
-            <x:String x:Key="ApiFarmaenlace">http://181.198.110.230:8084/ApiFarmaenlace/{0}</x:String>-->
+            <x:String x:Key="ApiFarmaenlace">http://181.198.110.230:8084/ApiFarmaenlace/{0}</x:String>
             
             <!--DESARROLLO-->
             <!--<x:String x:Key="URLAPI">http://farmaenlaceapi.azurewebsites.net</x:String>

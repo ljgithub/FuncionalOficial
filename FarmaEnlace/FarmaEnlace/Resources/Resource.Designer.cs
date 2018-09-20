@@ -232,7 +232,7 @@ namespace FarmaEnlace.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dear user, the Location service has been denied for this app. If you want to use its features you have to go to your phone settings and enable or reset this permissions..
+        ///   Looks up a localized string similar to Dear user, the Location service has been denied for this app. If you want to use its features you have to go to your phone settings and enable or reset its permissions..
         /// </summary>
         public static string ErrorGPSDenied {
             get {

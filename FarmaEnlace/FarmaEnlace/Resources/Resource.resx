@@ -334,6 +334,6 @@
     <value>Dear user, please try again.</value>
   </data>
   <data name="ErrorGPSDenied" xml:space="preserve">
-    <value>Dear user, the Location service has been denied for this app. If you want to use its features you have to go to your phone settings and enable or reset this permissions.</value>
+    <value>Dear user, the Location service has been denied for this app. If you want to use its features you have to go to your phone settings and enable or reset its permissions.</value>
   </data>
 </root>

@@ -221,9 +221,9 @@ namespace FarmaEnlace.ViewModels
         {
             try {
                 UserDialogs.Instance.ShowLoading(string.Empty, MaskType.Black);
-                bool avaible = await GeolocatorService.checkLocationAvaibility();
+                int avaible = await GeolocatorService.checkLocationAvaibility();
                 bool hasPosition = false;
-                if (avaible)
+                if (avaible==GeolocatorService.ALLOWED)
                 {
                     var mainViewModel = MainViewModel.GetInstance();
                     bool hasInternetAccess = false;
@@ -283,25 +283,28 @@ namespace FarmaEnlace.ViewModels
                         await dialogService.ShowMessage(
                         Resources.Resource.Info,
                         Resources.Resource.ErrorNoGPS);
-                        UserDialogs.Instance.HideLoading();
+                        
                         return;
                     }
                     
                 }
-                else
+                else if (avaible == GeolocatorService.UNDEFINED)
                 {
                     await dialogService.ShowMessage(
-                        Resources.Resource.Info,
-                        Resources.Resource.ErrorNoGPSAvaible);
-                    UserDialogs.Instance.HideLoading();
-                    return;
+                    Resources.Resource.Info,
+                    Resources.Resource.ErrorNoGPSAvaible);
+                } else if (avaible == GeolocatorService.DENIED)
+                {
+                    await dialogService.ShowMessage(
+                    Resources.Resource.Info,
+                    Resources.Resource.ErrorGPSDenied);    
                 }
 
             } catch (Exception e) {
                 await dialogService.ShowMessage(
                    Resources.Resource.Error,
                     Resources.Resource.TryAgain);
-                UserDialogs.Instance.HideLoading();
+
                 isCallScan = false;
             }
             finally {

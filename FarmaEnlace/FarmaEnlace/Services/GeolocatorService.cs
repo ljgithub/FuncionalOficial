@@ -12,17 +12,13 @@ namespace FarmaEnlace.Services
     {
 
         #region Properties
-        public static double Latitude
-        {
-            get;
-            set;
-        }
+        public static double Latitude;
+        public static double Longitude;
 
-        public static double Longitude
-        {
-            get;
-            set;
-        }
+        public static int DENIED=2;
+        public static int ALLOWED=0;
+        public static int UNDEFINED=1;
+
         #endregion
 
         public async Task<bool> GetLocation()
@@ -50,29 +46,47 @@ namespace FarmaEnlace.Services
             }
         }
 
-        public static async Task<bool> checkLocationAvaibility()
+        public static async Task<int> checkLocationAvaibility()
         {
             //verifica si la aplicacion esta lista para usar el GPS, para ello debe verificar si la opcion en el telefono esta activa y tambien verificar
-            //si tiene el permiso necesario. Solo si ambas condiciones estan correctas retorno true, sino false.
+            //si tiene el permiso necesario. Solo si ambas condiciones estan correctas retorno 0, sino retorno 2 cuando esta denegado o 1 si puede autorizarse con el usuario.
             DialogService dialogService = new DialogService();
             bool isGPSActive = false;
-            bool hasGPSPermissions = false;      
+            int permission = 0;
             IPermisosGPS permisoGPS = DependencyService.Get<IPermisosGPS>();
 
             Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
+            bool respuestaServicios = true;
             if (locator.IsGeolocationEnabled == false)
             {
-                permisoGPS.requestGPSActivation();  
+
+                if (Device.RuntimePlatform == Device.Android)
+                {
+                    respuestaServicios = await dialogService.ShowConfirm("Notificación", "Para continuar, permite que tu dispositivo active la ubicación, que se usa en el servicio de ubicación.");                    
+                }
+
+                if (respuestaServicios)
+                {
+                    permisoGPS.requestGPSActivation();//cambiart nombre  
+                }
+
                 isGPSActive = false;
             }
             else
             {
-                isGPSActive = true;
+                return ALLOWED;
             }
 
-            //hasGPSPermissions revisar permisos para GPS
-            hasGPSPermissions = permisoGPS.checkGpsPermission();
-            return (isGPSActive && hasGPSPermissions);
+            if (respuestaServicios)
+            {
+                 permission=permisoGPS.checkGpsPermission();
+            }
+
+            //si el gps esta desactivado pero no ha sido denegado por el usuario
+            if (!isGPSActive && permission < 2) return UNDEFINED;
+
+            //si el gps si estaba activo, la respuesta depende unicamente de los permisos
+            return permission;
         }
 
     }

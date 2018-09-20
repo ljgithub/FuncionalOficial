@@ -10,6 +10,7 @@ using Android.Content.PM;
 using Android.Support.V4.App;
 using System;
 using Android.App;
+using FarmaEnlace.Services;
 
 [assembly: Xamarin.Forms.Dependency(typeof(PermisosGPS))]
 namespace FarmaEnlace.Android.Implementations
@@ -39,16 +40,16 @@ namespace FarmaEnlace.Android.Implementations
             Forms.Context.StartActivity(gpsSettingIntent);
         }
 
-        public bool checkGpsPermission() {
+        public int checkGpsPermission() {
             //verifico si la app tiene el permiso para acceder al GPS, retorno true si es que si tiene o false de lo contrario
 
             if (Forms.Context.CheckSelfPermission(Manifest.Permission.AccessCoarseLocation) == Permission.Granted)
             {
-                return true;
+                return GeolocatorService.ALLOWED;
             } else {
                 activity = new Activity();
                 ActivityCompat.RequestPermissions(activity, new String[] { Manifest.Permission.AccessCoarseLocation }, MY_PERMISSION_ACCESS_COARSE_LOCATION);
-                return false;
+                return GeolocatorService.UNDEFINED;
             }
         }
         #endregion

@@ -476,8 +476,8 @@ namespace FarmaEnlace.ViewModels
             SaveStatistics(1, 0);
             #endregion
 
-            bool available = await GeolocatorService.checkLocationAvaibility();
-            if (available)
+            int available = await GeolocatorService.checkLocationAvaibility();
+            if (available == 0)
             {
 
                 bool hasInternetAccess = await CheckIntenetAvaibility();
@@ -487,6 +487,18 @@ namespace FarmaEnlace.ViewModels
                 mainViewModel.Categories.CategoriesLineCollection = null;
                 mainViewModel.Categories.LoadLineCategories();
                 await navigationService.NavigateOnMaster("CategoriesLineView");
+            }
+            else if (available == GeolocatorService.UNDEFINED) {
+
+                await dialogService.ShowMessage(
+                       Resources.Resource.Info,
+                       Resources.Resource.ErrorNoGPSAvaible);
+
+            } else if (available == GeolocatorService.DENIED) {
+
+                await dialogService.ShowMessage(
+                       Resources.Resource.Info,
+                       Resources.Resource.ErrorGPSDenied);
             }
 
         }
@@ -501,7 +513,7 @@ namespace FarmaEnlace.ViewModels
                 await dialogService.ShowMessage(
                        Resources.Resource.Info,
                        Resources.Resource.ErrorConection);
-                UserDialogs.Instance.HideLoading();
+
                 return false;
             }
             else
@@ -526,13 +538,13 @@ namespace FarmaEnlace.ViewModels
             #region SaveStatisticsFarmacias
             SaveStatistics(0, 1);
             #endregion
-            bool avaible=await GeolocatorService.checkLocationAvaibility();
+            int avaible=await GeolocatorService.checkLocationAvaibility();
 
             //UserDialogs.Instance.ShowLoading(String.Empty, MaskType.Black);
             var connection = await apiService.CheckConnection();
             if (connection.IsSuccess)
             {
-                if (avaible)
+                if (avaible == GeolocatorService.ALLOWED)
                 {
 
                     bool hasInternetAccess = await CheckIntenetAvaibility();
@@ -540,8 +552,17 @@ namespace FarmaEnlace.ViewModels
 
                     mainViewModel.Commerces = CommercesViewModel.GetInstance();
                     await navigationService.NavigateOnMaster("CommercesView");
-                } else {
-                    //TODO mostar ensaje de error de que no estaba listo el GPS, mensaje sacar e archivo de recursops
+                } else if (avaible == GeolocatorService.UNDEFINED) {
+
+                    await dialogService.ShowMessage(
+                       Resources.Resource.Info,
+                       Resources.Resource.ErrorNoGPSAvaible);
+
+                } else if (avaible == GeolocatorService.DENIED) {
+
+                    await dialogService.ShowMessage(
+                       Resources.Resource.Info,
+                       Resources.Resource.ErrorGPSDenied);
                 }
             }
             else

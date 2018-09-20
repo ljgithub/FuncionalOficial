@@ -1,6 +1,7 @@
 ﻿using CoreLocation;
 using FarmaEnlace.Interfaces;
 using FarmaEnlace.iOS.Implementations;
+using FarmaEnlace.Services;
 using Foundation;
 using UIKit;
 
@@ -16,10 +17,10 @@ namespace FarmaEnlace.iOS.Implementations
         public PermisosGPS() {
            
         }
-        public bool checkGpsPermission()
+        public int checkGpsPermission()
         {
-            // all iOS devices support at least wifi geolocation
-            // requestWhenInUseAuthorization must be set in plist
+            int status = GeolocatorService.ALLOWED;
+
             cLLocationManager = new CLLocationManager();
             if (CLLocationManager.Status <= CLAuthorizationStatus.Denied)
             {
@@ -27,13 +28,16 @@ namespace FarmaEnlace.iOS.Implementations
                 {
                     cLLocationManager.RequestWhenInUseAuthorization();
                 }
-                estaActivo = false;
+
+                if (CLLocationManager.Status == CLAuthorizationStatus.Denied) status= GeolocatorService.DENIED;
+                else if (CLLocationManager.Status < CLAuthorizationStatus.Denied) status= GeolocatorService.UNDEFINED;
             }
             else
             {
-                estaActivo = true;
+                status= GeolocatorService.ALLOWED;
             }
-            return estaActivo;
+
+            return status;
         }
 
         public void requestGPSActivation()

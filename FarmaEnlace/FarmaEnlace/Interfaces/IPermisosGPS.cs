@@ -12,6 +12,6 @@ namespace FarmaEnlace.Interfaces
         #region Methods
         void requestGPSActivation();
         #endregion
-        bool checkGpsPermission();
+        int checkGpsPermission();
     }
 }
