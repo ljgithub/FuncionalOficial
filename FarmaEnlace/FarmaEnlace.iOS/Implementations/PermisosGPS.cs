@@ -20,17 +20,18 @@ namespace FarmaEnlace.iOS.Implementations
         public int checkGpsPermission()
         {
             int status = GeolocatorService.ALLOWED;
-
+            
             cLLocationManager = new CLLocationManager();
             if (CLLocationManager.Status <= CLAuthorizationStatus.Denied)
             {
                 if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
                 {
-                    cLLocationManager.RequestWhenInUseAuthorization();
+                    cLLocationManager.RequestWhenInUseAuthorization();                   
                 }
 
                 if (CLLocationManager.Status == CLAuthorizationStatus.Denied) status= GeolocatorService.DENIED;
                 else if (CLLocationManager.Status < CLAuthorizationStatus.Denied) status= GeolocatorService.UNDEFINED;
+                
             }
             else
             {
