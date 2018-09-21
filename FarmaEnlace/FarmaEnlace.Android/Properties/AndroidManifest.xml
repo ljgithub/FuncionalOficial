@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:debuggable="true" installLocation="auto" package="com.Tandicorp.FarmaEnlace" android:installLocation="preferExternal" android:versionName="Version 73" android:versionCode="73">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:debuggable="true" installLocation="auto" package="com.Tandicorp.FarmaEnlace" android:installLocation="preferExternal" android:versionName="Version 74" android:versionCode="74">
 	<uses-sdk android:minSdkVersion="22" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

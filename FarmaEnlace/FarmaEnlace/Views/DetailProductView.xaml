@@ -158,14 +158,15 @@
                                 VerticalOptions="Start"
                                 LineBreakMode="NoWrap"
                                 Margin="0,0,0,0"
-                                FontSize="Small">
+                                FontSize="Small"
+                                x:Name="lbl_Presenta">
                             </Label>
                             <Label  
                                 HorizontalOptions="Center" 
                                 Style="{DynamicResource labelSmallGreyStyle}"                           
                                 Text="{Binding DetailProduct.TypeSale, StringFormat='{0}'}"
                                 VerticalOptions="Start"                            
-                                >
+                                x:Name="lbl_valPresenta">
                             </Label>
 
                             <StackLayout  
@@ -179,7 +180,8 @@
                                 Style="{DynamicResource labelGreyTitlesStyle}"
                                 Margin="0,0,0,0"                           
                                 Text="PVP "
-                                VerticalOptions="Center">
+                                VerticalOptions="Center"
+                                    x:Name="lbl_pvp">
                                 </Label>
 
                                 <Label 
@@ -188,7 +190,8 @@
                                 TextColor="{Binding TextColorPrice}"
                                 Margin="0,0,0,0"                            
                                 Text="{Binding DetailProduct.Price, StringFormat='${0:0.00}'}"
-                                VerticalOptions="Start">
+                                VerticalOptions="Start"
+                                    x:Name="lbl_valPvp">
                                 </Label>
                             </StackLayout>
                         </StackLayout>
@@ -204,7 +207,8 @@
                             FontSize="Medium"
                             HorizontalTextAlignment="Center"                        
                             LineBreakMode="NoWrap"
-                            Margin="0,0,0,0">
+                            Margin="0,0,0,0"
+                            x:Name="lbl_PrecioEspe">
 
                         </Label>
                         <!--NOMBRE DE LA FARMACIA -->
@@ -214,7 +218,8 @@
                             Margin="0,0,0,0"                        
                             TextColor="{Binding TextColorName}"
                             HorizontalTextAlignment="Center"
-                            FontSize="Large">
+                            FontSize="Large"
+                            x:Name="lbl_Brand">
                         </Label>
                     </StackLayout>
                     <!--   DESCRIPCION DEL PRODUCTO
@@ -249,11 +254,12 @@
                             VerticalOptions="Center"                        
                             TextColor="{Binding DetailProduct.TextColorDescripctionControl}"
                             Text="{Binding DetailProduct.DescripctionControl}"
-                            Style="{DynamicResource labelRedTitlesStyle}">
+                            Style="{DynamicResource labelRedTitlesStyle}"
+                            x:Name="lbl_Advertencia">
                             <Label.FontSize>
                                 <OnIdiom x:TypeArguments="x:Double"
                                      Phone="13"
-                                     Tablet="19"
+                                     Tablet="25"
                                      />
                             </Label.FontSize>
                         </Label>

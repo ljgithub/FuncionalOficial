@@ -89,6 +89,12 @@
     <CodesignKey>iPhone Distribution: Farmaenlace Cia. Ltda. (9447VZDGRS)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <OptimizePNGs>true</OptimizePNGs>
+    <MtouchDebug>true</MtouchDebug>
+    <IOSDebugOverWiFi>true</IOSDebugOverWiFi>
+    <MtouchLink>None</MtouchLink>
+    <MtouchEnableSGenConc>false</MtouchEnableSGenConc>
+    <IpaMetadata>
+    </IpaMetadata>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>none</DebugType>

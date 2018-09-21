@@ -35,7 +35,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Tu App Farmacia</string>
 	<key>CFBundleVersion</key>
-	<string>1.82</string>
+	<string>1.89</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Tu App Farmacia desea utilizar su ubicación actual para mostrarla en la aplicación, también para obtener farmacias cercanas y estimar los tiempos de viaje. Es seguro y privado.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>

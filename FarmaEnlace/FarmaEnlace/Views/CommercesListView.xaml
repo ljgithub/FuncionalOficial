@@ -67,7 +67,7 @@
                 <Label Grid.Row="0" Grid.Column="0"
                     HorizontalOptions="Start" 
                     Style="{DynamicResource labelGreyTitlesStyle}"
-                       FontSize="13"
+                    FontSize="13"
                     TextColor="{Binding TextoResultadoColor}" 
                     Text="{Binding TextoResultado}" 
                     VerticalOptions="Center">
